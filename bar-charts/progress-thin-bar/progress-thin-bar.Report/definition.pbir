@@ -1,0 +1,9 @@
+{
+  "version": "1.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../progress-thin-bar.Dataset"
+    },
+    "byConnection": null
+  }
+}

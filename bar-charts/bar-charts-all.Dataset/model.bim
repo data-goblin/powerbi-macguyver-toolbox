@@ -170,6 +170,74 @@
             ],
             "formatString": "+#,##0.0%;-#,##0.0%;#,##0.0%",
             "lineageTag": "546753a4-f8e4-45be-92c8-3a0ccdc60f66"
+          },
+          {
+            "name": "Dumbbell Candle Upper (Green)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR _CY = [Sum (2023)]",
+              "VAR _PY = [Sum (2022)]",
+              "RETURN",
+              "IF ( _CY > _PY, _CY )"
+            ],
+            "lineageTag": "ddabfcbe-403f-4e32-bb5c-9c775387f4fe"
+          },
+          {
+            "name": "Dumbbell Candle Lower (Green)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR _CY = [Sum (2023)]",
+              "VAR _PY = [Sum (2022)]",
+              "RETURN",
+              "IF ( _CY > _PY, _PY )"
+            ],
+            "lineageTag": "efacd5f7-169e-4e7d-b4fd-746f35c92480"
+          },
+          {
+            "name": "Dumbbell Candle Upper (Red)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR _CY = [Sum (2023)]",
+              "VAR _PY = [Sum (2022)]",
+              "RETURN",
+              "IF ( _CY < _PY, _PY )"
+            ],
+            "lineageTag": "d636fe70-992e-4e3b-a007-3613a2b538a8"
+          },
+          {
+            "name": "Dumbbell Candle Lower (Red)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR _CY = [Sum (2023)]",
+              "VAR _PY = [Sum (2022)]",
+              "RETURN",
+              "IF ( _CY < _PY, _CY )"
+            ],
+            "lineageTag": "38f51b3a-e517-4ced-8582-2c1941fc8caf"
           }
         ],
         "partitions": [
@@ -359,7 +427,14 @@
           },
           {
             "name": "Year Colour",
-            "expression": "IF ( SELECTEDVALUE ( 'Table'[Year] ) = \"  2022\", \"#c3dcea\", \"#1f84bb\" )",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Control Colours",
+            "expression": "IF ( SELECTEDVALUE ( 'Table'[Year] ) = \"  2022\", \"#ece6da\", \"#737068\" )",
             "lineageTag": "7a633807-acfb-4667-bf5f-0f51cfe82c98"
           },
           {
@@ -415,8 +490,8 @@
               "    _Attribute = \"CHANGE\",",
               "    \"#00000000\",",
               "    IF (",
-              "        _Attribute = \"2023\", \"#1f84bb\",",
-              "        \"#c3dcea\"",
+              "        _Attribute = \"2023\", \"#737068\",",
+              "        \"#ece6da\"",
               "    )",
               ")"
             ],
@@ -464,6 +539,54 @@
               "    IF ( [Sum (Δ% '22 - '23)] > 0, \"#1f84bb\", \"#ec8b69\" ), \"#00000000\" )"
             ],
             "lineageTag": "0442ff64-b4ae-4dd0-bab9-992d9e1ec8f5"
+          },
+          {
+            "name": "120% of Highest Delta",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Control Axis Ranges",
+            "expression": [
+              "",
+              "1.2 ",
+              "* ",
+              "CALCULATE(",
+              "    MAX( [Sum (2022)], [Sum (2023)] ),",
+              "    TOPN(",
+              "        1,",
+              "        VALUES( 'Table'[Dimension] ),",
+              "        MAX( [Sum (2022)], [Sum (2023)] )",
+              "    )",
+              ")"
+            ],
+            "lineageTag": "e64df63d-9b51-4dea-b0c7-7cfd61781d41"
+          },
+          {
+            "name": "Min 2",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Duplicated Measures for Formatting",
+            "expression": "-2",
+            "lineageTag": "8a4b18d3-f2cd-440b-a115-9c6339b8ae7a"
+          },
+          {
+            "name": "Zero #3",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Duplicated Measures for Formatting",
+            "expression": "0",
+            "lineageTag": "a4149ffb-966e-4875-a3a3-d540e6ece0e0"
           }
         ],
         "partitions": [

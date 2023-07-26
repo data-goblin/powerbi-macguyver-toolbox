@@ -9,6 +9,6 @@ Feel free to use them, but do so at your own risk.
 
 ## Bar chart templates
 The following bar chart templates are available:
-![An image depicting the different chart types](<bar-charts/Bar Charts in Power BI.png>)
+![An image depicting the different chart types](<bar-charts/all-bar-chart-templates/Bar Charts in Power BI.png>)
 
 (Table with links WIP)

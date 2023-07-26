@@ -279,6 +279,7 @@
             "type": "calculatedTableColumn"
           }
         ],
+        "isHidden": true,
         "lineageTag": "bc077534-c5b0-40dd-9fb4-4bad6abc2bd2",
         "measures": [
           {
@@ -291,6 +292,7 @@
             ],
             "displayFolder": "For Stacked Percentages",
             "expression": "1 - [Percentage] ",
+            "isHidden": true,
             "lineageTag": "a797f413-2545-4e12-a017-c9decafc3fa4"
           },
           {
@@ -298,6 +300,7 @@
             "displayFolder": "Misc",
             "expression": "0",
             "formatString": "0",
+            "isHidden": true,
             "lineageTag": "9c5e001d-acf5-4a94-8c79-b36b22eddff2"
           },
           {
@@ -310,12 +313,14 @@
             ],
             "displayFolder": "Control Axis Ranges",
             "expression": "0.9 * [Sum]",
+            "isHidden": true,
             "lineageTag": "3dfd2c42-1784-48db-b00d-f2279171b90d"
           },
           {
             "name": "Transparent",
             "displayFolder": "Control Colours",
             "expression": "\"#00000000\"",
+            "isHidden": true,
             "lineageTag": "7af08448-2e99-4e55-a505-8e431865c8dd"
           },
           {
@@ -323,6 +328,7 @@
             "displayFolder": "Misc",
             "expression": "1",
             "formatString": "0.0%;-0.0%;0.0%",
+            "isHidden": true,
             "lineageTag": "ac584242-db7d-4988-837c-5bd76985c46d"
           },
           {
@@ -335,6 +341,7 @@
             ],
             "displayFolder": "Control Axis Ranges",
             "expression": "0.05 * [Sum]",
+            "isHidden": true,
             "lineageTag": "7bf36b78-b7d5-408b-860f-e141b73f3749"
           },
           {
@@ -359,6 +366,7 @@
               "    )",
               ")"
             ],
+            "isHidden": true,
             "lineageTag": "5b18d1b8-9148-45f3-8893-a6f86d294363"
           },
           {
@@ -366,6 +374,7 @@
             "displayFolder": "Misc",
             "expression": "-1",
             "formatString": "0",
+            "isHidden": true,
             "lineageTag": "ebff2474-2af1-4c1e-b138-c5f3c295c261"
           },
           {
@@ -390,6 +399,7 @@
               "    )",
               ")"
             ],
+            "isHidden": true,
             "lineageTag": "372933e1-0e0e-457e-8349-6aaaaa5cb5d9"
           },
           {
@@ -403,6 +413,7 @@
             "displayFolder": "For Format Strings",
             "expression": "- [Sum (2022)]",
             "formatString": "#,##0; #,##0; #,##0",
+            "isHidden": true,
             "lineageTag": "2ad4db16-6991-4157-8219-d80f6deb39ed"
           },
           {
@@ -416,6 +427,7 @@
             "displayFolder": "For Legends",
             "expression": "[Sum (2022; Inverse)]",
             "formatString": "#,##0; #,##0; #,##0",
+            "isHidden": true,
             "lineageTag": "bec9c999-6fec-47de-8f1f-6e2ae0cd4437"
           },
           {
@@ -423,6 +435,7 @@
             "displayFolder": "For Legends",
             "expression": "[Sum (2023)]",
             "formatString": "0",
+            "isHidden": true,
             "lineageTag": "8bcf8528-5a56-46a4-8577-7c5cfa488766"
           },
           {
@@ -435,6 +448,7 @@
             ],
             "displayFolder": "Control Colours",
             "expression": "IF ( SELECTEDVALUE ( 'Table'[Year] ) = \"  2022\", \"#ece6da\", \"#737068\" )",
+            "isHidden": true,
             "lineageTag": "7a633807-acfb-4667-bf5f-0f51cfe82c98"
           },
           {
@@ -453,6 +467,7 @@
               "    MIN ( [Sum (2022)], [Sum (2023)] )",
               ")"
             ],
+            "isHidden": true,
             "lineageTag": "42be94b5-2cf7-403f-b817-e793d939313a"
           },
           {
@@ -471,6 +486,7 @@
               "    MAX ( [Sum (2022)], [Sum (2023)] )",
               ")"
             ],
+            "isHidden": true,
             "lineageTag": "06a8e96e-b86e-4795-ae87-d11205f3f7ee"
           },
           {
@@ -495,6 +511,7 @@
               "    )",
               ")"
             ],
+            "isHidden": true,
             "lineageTag": "2ac1fede-d563-4021-b19f-cb3ad7697b75"
           },
           {
@@ -519,6 +536,7 @@
               "    )",
               ")"
             ],
+            "isHidden": true,
             "lineageTag": "72ea17f8-178e-48f7-a73d-2a0479fdd182"
           },
           {
@@ -538,6 +556,7 @@
               "    _Attribute = \"CHANGE\",",
               "    IF ( [Sum (Δ% '22 - '23)] > 0, \"#1f84bb\", \"#ec8b69\" ), \"#00000000\" )"
             ],
+            "isHidden": true,
             "lineageTag": "0442ff64-b4ae-4dd0-bab9-992d9e1ec8f5"
           },
           {
@@ -562,6 +581,7 @@
               "    )",
               ")"
             ],
+            "isHidden": true,
             "lineageTag": "e64df63d-9b51-4dea-b0c7-7cfd61781d41"
           },
           {
@@ -574,6 +594,7 @@
             ],
             "displayFolder": "Duplicated Measures for Formatting",
             "expression": "-2",
+            "isHidden": true,
             "lineageTag": "8a4b18d3-f2cd-440b-a115-9c6339b8ae7a"
           },
           {
@@ -586,6 +607,7 @@
             ],
             "displayFolder": "Duplicated Measures for Formatting",
             "expression": "0",
+            "isHidden": true,
             "lineageTag": "a4149ffb-966e-4875-a3a3-d540e6ece0e0"
           }
         ],
@@ -638,6 +660,7 @@
           {
             "name": "Attribute",
             "dataType": "string",
+            "isHidden": true,
             "lineageTag": "46153ef3-7f1e-4409-9fd9-da8badcc1c16",
             "sortByColumn": "Ordinal",
             "sourceColumn": "Name"
@@ -650,6 +673,7 @@
             "sourceColumn": "Ordinal"
           }
         ],
+        "isHidden": true,
         "lineageTag": "e8e227b7-fd27-4a64-87a2-95da79648028",
         "partitions": [
           {
@@ -680,6 +704,7 @@
             ],
             "dataType": "string",
             "isDataTypeInferred": true,
+            "isHidden": true,
             "isNameInferred": true,
             "lineageTag": "b683d841-5ca8-40dc-a3aa-b94c9aa78716",
             "sortByColumn": "Order",
@@ -698,6 +723,7 @@
             "dataType": "int64",
             "formatString": "0",
             "isDataTypeInferred": true,
+            "isHidden": true,
             "isNameInferred": true,
             "lineageTag": "781445e6-72e9-47cf-ae90-7148209c7c40",
             "sourceColumn": "[Order]",
@@ -705,6 +731,7 @@
             "type": "calculatedTableColumn"
           }
         ],
+        "isHidden": true,
         "lineageTag": "fe2cdcff-7270-464b-bddc-7b06cdc7fdc3",
         "measures": [
           {
@@ -729,6 +756,7 @@
                 ")"
               ]
             },
+            "isHidden": true,
             "lineageTag": "0e596993-63a5-42a9-9dc0-aa320666263d"
           }
         ],

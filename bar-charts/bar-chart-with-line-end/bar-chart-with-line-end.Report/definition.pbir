@@ -1,0 +1,9 @@
+{
+  "version": "1.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../bar-chart-with-line-end.Dataset"
+    },
+    "byConnection": null
+  }
+}

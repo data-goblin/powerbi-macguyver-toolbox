@@ -13,6 +13,8 @@ You must first enable Power BI Project files from Power BI Desktop to open and u
 3. Navigate to _Options and settings_ and then _Options_
 4. Enable the preview feature _Power BI Project (.pbip) save option
 5. Restart Power BI Desktop
+6. Clone the Repo to your local machine using VS Code or a similar SCM tool
+7. Open the .pbip files in Power BI Desktop
 
 ![An image depicting how to enable .pbip format in Power BI Desktop](how-to-enable-pbip-format.png)
 

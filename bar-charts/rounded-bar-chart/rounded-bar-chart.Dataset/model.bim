@@ -1,0 +1,288 @@
+{
+  "compatibilityLevel": 1550,
+  "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.119.870.0 (23.07)"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"Table\"]"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "DynamicImprovement": "HighConfidence",
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "1. Measures",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "724d8a875a79418db6f9113a2cf5d8eb"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Value",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "18e219e8-e8e5-4a4e-8c86-825ff8a663c7",
+            "sourceColumn": "[Value]",
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "4bd4c7d3-ed8c-4fc9-802b-4eb3b0893f5d",
+        "measures": [
+          {
+            "name": "Percentage",
+            "expression": [
+              "",
+              "VAR _Total = CALCULATE( SUM ( 'Table'[Quantitative] ), REMOVEFILTERS ( ) )",
+              "RETURN",
+              "DIVIDE ( ",
+              "    SUM ( 'Table'[Quantitative] ), ",
+              "    _Total",
+              ") + 0.15"
+            ],
+            "formatString": "0.0%;-0.0%;0.0%",
+            "lineageTag": "ccbbf42b-88e3-4b49-8192-f592b6d02dc4"
+          },
+          {
+            "name": "Sum",
+            "expression": "SUM ( 'Table'[Quantitative] )",
+            "formatString": "#,0",
+            "lineageTag": "71445de7-2cd6-43b8-81cb-8b9dd1159740"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "1. Measures",
+            "mode": "import",
+            "source": {
+              "expression": "{1}",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "2. Report-Specific Objects",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "21661cfde1db4d40be113778b97a84f2"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Value",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "05cd4f72-d741-444a-8849-796154a583d9",
+            "sourceColumn": "[Value]",
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "bc077534-c5b0-40dd-9fb4-4bad6abc2bd2",
+        "measures": [
+          {
+            "name": "1 - Percentage",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "For Stacked Percentages",
+            "expression": "1 - [Percentage] ",
+            "lineageTag": "a797f413-2545-4e12-a017-c9decafc3fa4"
+          },
+          {
+            "name": "Zero",
+            "displayFolder": "Misc",
+            "expression": "0",
+            "formatString": "0",
+            "lineageTag": "9c5e001d-acf5-4a94-8c79-b36b22eddff2"
+          },
+          {
+            "name": "90% of Sum",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Control Axis Ranges",
+            "expression": "0.9 * [Sum]",
+            "lineageTag": "3dfd2c42-1784-48db-b00d-f2279171b90d"
+          },
+          {
+            "name": "Transparent",
+            "displayFolder": "Control Colours",
+            "expression": "\"#00000000\"",
+            "lineageTag": "7af08448-2e99-4e55-a505-8e431865c8dd"
+          },
+          {
+            "name": "One",
+            "displayFolder": "Misc",
+            "expression": "1",
+            "formatString": "0",
+            "lineageTag": "ac584242-db7d-4988-837c-5bd76985c46d"
+          },
+          {
+            "name": "5% of Sum",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Control Axis Ranges",
+            "expression": "0.05 * [Sum]",
+            "lineageTag": "7bf36b78-b7d5-408b-860f-e141b73f3749"
+          },
+          {
+            "name": "110% of Highest Sum",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Control Axis Ranges",
+            "expression": [
+              "",
+              "1.1 ",
+              "* ",
+              "CALCULATE(",
+              "    [Sum],",
+              "    TOPN(",
+              "        1,",
+              "        VALUES( 'Table'[Dimension] ),",
+              "        [Sum]",
+              "    )",
+              ")"
+            ],
+            "lineageTag": "5b18d1b8-9148-45f3-8893-a6f86d294363"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "2. Report-Specific Objects",
+            "mode": "import",
+            "source": {
+              "expression": "{1}",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Table",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Dimension",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b6428db5-956a-46cf-8e0d-f78eb01375b5",
+            "sourceColumn": "Dimension",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Quantitative",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "ea479855-4c8e-45af-927c-60b87abbeb86",
+            "sourceColumn": "Quantitative",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "74c7dcbc-f534-4da1-9c59-174298c17e81",
+        "partitions": [
+          {
+            "name": "Table",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i45WCi4pTUtT0lEyUorVQfBMUXhmKDxjMM83vyhVoRgqZIEpZGiIRQyLVnOwkGtZap5Cbn5iEUKtKS4JI1wSlviN8stHiKALGKELGGBREQsA\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Dimension = _t, Quantitative = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Quantitative\", Int64.Type}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -5,7 +5,7 @@ Power BI report .pbip templates and patterns to create special visuals, address 
 These templates are provided as-is without warranties or guarantees. They are not maintained nor are they all necessarily suitable for use in production solutions.
 Feel free to use them, but do so at your own risk.
 	
-## ⚠️ To use these templates
+## 💡 To use these templates
 You must first enable Power BI Project files from Power BI Desktop to open and use these templates. Note that the .pbip format is in Preview.
 
 1. Open Power BI Desktop (~May 2023 version or later)
@@ -25,6 +25,12 @@ __I use the .pbip format for the following reasons:__
 
 ## Bar chart templates
 The following bar chart templates are available:
-![An image depicting the different chart types](<bar-charts/all-bar-chart-templates/Bar Charts in Power BI.png>)
+![An image depicting the different bar chart types](<bar-charts/all-bar-chart-templates/Bar Charts in Power BI.png>)
+
+(Table with links WIP)
+
+## Line chart templates
+The following line chart templates are available:
+![An image depicting the different line chart types](<line-charts/all-line-chart-templates/Line Charts in Power BI.png>)
 
 (Table with links WIP)

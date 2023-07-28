@@ -1,0 +1,9 @@
+{
+  "version": "1.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../line-with-label-and-markers.Dataset"
+    },
+    "byConnection": null
+  }
+}

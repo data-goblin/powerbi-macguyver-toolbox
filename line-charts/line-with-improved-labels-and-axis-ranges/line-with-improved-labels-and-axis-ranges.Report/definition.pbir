@@ -1,0 +1,9 @@
+{
+  "version": "1.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../line-with-improved-labels-and-axis-ranges.Dataset"
+    },
+    "byConnection": null
+  }
+}

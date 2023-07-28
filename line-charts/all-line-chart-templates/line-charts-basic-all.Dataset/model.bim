@@ -588,6 +588,7 @@
               ")"
             ],
             "formatString": "0",
+            "isHidden": true,
             "lineageTag": "55d3fdf6-89df-4b96-9fc9-65ba8a5f157d"
           },
           {
@@ -609,6 +610,7 @@
               "    IF ( _SelectedMonth IN _Months, _Threshold, BLANK() ) ",
               ") "
             ],
+            "isHidden": true,
             "lineageTag": "f00dfc04-d6b9-44ff-b743-45405d58c22e"
           },
           {
@@ -621,6 +623,7 @@
             ],
             "displayFolder": "Thresholds and Horizontal Areas",
             "expression": "4.8",
+            "isHidden": true,
             "lineageTag": "70912a2f-7fdc-40f8-aa4c-bb8ceb75e567"
           },
           {
@@ -642,6 +645,7 @@
               "    IF ( _SelectedMonth IN _Months, _Threshold, BLANK() ) ",
               ") "
             ],
+            "isHidden": true,
             "lineageTag": "f834f7ac-25ff-4ab5-a228-3cb8d5ad14d7"
           },
           {
@@ -661,6 +665,7 @@
               "    BLANK()",
               ")"
             ],
+            "isHidden": true,
             "lineageTag": "2131f417-e0b0-4648-8866-11eee637812d"
           },
           {
@@ -680,6 +685,7 @@
               "    \"#ada79b\"",
               ")"
             ],
+            "isHidden": true,
             "lineageTag": "8135898e-8d0a-4140-8880-d79a4718f271"
           },
           {
@@ -692,6 +698,7 @@
             ],
             "displayFolder": "Highlight Vertical Area",
             "expression": "MAX( 'Date'[Month (#)] ) ",
+            "isHidden": true,
             "lineageTag": "f75cdff8-6112-4226-8525-172496dd5503"
           },
           {
@@ -704,6 +711,7 @@
             ],
             "displayFolder": "Thresholds and Horizontal Areas",
             "expression": "7",
+            "isHidden": true,
             "lineageTag": "3bd79048-e547-450e-9c11-d0d0a4995ffe"
           },
           {
@@ -716,6 +724,7 @@
             ],
             "displayFolder": "Misc",
             "expression": "BLANK()",
+            "isHidden": true,
             "lineageTag": "bc1a9073-c74e-4bef-a16a-79a7e75044f5"
           },
           {
@@ -728,6 +737,7 @@
             ],
             "displayFolder": "Error Bands",
             "expression": "[Average] - [SD] ",
+            "isHidden": true,
             "lineageTag": "a376f3b9-65d9-44c9-9af1-f75308bce45a"
           },
           {
@@ -740,6 +750,7 @@
             ],
             "displayFolder": "Error Bands",
             "expression": "[Average] + [SD] ",
+            "isHidden": true,
             "lineageTag": "22523ff4-a7f5-4fbf-84de-218f21e79cfd"
           },
           {
@@ -758,6 +769,7 @@
               "RETURN",
               "IF ( _CY < _PY, _PY )"
             ],
+            "isHidden": true,
             "lineageTag": "d636fe70-992e-4e3b-a007-3613a2b538a8"
           },
           {
@@ -776,6 +788,7 @@
               "RETURN",
               "IF ( _CY > _PY, _CY )"
             ],
+            "isHidden": true,
             "lineageTag": "ddabfcbe-403f-4e32-bb5c-9c775387f4fe"
           },
           {
@@ -794,6 +807,7 @@
               "RETURN",
               "IF ( _CY < _PY, _CY )"
             ],
+            "isHidden": true,
             "lineageTag": "38f51b3a-e517-4ced-8582-2c1941fc8caf"
           },
           {
@@ -812,6 +826,7 @@
               "RETURN",
               "IF ( _CY > _PY, _PY )"
             ],
+            "isHidden": true,
             "lineageTag": "efacd5f7-169e-4e7d-b4fd-746f35c92480"
           }
         ],
@@ -1014,6 +1029,7 @@
               }
             ],
             "dataType": "dateTime",
+            "displayFolder": "1. Date",
             "formatString": "General Date",
             "isDataTypeInferred": true,
             "isNameInferred": true,
@@ -1031,8 +1047,10 @@
               }
             ],
             "dataType": "boolean",
+            "displayFolder": "Report-Specific Columns",
             "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
             "isDataTypeInferred": true,
+            "isHidden": true,
             "isNameInferred": true,
             "lineageTag": "e333a594-fc2f-4719-8e35-170249d5a7de",
             "sourceColumn": "[IsLatestMonth]",
@@ -1048,7 +1066,9 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "Report-Specific Columns",
             "isDataTypeInferred": true,
+            "isHidden": true,
             "isNameInferred": true,
             "lineageTag": "71f54ef1-4636-425f-8bb2-6e407b1c1e41",
             "sourceColumn": "[LatestMonthName]",
@@ -1064,6 +1084,7 @@
               }
             ],
             "dataType": "int64",
+            "displayFolder": "2. Month",
             "formatString": "0",
             "isDataTypeInferred": true,
             "isNameInferred": true,
@@ -1081,6 +1102,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "2. Month",
             "isDataTypeInferred": true,
             "isNameInferred": true,
             "lineageTag": "91f3252c-7ac5-44c3-8c05-8564cf783ac7",
@@ -1098,7 +1120,9 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "Report-Specific Columns",
             "isDataTypeInferred": true,
+            "isHidden": true,
             "isNameInferred": true,
             "lineageTag": "03efa8ab-73ce-4cfc-8cb3-97aef052d53b",
             "sortByColumn": "Month (#)",
@@ -1115,6 +1139,7 @@
               }
             ],
             "dataType": "int64",
+            "displayFolder": "3. Quarter",
             "formatString": "0",
             "isDataTypeInferred": true,
             "isNameInferred": true,
@@ -1132,6 +1157,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "3. Quarter",
             "isDataTypeInferred": true,
             "isNameInferred": true,
             "lineageTag": "ff458ded-5113-40ed-84f0-7361f48a45e7",
@@ -1149,6 +1175,7 @@
               }
             ],
             "dataType": "int64",
+            "displayFolder": "4. Year",
             "formatString": "0",
             "isDataTypeInferred": true,
             "isNameInferred": true,
@@ -1217,6 +1244,7 @@
               }
             ],
             "dataType": "dateTime",
+            "displayFolder": "Dimensions",
             "formatString": "Long Date",
             "lineageTag": "f5b0c4d6-8f33-4006-9065-823e0bf533b0",
             "sourceColumn": "Date",
@@ -1235,6 +1263,7 @@
               }
             ],
             "dataType": "double",
+            "displayFolder": "Facts",
             "lineageTag": "668171a0-db3e-43ca-bbba-fe8726005248",
             "sourceColumn": "Quantitative",
             "summarizeBy": "sum"
@@ -1248,6 +1277,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "Dimensions",
             "lineageTag": "9f44d7b1-03be-4dc8-ad1c-32b4503fb996",
             "sourceColumn": "Sub-Dimension",
             "summarizeBy": "none"
@@ -1261,6 +1291,7 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "Dimensions",
             "lineageTag": "f94a7412-424a-4c12-9e19-6a928be50131",
             "sourceColumn": "Year",
             "summarizeBy": "none"

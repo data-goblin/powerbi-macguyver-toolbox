@@ -8,7 +8,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.119.870.0 (23.07)"
+        "value": "2.119.986.0 (23.07)"
       },
       {
         "name": "PBI_QueryOrder",
@@ -609,6 +609,48 @@
             "expression": "0",
             "isHidden": true,
             "lineageTag": "a4149ffb-966e-4875-a3a3-d540e6ece0e0"
+          },
+          {
+            "name": "Goblins",
+            "expression": "IF ( SELECTEDVALUE( 'Table'[Dimension] ) = \"Goblins\", 0.75 )",
+            "formatString": "0%;-0%;0%",
+            "lineageTag": "159adc75-7072-42b0-93ca-599cd80e5992"
+          },
+          {
+            "name": "Y-Axis (Progress III)",
+            "expression": [
+              "",
+              "VAR _Dimension = SELECTEDVALUE ( 'Table'[Dimension] ) ",
+              "RETURN",
+              "SWITCH(",
+              "    _Dimension,",
+              "    \"Halflings\", 0.95, ",
+              "    \"Goblins\", 0.70,",
+              "    \"Orcs\", 0.45,",
+              "    \"Elves\", 0.20",
+              "    ,0",
+              ")"
+            ],
+            "formatString": "0%;-0%;0%",
+            "lineageTag": "3ae4415e-2da2-4c0a-9850-4dc0e09a9821"
+          },
+          {
+            "name": "Yellow",
+            "expression": "0.25",
+            "formatString": "0%;-0%;0%",
+            "lineageTag": "7b2ecbaf-aa8b-439d-aeb4-dd5a256af54d"
+          },
+          {
+            "name": "Orcs",
+            "expression": "IF ( SELECTEDVALUE( 'Table'[Dimension] ) = \"Goblins\", 0.5 )",
+            "formatString": "0%;-0%;0%",
+            "lineageTag": "c3bfd392-d6d1-4ed7-ba57-e90ec17dc9e8"
+          },
+          {
+            "name": "Halflings",
+            "expression": "IF ( SELECTEDVALUE( 'Table'[Dimension] ) = \"Halflings\", 1 )",
+            "formatString": "0%;-0%;0%",
+            "lineageTag": "69d09b41-5a01-404b-b885-00bcb54f8111"
           }
         ],
         "partitions": [
@@ -659,18 +701,32 @@
         "columns": [
           {
             "name": "Attribute",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
             "dataType": "string",
             "isHidden": true,
             "lineageTag": "46153ef3-7f1e-4409-9fd9-da8badcc1c16",
             "sortByColumn": "Ordinal",
-            "sourceColumn": "Name"
+            "sourceColumn": "Name",
+            "summarizeBy": "none"
           },
           {
             "name": "Ordinal",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
             "dataType": "int64",
             "isHidden": true,
             "lineageTag": "eb4d2363-14da-44a2-b9e8-6a6b70069eea",
-            "sourceColumn": "Ordinal"
+            "sourceColumn": "Ordinal",
+            "summarizeBy": "sum"
           }
         ],
         "isHidden": true,

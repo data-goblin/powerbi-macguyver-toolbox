@@ -1,0 +1,9 @@
+{
+  "version": "1.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../area-of-interest-vertical.Dataset"
+    },
+    "byConnection": null
+  }
+}

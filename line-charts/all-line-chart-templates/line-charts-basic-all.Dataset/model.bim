@@ -181,74 +181,6 @@
             "lineageTag": "546753a4-f8e4-45be-92c8-3a0ccdc60f66"
           },
           {
-            "name": "Dumbbell Candle Upper (Green)",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "expression": [
-              "",
-              "VAR _CY = [Average (2023)]",
-              "VAR _PY = [Average (2022)]",
-              "RETURN",
-              "IF ( _CY > _PY, _CY )"
-            ],
-            "lineageTag": "ddabfcbe-403f-4e32-bb5c-9c775387f4fe"
-          },
-          {
-            "name": "Dumbbell Candle Lower (Green)",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "expression": [
-              "",
-              "VAR _CY = [Average (2023)]",
-              "VAR _PY = [Average (2022)]",
-              "RETURN",
-              "IF ( _CY > _PY, _PY )"
-            ],
-            "lineageTag": "efacd5f7-169e-4e7d-b4fd-746f35c92480"
-          },
-          {
-            "name": "Dumbbell Candle Upper (Red)",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "expression": [
-              "",
-              "VAR _CY = [Average (2023)]",
-              "VAR _PY = [Average (2022)]",
-              "RETURN",
-              "IF ( _CY < _PY, _PY )"
-            ],
-            "lineageTag": "d636fe70-992e-4e3b-a007-3613a2b538a8"
-          },
-          {
-            "name": "Dumbbell Candle Lower (Red)",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "expression": [
-              "",
-              "VAR _CY = [Average (2023)]",
-              "VAR _PY = [Average (2022)]",
-              "RETURN",
-              "IF ( _CY < _PY, _CY )"
-            ],
-            "lineageTag": "38f51b3a-e517-4ced-8582-2c1941fc8caf"
-          },
-          {
             "name": "SD",
             "annotations": [
               {
@@ -261,28 +193,6 @@
               "    STDEV.S ( 'Table'[Quantitative] )"
             ],
             "lineageTag": "489d3676-df3a-464a-b8ae-a7f906557fd1"
-          },
-          {
-            "name": "Average - 1SD",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "expression": "[Average] - [SD] ",
-            "lineageTag": "a376f3b9-65d9-44c9-9af1-f75308bce45a"
-          },
-          {
-            "name": "Average + 1SD",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "expression": "[Average] + [SD] ",
-            "lineageTag": "22523ff4-a7f5-4fbf-84de-218f21e79cfd"
           },
           {
             "name": "Sum",
@@ -668,6 +578,7 @@
           },
           {
             "name": "Sum (Latest Data Point)",
+            "displayFolder": "Label Latest Data Point",
             "expression": [
               "",
               "CALCULATE(",
@@ -687,6 +598,7 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
+            "displayFolder": "Thresholds and Horizontal Areas",
             "expression": [
               "",
               "VAR _Months = FILTER( VALUES( 'Date'[Month (MMM)] ), COUNTROWS( 'Table' ) > 0 )",
@@ -707,6 +619,7 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
+            "displayFolder": "Thresholds and Horizontal Areas",
             "expression": "4.8",
             "lineageTag": "70912a2f-7fdc-40f8-aa4c-bb8ceb75e567"
           },
@@ -718,6 +631,7 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
+            "displayFolder": "Thresholds and Horizontal Areas",
             "expression": [
               "",
               "VAR _Months = FILTER( VALUES( 'Date'[Month (MMM)] ), COUNTROWS( 'Table' ) > 0 )",
@@ -738,6 +652,7 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
+            "displayFolder": "Highlight Vertical Area",
             "expression": [
               "",
               "IF ( ",
@@ -756,6 +671,7 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
+            "displayFolder": "Highlight Vertical Area",
             "expression": [
               "",
               "IF ( ",
@@ -774,6 +690,7 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
+            "displayFolder": "Highlight Vertical Area",
             "expression": "MAX( 'Date'[Month (#)] ) ",
             "lineageTag": "f75cdff8-6112-4226-8525-172496dd5503"
           },
@@ -785,6 +702,7 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
+            "displayFolder": "Thresholds and Horizontal Areas",
             "expression": "7",
             "lineageTag": "3bd79048-e547-450e-9c11-d0d0a4995ffe"
           },
@@ -796,8 +714,105 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
+            "displayFolder": "Misc",
             "expression": "BLANK()",
             "lineageTag": "bc1a9073-c74e-4bef-a16a-79a7e75044f5"
+          },
+          {
+            "name": "Average - 1SD",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Error Bands",
+            "expression": "[Average] - [SD] ",
+            "lineageTag": "a376f3b9-65d9-44c9-9af1-f75308bce45a"
+          },
+          {
+            "name": "Average + 1SD",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Error Bands",
+            "expression": "[Average] + [SD] ",
+            "lineageTag": "22523ff4-a7f5-4fbf-84de-218f21e79cfd"
+          },
+          {
+            "name": "Dumbbell Candle Upper (Red)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "For Dumbbell Charts",
+            "expression": [
+              "",
+              "VAR _CY = [Average (2023)]",
+              "VAR _PY = [Average (2022)]",
+              "RETURN",
+              "IF ( _CY < _PY, _PY )"
+            ],
+            "lineageTag": "d636fe70-992e-4e3b-a007-3613a2b538a8"
+          },
+          {
+            "name": "Dumbbell Candle Upper (Green)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "For Dumbbell Charts",
+            "expression": [
+              "",
+              "VAR _CY = [Average (2023)]",
+              "VAR _PY = [Average (2022)]",
+              "RETURN",
+              "IF ( _CY > _PY, _CY )"
+            ],
+            "lineageTag": "ddabfcbe-403f-4e32-bb5c-9c775387f4fe"
+          },
+          {
+            "name": "Dumbbell Candle Lower (Red)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "For Dumbbell Charts",
+            "expression": [
+              "",
+              "VAR _CY = [Average (2023)]",
+              "VAR _PY = [Average (2022)]",
+              "RETURN",
+              "IF ( _CY < _PY, _CY )"
+            ],
+            "lineageTag": "38f51b3a-e517-4ced-8582-2c1941fc8caf"
+          },
+          {
+            "name": "Dumbbell Candle Lower (Green)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "For Dumbbell Charts",
+            "expression": [
+              "",
+              "VAR _CY = [Average (2023)]",
+              "VAR _PY = [Average (2022)]",
+              "RETURN",
+              "IF ( _CY > _PY, _PY )"
+            ],
+            "lineageTag": "efacd5f7-169e-4e7d-b4fd-746f35c92480"
           }
         ],
         "partitions": [
@@ -952,10 +967,10 @@
             ],
             "formatStringDefinition": {
               "expression": [
-                "IF ( ",
-                "    SELECTEDVALUE ( '3. Report-Specific Disconnected Table'[Attribute] ) = \"CHANGE\",",
-                "    FORMAT( [Sum (Δ% '22 - '23)], \"+0\\.0%;-0\\.0%;0\\.0%\"),",
-                "    \"#,##0\"",
+                "IF ( \r",
+                "    SELECTEDVALUE ( '3. Report-Specific Disconnected Table'[Attribute] ) = \"CHANGE\",\r",
+                "    FORMAT( [Sum (Δ% '22 - '23)], \"+0\\.0%;-0\\.0%;0\\.0%\"),\r",
+                "    \"#,##0\"\r",
                 ")"
               ]
             },
@@ -1183,10 +1198,6 @@
       {
         "name": "Table",
         "annotations": [
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
           {
             "name": "PBI_ResultType",
             "value": "Table"

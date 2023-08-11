@@ -8,7 +8,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.119.870.0 (23.07)"
+        "value": "2.119.986.0 (23.07)"
       },
       {
         "name": "PBI_QueryOrder",
@@ -659,18 +659,32 @@
         "columns": [
           {
             "name": "Attribute",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
             "dataType": "string",
             "isHidden": true,
             "lineageTag": "46153ef3-7f1e-4409-9fd9-da8badcc1c16",
             "sortByColumn": "Ordinal",
-            "sourceColumn": "Name"
+            "sourceColumn": "Name",
+            "summarizeBy": "none"
           },
           {
             "name": "Ordinal",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
             "dataType": "int64",
             "isHidden": true,
             "lineageTag": "eb4d2363-14da-44a2-b9e8-6a6b70069eea",
-            "sourceColumn": "Ordinal"
+            "sourceColumn": "Ordinal",
+            "summarizeBy": "sum"
           }
         ],
         "isHidden": true,

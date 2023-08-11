@@ -297,9 +297,15 @@
           },
           {
             "name": "Zero",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isCustom\":true}"
+              }
+            ],
             "displayFolder": "Misc",
             "expression": "0",
-            "formatString": "0",
+            "formatString": "\" \"",
             "isHidden": true,
             "lineageTag": "9c5e001d-acf5-4a94-8c79-b36b22eddff2"
           },
@@ -612,12 +618,14 @@
           },
           {
             "name": "Goblins",
+            "displayFolder": "For Progress Bar III",
             "expression": "IF ( SELECTEDVALUE( 'Table'[Dimension] ) = \"Goblins\", 0.75 )",
             "formatString": "0%;-0%;0%",
             "lineageTag": "159adc75-7072-42b0-93ca-599cd80e5992"
           },
           {
             "name": "Y-Axis (Progress III)",
+            "displayFolder": "For Progress Bar III",
             "expression": [
               "",
               "VAR _Dimension = SELECTEDVALUE ( 'Table'[Dimension] ) ",
@@ -636,18 +644,21 @@
           },
           {
             "name": "Yellow",
+            "displayFolder": "For Progress Bar III",
             "expression": "0.25",
             "formatString": "0%;-0%;0%",
             "lineageTag": "7b2ecbaf-aa8b-439d-aeb4-dd5a256af54d"
           },
           {
             "name": "Orcs",
+            "displayFolder": "For Progress Bar III",
             "expression": "IF ( SELECTEDVALUE( 'Table'[Dimension] ) = \"Goblins\", 0.5 )",
             "formatString": "0%;-0%;0%",
             "lineageTag": "c3bfd392-d6d1-4ed7-ba57-e90ec17dc9e8"
           },
           {
             "name": "Halflings",
+            "displayFolder": "For Progress Bar III",
             "expression": "IF ( SELECTEDVALUE( 'Table'[Dimension] ) = \"Halflings\", 1 )",
             "formatString": "0%;-0%;0%",
             "lineageTag": "69d09b41-5a01-404b-b885-00bcb54f8111"

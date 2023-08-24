@@ -1,0 +1,9 @@
+{
+  "version": "1.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../kpi-cards-all.Dataset"
+    },
+    "byConnection": null
+  }
+}

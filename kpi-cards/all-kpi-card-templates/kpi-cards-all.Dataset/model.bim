@@ -51,9 +51,18 @@
           "ClientMachine": "DESKTOP-NV69I5J",
           "DeploymentMode": "SaveUI",
           "TabularEditorBuild": "3.9.0.2972",
-          "Time": "2023-07-26T01:35:00.5333614+02:00",
+          "Time": "2023-08-29T20:29:11.2364334+02:00",
           "User": "DESKTOP-NV69I5J\\Klonk-Temp"
         }
+      }
+    ],
+    "relationships": [
+      {
+        "name": "afb3546c-43d8-48ac-aad4-ca45f6d7bf38",
+        "fromColumn": "Month",
+        "fromTable": "Table",
+        "toColumn": "Date",
+        "toTable": "Date"
       }
     ],
     "sourceQueryCulture": "en-US",
@@ -85,21 +94,7 @@
             "summarizeBy": "none"
           },
           {
-            "name": "Quantitative",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "int64",
-            "formatString": "0",
-            "lineageTag": "ea479855-4c8e-45af-927c-60b87abbeb86",
-            "sourceColumn": "Quantitative",
-            "summarizeBy": "sum"
-          },
-          {
-            "name": "Sub-Dimension",
+            "name": "SubDimension",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -107,8 +102,26 @@
               }
             ],
             "dataType": "string",
-            "lineageTag": "9f44d7b1-03be-4dc8-ad1c-32b4503fb996",
-            "sourceColumn": "Sub-Dimension",
+            "lineageTag": "5e30f180-4ec3-494a-b8ad-8c11697dd2f6",
+            "sourceColumn": "SubDimension",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "90826514-1f5c-4f5a-97ec-cb24d73861b0",
+            "sourceColumn": "Month",
             "summarizeBy": "none"
           },
           {
@@ -119,10 +132,25 @@
                 "value": "Automatic"
               }
             ],
-            "dataType": "string",
-            "lineageTag": "f94a7412-424a-4c12-9e19-6a928be50131",
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "375a89cb-dd50-4436-8b44-7f963752da6a",
             "sourceColumn": "Year",
-            "summarizeBy": "none"
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Quantitative",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "6707e5e6-d461-4e15-88ef-6d8c60a6e2a5",
+            "sourceColumn": "Quantitative",
+            "summarizeBy": "sum"
           }
         ],
         "lineageTag": "74c7dcbc-f534-4da1-9c59-174298c17e81",
@@ -132,11 +160,52 @@
             "mode": "import",
             "source": {
               "expression": [
+                "//let",
+                "//    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i45Wcs9PysnMK1bSUQrKTy9NBTEUFIwMjIyADCOlWB1kFeGZVYlFKXAlxkCGKZoSt8z0jJLUIhRjzNHU+ObnZaMYYgxW4F+UjN0ZFsjSWNxgaIisAJsLDFFswLAf4kDXnLJU7A4wNEVRgM0JRigqsLrBEkUJhiOglngk5qQBwykdu0uMMdRgcYwJhiKs7sFQheEkoKdiAQ==\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Dimension = _t, #\"Sub-Dimension\" = _t, Year = _t, Quantitative = _t]),",
+                "//    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Quantitative\", Int64.Type}, {\"Year\", type text}})",
+                "//in",
+                "//    #\"Changed Type\"",
                 "let",
-                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i45Wcs9PysnMK1bSUQrKTy9NBTEUFIwMjIyADCOlWB1kFeGZVYlFKXAlxkCGKZoSt8z0jJLUIhRjzNHU+ObnZaMYYgxW4F+UjN0ZFsjSWNxgaIisAJsLDFFswLAf4kDXnLJU7A4wNEVRgM0JRigqsLrBEkUJhiOglngk5qQBwykdu0uMMdRgcYwJhiKs7sFQheEkoKdiAQ==\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Dimension = _t, #\"Sub-Dimension\" = _t, Year = _t, Quantitative = _t]),",
-                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Quantitative\", Int64.Type}, {\"Year\", type text}})",
+                "    Dimensions = #table({\"Dimension\", \"SubDimension\"}, ",
+                "                        {{\"Elves\", \"Fighter\"}, ",
+                "                         {\"Elves\", \"Rogue\"}, ",
+                "                         {\"Elves\", \"Sorcerer\"}, ",
+                "                         {\"Goblins\", \"Fighter\"}, ",
+                "                         {\"Goblins\", \"Rogue\"}, ",
+                "                         {\"Goblins\", \"Sorcerer\"}, ",
+                "                         {\"Orcs\", \"Fighter\"}, ",
+                "                         {\"Orcs\", \"Rogue\"}, ",
+                "                         {\"Orcs\", \"Sorcerer\"}}),",
+                "                         ",
+                "    DateList2022 = List.Dates(#date(2022, 1, 1), Duration.Days(#date(2022, 12, 31) - #date(2022, 1, 1)) + 1, #duration(1, 0, 0, 0)),",
+                "    DateList2023 = List.Dates(#date(2023, 1, 1), Duration.Days(#date(2023, 9, 6) - #date(2023, 1, 1)) + 1, #duration(1, 0, 0, 0)),",
+                "    CombinedDates = DateList2022 & DateList2023,",
+                "    DateTable = Table.FromList(CombinedDates, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
+                "",
+                "    // Cross join dates and dimensions to create base table",
+                "    JoinFunction = (DateValue) => Table.AddColumn(Dimensions, \"Month\", each DateValue),",
+                "    CrossJoin = Table.TransformRows(DateTable, (row) => JoinFunction(row[Column1])),",
+                "    MergedTable = Table.FromList(CrossJoin, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
+                "    FinalTableBase = Table.ExpandTableColumn(MergedTable, \"Column1\", {\"Dimension\", \"SubDimension\", \"Month\"}),",
+                "",
+                "    WithValues = Table.AddColumn(FinalTableBase, \"Quantitative\", each ",
+                "        let ",
+                "            YearValue = Date.Year([Month]),",
+                "            RandomValue = Number.RoundDown(100 + Number.RandomBetween(-25, 25)),",
+                "            BaseValue = 0 + RandomValue",
+                "        in",
+                "            if YearValue = 2022 then",
+                "                BaseValue",
+                "            else if YearValue = 2023 and [Dimension] <> \"Goblins\" then",
+                "                BaseValue * 0.85",
+                "            else if YearValue = 2023 and [Dimension] = \"Goblins\" then",
+                "                BaseValue * 1.15",
+                "            else ",
+                "                0),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(WithValues,{{\"Quantitative\", Int64.Type}, {\"Month\", type date}, {\"SubDimension\", type text}, {\"Dimension\", type text}}),",
+                "    #\"Inserted Year\" = Table.AddColumn(#\"Changed Type\", \"Year\", each Date.Year([Month]), Int64.Type)",
                 "in",
-                "    #\"Changed Type\""
+                "    #\"Inserted Year\""
               ],
               "type": "m"
             }
@@ -554,6 +623,218 @@
             "expression": "IF ( SELECTEDVALUE( 'Table'[Dimension] ) = \"Halflings\", 1 )",
             "formatString": "0%;-0%;0%",
             "lineageTag": "69d09b41-5a01-404b-b885-00bcb54f8111"
+          },
+          {
+            "name": "Count (Format String)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "COUNTROWS( 'Table' )",
+            "formatStringDefinition": {
+              "expression": [
+                "",
+                "VAR _Count = [Count]",
+                "VAR _Symbol =",
+                "    SWITCH ( TRUE (),",
+                "        _Count > 0, UNICHAR ( 10008 ),",
+                "        _Count = 0, UNICHAR( 10004 ),",
+                "        BLANK ()",
+                "    )",
+                "RETURN",
+                "   \"#,##0 \" & _Symbol"
+              ]
+            },
+            "lineageTag": "a823e998-d1ef-493c-a9a7-8e843dc61fc9"
+          },
+          {
+            "name": "Waffle Subtitle",
+            "displayFolder": "Waffle Chart (DAX Unicode)",
+            "expression": [
+              "",
+              "VAR _Result = [Sum ('23 vs. '22)]",
+              "RETURN",
+              "\"Progress: \" & FORMAT ( _Result, \"#,##0%\" )"
+            ],
+            "lineageTag": "fb2bb51a-f88a-49e0-b70d-2c8f9bfe8a11"
+          },
+          {
+            "name": "Color Indicator",
+            "expression": [
+              "",
+              "VAR _Result = [Sum ('23 vs. '22)]",
+              "VAR _Actuals = [Sum (2023)]",
+              "VAR _Color = IF ( _Result < 1, UNICHAR ( 128308 ), UNICHAR ( 129482 ) )",
+              "RETURN",
+              "_Color & \" Actuals:\" & FORMAT ( _Actuals, \" #,##0\" )"
+            ],
+            "lineageTag": "65c9248a-39c8-491d-87ce-125866b90de7"
+          },
+          {
+            "name": "Rating Subtitle",
+            "displayFolder": "Rating (DAX Unicode)",
+            "expression": [
+              "",
+              "VAR _Rating = [Sum ('23 vs. '22)] * 5",
+              "RETURN",
+              "\"Rating: \" & FORMAT ( _Rating, \"#,##0\" )"
+            ],
+            "lineageTag": "22a84017-ed7c-4e73-a82b-0982319caeab"
+          },
+          {
+            "name": "Dumbbell Candle Lower (Green)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Dumbbell Candlestick",
+            "expression": [
+              "",
+              "VAR _CY = [Sum (2023)]",
+              "VAR _PY = [Sum (2022)]",
+              "RETURN",
+              "IF ( _CY > _PY, _PY )"
+            ],
+            "lineageTag": "efacd5f7-169e-4e7d-b4fd-746f35c92480"
+          },
+          {
+            "name": "Dumbbell Candle Lower (Red)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Dumbbell Candlestick",
+            "expression": [
+              "",
+              "VAR _CY = [Sum (2023)]",
+              "VAR _PY = [Sum (2022)]",
+              "RETURN",
+              "IF ( _CY < _PY, _CY )"
+            ],
+            "lineageTag": "38f51b3a-e517-4ced-8582-2c1941fc8caf"
+          },
+          {
+            "name": "Dumbbell Candle Upper (Green)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Dumbbell Candlestick",
+            "expression": [
+              "",
+              "VAR _CY = [Sum (2023)]",
+              "VAR _PY = [Sum (2022)]",
+              "RETURN",
+              "IF ( _CY > _PY, _CY )"
+            ],
+            "lineageTag": "ddabfcbe-403f-4e32-bb5c-9c775387f4fe"
+          },
+          {
+            "name": "Dumbbell Candle Upper (Red)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Dumbbell Candlestick",
+            "expression": [
+              "",
+              "VAR _CY = [Sum (2023)]",
+              "VAR _PY = [Sum (2022)]",
+              "RETURN",
+              "IF ( _CY < _PY, _PY )"
+            ],
+            "lineageTag": "d636fe70-992e-4e3b-a007-3613a2b538a8"
+          },
+          {
+            "name": "Waffle",
+            "displayFolder": "Waffle Chart (DAX Unicode)",
+            "expression": [
+              "",
+              "-- Init",
+              "VAR _Actuals = [Sum (2023)]",
+              "VAR _Target = [Sum (2022)]",
+              "VAR _Perc = MIN(1, DIVIDE(_Actuals, _Target))  ",
+              "VAR _TotalCells = 100",
+              "VAR _RowLength = 10",
+              "VAR _TotalRows = CEILING(DIVIDE(_TotalCells, _RowLength), 1)",
+              "VAR _FilledCount = ROUND(_Perc * _TotalCells, 0) ",
+              "",
+              "-- Unicode characters",
+              "VAR _Filled = UNICHAR(9632) & \" \" -- ■",
+              "VAR _Empty = UNICHAR(9633) & \" \"  -- □",
+              "",
+              "-- Figure out the waffle Height x Width etc.",
+              "VAR _FullFilledLines = INT(_FilledCount / _RowLength)",
+              "VAR _FilledPartial = MOD(_FilledCount, _RowLength)",
+              "VAR _EmptyPartial = _RowLength - _FilledPartial ",
+              "VAR _FullEmptyLines = _TotalRows - _FullFilledLines - IF(_FilledPartial > 0, 1, 0)",
+              "",
+              "-- Result",
+              "VAR _Waffle =",
+              "    REPT(REPT(_Empty, _RowLength) & UNICHAR(10), _FullEmptyLines) &",
+              "    IF(_FilledPartial > 0, REPT(_Filled, _FilledPartial) & REPT(_Empty, _EmptyPartial) & UNICHAR(10), \"\") &",
+              "    REPT(REPT(_Filled, _RowLength) & UNICHAR(10), _FullFilledLines)",
+              "RETURN",
+              "    _Waffle",
+              ""
+            ],
+            "lineageTag": "2ccd2bf1-9988-423e-abd0-12ccb403f7ae"
+          },
+          {
+            "name": "Rating",
+            "displayFolder": "Rating (DAX Unicode)",
+            "expression": [
+              "",
+              "-- Init",
+              "VAR _Actuals = [Sum (2023)] ",
+              "VAR _Target = [Sum (2022)]  ",
+              "VAR _Perc = MIN(1, DIVIDE(_Actuals, _Target))  ",
+              "VAR _MaxStars = 5",
+              "",
+              "VAR _FilledStarsCount = INT(_Perc * _MaxStars)",
+              "VAR _HalfStar = IF(MOD(_Perc * _MaxStars, 1) >= 0.5, 1, 0)",
+              "VAR _EmptyStarsCount = _MaxStars - _FilledStarsCount - _HalfStar",
+              "",
+              "",
+              "-- Unicode characters",
+              "VAR _FilledStar = UNICHAR(9733)         -- ★",
+              "VAR _HalfFilledStar = UNICHAR(10030)    -- ✮",
+              "VAR _EmptyStar = UNICHAR(9734)          -- ☆",
+              "",
+              "",
+              "-- Result",
+              "VAR _StarRating =",
+              "    REPT(_FilledStar, _FilledStarsCount) &",
+              "    REPT(_HalfFilledStar, _HalfStar) &",
+              "    REPT(_EmptyStar, _EmptyStarsCount)",
+              "",
+              "RETURN",
+              "    _StarRating & UNICHAR (10)",
+              ""
+            ],
+            "lineageTag": "860209d7-5ea2-4a48-9ea1-2f9e7df39fce"
+          },
+          {
+            "name": "Context Subtitle",
+            "expression": [
+              "",
+              "VAR _Perc = [Sum (Δ% '22 - '23)]",
+              "VAR _Color = \"   ( \" & IF ( _Perc < 1, UNICHAR ( 9660 ), UNICHAR ( 9650 ) )",
+              "VAR _Target = [Sum (2022)]",
+              "RETURN",
+              "\"1 Year Prior: \" & FORMAT ( _Target, \"#,##0\" ) & _Color & FORMAT ( _Perc, \" #,##0.0%; #,##0.0%; #,##0%\" ) & \" )\""
+            ],
+            "lineageTag": "faf3bed7-a8d6-42b2-b0e4-edc35cd41bed"
           }
         ],
         "partitions": [
@@ -630,10 +911,10 @@
               "// This would normally be just the sum; where Sum (2022) would be using time intelligence or a similar method to calculate PY",
               "CALCULATE(",
               "    [Sum],",
-              "    'Table'[Year] = \"  2023\"",
+              "    DATESYTD('Table'[Month])",
               ")"
             ],
-            "formatString": "0",
+            "formatString": "#,0",
             "lineageTag": "202a6bc8-71c3-41cc-9349-cde551b031a0"
           },
           {
@@ -642,8 +923,8 @@
               "",
               "// This would normally be calculated using time intelligence or a similar method to calculate PY",
               "CALCULATE(",
-              "    [Sum],",
-              "    'Table'[Year] = \"  2022\"",
+              "    [Sum (2023)],",
+              "    SAMEPERIODLASTYEAR('Table'[Month])",
               ")"
             ],
             "formatString": "0",
@@ -677,76 +958,65 @@
               "    [Sum (2022)]",
               ")"
             ],
-            "formatString": "+#,##0.0%;-#,##0.0%;#,##0.0%",
+            "formatStringDefinition": {
+              "expression": [
+                "",
+                "VAR _UpArrow = UNICHAR(8595)",
+                "VAR _DownArrow = UNICHAR(8593)",
+                "RETURN",
+                "   _DownArrow & \" #,##0.0%\" & \";\" &    // Negative numbers",
+                "   _UpArrow & \" #,##0.0%\" & \";\" &      // Positive numbers",
+                "   \"#,##0.0\"                           // Zero"
+              ]
+            },
             "lineageTag": "546753a4-f8e4-45be-92c8-3a0ccdc60f66"
           },
           {
-            "name": "Dumbbell Candle Upper (Green)",
+            "name": "Count",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
-            "expression": [
-              "",
-              "VAR _CY = [Sum (2023)]",
-              "VAR _PY = [Sum (2022)]",
-              "RETURN",
-              "IF ( _CY > _PY, _CY )"
-            ],
-            "lineageTag": "ddabfcbe-403f-4e32-bb5c-9c775387f4fe"
+            "expression": "COUNTROWS( VALUES('Table'[Dimension]) )",
+            "lineageTag": "4b4de92d-e3ee-4139-a985-1b450ff40060"
           },
           {
-            "name": "Dumbbell Candle Lower (Green)",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
+            "name": "Sum ('23 vs. '22)",
             "expression": [
               "",
-              "VAR _CY = [Sum (2023)]",
-              "VAR _PY = [Sum (2022)]",
+              "VAR _Actuals = [Sum (2023)]",
+              "VAR _Target = [Sum (2022)]",
+              "VAR _Perc = DIVIDE(_Actuals, _Target)",
               "RETURN",
-              "IF ( _CY > _PY, _PY )"
+              "    _Perc"
             ],
-            "lineageTag": "efacd5f7-169e-4e7d-b4fd-746f35c92480"
+            "formatString": "#,##0 %",
+            "lineageTag": "efdaa006-24a4-4a68-a810-343bf07e07ee"
           },
           {
-            "name": "Dumbbell Candle Upper (Red)",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
+            "name": "Rolling 2-Week Sum",
             "expression": [
               "",
-              "VAR _CY = [Sum (2023)]",
-              "VAR _PY = [Sum (2022)]",
+              "VAR _RollingSum = ",
+              "    CALCULATE(",
+              "        [Sum],",
+              "        DATESINPERIOD(",
+              "            'Date'[Date],",
+              "            LASTDATE('Date'[Date]),",
+              "            -14,",
+              "            DAY",
+              "        )",
+              "    )",
+              "VAR _MaxDateTable = MAX ( 'Date'[Date] )",
+              "VAR _MaxDate = MAX ( 'Table'[Month] )",
+              "VAR _Result = ",
+              "    IF (_MaxDateTable > _MaxDate, _RollingSum )",
               "RETURN",
-              "IF ( _CY < _PY, _PY )"
+              "    _Result"
             ],
-            "lineageTag": "d636fe70-992e-4e3b-a007-3613a2b538a8"
-          },
-          {
-            "name": "Dumbbell Candle Lower (Red)",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "expression": [
-              "",
-              "VAR _CY = [Sum (2023)]",
-              "VAR _PY = [Sum (2022)]",
-              "RETURN",
-              "IF ( _CY < _PY, _CY )"
-            ],
-            "lineageTag": "38f51b3a-e517-4ced-8582-2c1941fc8caf"
+            "lineageTag": "2a3d3b47-00b8-44e3-9f64-d00a9b2f77bb"
           }
         ],
         "partitions": [
@@ -924,6 +1194,67 @@
                 "    \"Attribute\", '3. Report-Specific Calculation Group'[Attribute],",
                 "    \"Order\", '3. Report-Specific Calculation Group'[Ordinal] ",
                 ")"
+              ],
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Date",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "163d92fff6ed49ff9051b07d98c0444d"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isDataTypeInferred": true,
+            "isNameInferred": true,
+            "lineageTag": "79acd4a7-177f-46ac-b3f5-bd96e78c9259",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Month Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "isNameInferred": true,
+            "lineageTag": "72d1b233-6932-4389-8501-3541eeaff684",
+            "sourceColumn": "[Month Year]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "42924f7d-1875-49e1-abad-09dccdadd421",
+        "partitions": [
+          {
+            "name": "Date",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "",
+                "    ADDCOLUMNS(",
+                "        CALENDAR( DATE(2022, 1, 1), DATE(2023, 12, 31) ),",
+                "        \"Month Year\", FORMAT( [Date], \"MMYYYY\" )",
+                "    )    "
               ],
               "type": "calculated"
             }

@@ -51,7 +51,7 @@
           "ClientMachine": "DESKTOP-NV69I5J",
           "DeploymentMode": "SaveUI",
           "TabularEditorBuild": "3.9.0.2972",
-          "Time": "2023-07-26T01:35:00.5333614+02:00",
+          "Time": "2023-07-25T23:35:00.5333614+00:00",
           "User": "DESKTOP-NV69I5J\\Klonk-Temp"
         }
       }
@@ -61,10 +61,6 @@
       {
         "name": "Table",
         "annotations": [
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
-          },
           {
             "name": "PBI_ResultType",
             "value": "Table"
@@ -747,6 +743,17 @@
               "IF ( _CY < _PY, _CY )"
             ],
             "lineageTag": "38f51b3a-e517-4ced-8582-2c1941fc8caf"
+          },
+          {
+            "name": "Average",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "AVERAGE( 'Table'[Quantitative] )",
+            "lineageTag": "9e1730ae-9fa7-4e42-ab67-b1258eff1fa6"
           }
         ],
         "partitions": [
@@ -901,10 +908,10 @@
             ],
             "formatStringDefinition": {
               "expression": [
-                "IF ( ",
-                "    SELECTEDVALUE ( '3. Report-Specific Disconnected Table'[Attribute] ) = \"CHANGE\",",
-                "    FORMAT( [Sum (Δ% '22 - '23)], \"+0\\.0%;-0\\.0%;0\\.0%\"),",
-                "    \"#,##0\"",
+                "IF ( \r",
+                "    SELECTEDVALUE ( '3. Report-Specific Disconnected Table'[Attribute] ) = \"CHANGE\",\r",
+                "    FORMAT( [Sum (Δ% '22 - '23)], \"+0\\.0%;-0\\.0%;0\\.0%\"),\r",
+                "    \"#,##0\"\r",
                 ")"
               ]
             },
@@ -925,6 +932,296 @@
                 "    \"Order\", '3. Report-Specific Calculation Group'[Ordinal] ",
                 ")"
               ],
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "4. Report-Specific SVG Measures",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "4f5be44a59594685aa453dcbf609e978"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Value",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "ea94bcb1-fc74-4dcb-bb99-815fc2be8ccb",
+            "sourceColumn": "[Value]",
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "f4ab3a84-bd81-4db3-82e0-074ee7960e80",
+        "measures": [
+          {
+            "name": "Card with Columns and Target",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataCategory": "ImageUrl",
+            "expression": [
+              "",
+              "/* SETUP */",
+              "VAR _spaceBetweenColumns = 5.5 // Space that will be reserved between columns",
+              "VAR _maxSizeOfColumn = 3.5 // Max size of column, if the calculated value is bigger than this, the column will be this size",
+              "VAR _columnRounding = 5 // Rounding of column corners",
+              "VAR _width = 365 // Width size of the SVG",
+              "VAR _height = 250 // Height size of the SVG",
+              "VAR _initialTbl = // ADD YOUR TABLE, PERIOD COLUMN (DATE, MONTH, QUARTER, YEAR,...) + MEASURE HERE",
+              "    ADDCOLUMNS (",
+              "        SELECTCOLUMNS(SUMMARIZE ( 'Table', 'Table'[Quantitative] ), \"@xAxisPeriod\", [Quantitative] ),",
+              "        \"@val\", [Sum]",
+              "    )",
+              "VAR _target = [Average] // Target value or measure",
+              "",
+              "/* TEXT DECLARTIONS */",
+              "VAR _firstLineInitialText = \"Total target is on\"",
+              "VAR _firstLineEndText =  \"~ missing\"",
+              "VAR _secondLineInitialText = \"Period target is on\"",
+              "VAR _secondLineEndText =  \"~ sold\"",
+              "VAR _thirdLineMiddleText = \"of\"",
+              "VAR _thirdLineEndText =  \"months were successful\"",
+              "",
+              "/* COLORS DECLARTIONS */",
+              "VAR _grey = \"#E6E6E6\" // Will be used for all other columns",
+              "VAR _activePartsColor = \"#658E95\" // Will be used for all highly colored parts of card",
+              "VAR _darkGrey = \"#808080\" // Will be used for all text",
+              "VAR _targetLineColor = \"#A8A8A8\" // Will be used for target line",
+              "",
+              "/* SVG DECLARTIONS */",
+              "VAR _svgDeclaration = \"data:image/svg+xml;utf8,\"",
+              "VAR _svgHeader = \"<svg xmlns='http://www.w3.org/2000/svg' width='\"&_width&\"' height='\"&_height&\"'>\"",
+              "VAR _svgEnd = \"</svg>\"",
+              "",
+              "/* CSS DECLARATIONS */",
+              "VAR _style = ",
+              "\"<style>",
+              "    text{",
+              "        font-family:Segoe UI;",
+              "    }",
+              "    .columns{",
+              "         opacity: 1;",
+              "         outline: none;",
+              "    }",
+              "    .line{",
+              "        stroke:\"&_targetLineColor&\"; ",
+              "        stroke-width:1.25;",
+              "        stroke-dasharray:5 5;",
+              "    }",
+              "    .txtGroup{",
+              "        dominant-baseline: middle;",
+              "        text-anchor:start;",
+              "    }",
+              "    .bolder{",
+              "        font-weight: bold;",
+              "    }",
+              "</style>\"",
+              "",
+              "/* CALCULATION */",
+              "VAR _preparedTbl = ",
+              "    ADDCOLUMNS (",
+              "        _initialTbl,",
+              "        \"@rowNum\", ROWNUMBER (_initialTbl, ORDERBY ( [@xAxisPeriod], ASC ) )",
+              "    )",
+              "VAR _maxValue =",
+              "    MAXX ( _preparedTbl, [@val] )",
+              "VAR _rowCounter =",
+              "    COUNTROWS ( _preparedTbl )",
+              "VAR _modifiedValue = _rowCounter*_target",
+              "VAR _resultSizeOfColumns =",
+              "    VAR _cal =",
+              "        ROUND ( DIVIDE ( 100 - ( ( _rowCounter + 1 ) * _spaceBetweenColumns ), _rowCounter ), 1 )",
+              "    RETURN",
+              "        IF ( _cal > _maxSizeOfColumn, _maxSizeOfColumn, _cal )",
+              "VAR _columns =",
+              "    CONCATENATEX (",
+              "        _preparedTbl,",
+              "        VAR _colorOfColumn =",
+              "            IF(_target<[@val],_activePartsColor,_grey) // Rules for coloring columns",
+              "        VAR _startOfColumn =",
+              "            ROUND ( DIVIDE ( [@val], _maxValue ) * 40, 1 )",
+              "        VAR _positionCounter = ( ( [@rowNum] - 1 ) * _resultSizeOfColumns ) + ( _spaceBetweenColumns * [@rowNum] )",
+              "        RETURN",
+              "            \"<rect class='columns' x='\" & _positionCounter & \"%' y='\" & 85-_startOfColumn & \"%' width='\" & _resultSizeOfColumns & \"%' height='\" & _startOfColumn & \"%' fill='\" & _colorOfColumn & \"' rx='\"&_columnRounding&\"' />\"",
+              "    )",
+              "VAR _targetLine =",
+              "    VAR _y = 85-ROUND ( DIVIDE ( _target, _maxValue ) * 40, 1 )",
+              "    RETURN",
+              "    \"<line class='line' x1='\"&_spaceBetweenColumns&\"%' x2='\"&100-_spaceBetweenColumns&\"%' y1='\"&_y&\"%' y2='\"&_y&\"%' />\"",
+              "VAR _initialText =",
+              "\"<g class='txtGroup'>\"&",
+              "    \"<text y='4%' x='2.5%' font-size='107.5%' fill='\"&_darkGrey&\"'><tspan class='bolder'> \"&_firstLineInitialText&\" <tspan fill='\"&_activePartsColor&\"'>\"",
+              "        &FORMAT(ROUND(DIVIDE(SUMX(_preparedTbl,[@val]),_modifiedValue),2),\"0%\")& ",
+              "        \"</tspan></tspan><tspan font-size='80%'> \"&_firstLineEndText&\" \"&_modifiedValue-SUMX(_preparedTbl,[@val])&\" </tspan>",
+              "    </text>\"",
+              "    &",
+              "    \"<text y='16.5%' x='2.5%' fill='\"&_darkGrey&\"'>",
+              "        \"&_secondLineInitialText&\" <tspan fill='\"&_activePartsColor&\"' class='bolder'>\"",
+              "        &FORMAT(ROUND(DIVIDE(SUMX(_preparedTbl,[@val]),_modifiedValue),2),\"0%\")& ",
+              "        \"</tspan> <tspan font-size='80%'> \"&_secondLineEndText&\" \"&SUMX(_preparedTbl,[@val])&\" </tspan>",
+              "    </text>\"",
+              "    &",
+              "    \"<text y='29%' x='2.5%' fill='\"&_darkGrey&\"'>",
+              "        <tspan fill='\"&_activePartsColor&\"' class='bolder'>\"",
+              "        & COUNTROWS(FILTER(_preparedTbl,[@val]>=_target)) & ",
+              "        \"</tspan> \"&_thirdLineMiddleText&\"",
+              "        <tspan class='bolder'>\"",
+              "        & _rowCounter & ",
+              "        \"</tspan> \"&_thirdLineEndText&\"",
+              "    </text>",
+              "</g>\"",
+              "VAR SVGImageURL = _svgDeclaration & _svgHeader & _style & _initialText & _targetLine &  _columns  & _svgEnd",
+              "RETURN",
+              "    SVGImageURL"
+            ],
+            "lineageTag": "6a23f99d-c620-4dff-8827-4e4ba637002a"
+          },
+          {
+            "name": "Card with Donut progress",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataCategory": "ImageUrl",
+            "expression": [
+              "",
+              "/* SETUP */",
+              "VAR _total = [Sum (2022)]  // Will be used as a target",
+              "VAR _value = [Sum (2023)] // Will be used as a current value",
+              "",
+              "// CANVAS SIZE",
+              "VAR _width = 365 // Width size of the SVG",
+              "VAR _height = 220 // Height size of the SVG",
+              "VAR _CanvasSize = MIN(_height,_width) // Canvas size",
+              "",
+              "// PADDING SETUP",
+              "VAR _paddning = 15 // Padding between the circle and the canvas",
+              "",
+              "/* COLOR DEFINITION */",
+              "VAR _positive = \"#658E95\" // Positive Color",
+              "VAR _neutral = \"#E7E74E\" // Neutral Color",
+              "VAR _negative = \"#7D1D3A\" // Negative Color",
+              "",
+              "/* PRE CALCULATION */",
+              "VAR _halfSize = _CanvasSize/2 // Half of the canvas size",
+              "VAR _r = _halfSize-_paddning*1.5 // Radius of the circle",
+              "VAR _round = 2*PI()*_r",
+              "VAR _perc = _value/_total // Percentage of the current value",
+              "VAR _ratio = _round-_round*_perc // Ratio of the current value",
+              "VAR _clr =  // Determine the color of the circle based on the percentage",
+              "    SWITCH(TRUE(),",
+              "        _perc>=0.75,_positive, // Positive Color",
+              "        _perc>=0.5,_neutral, // Neutral Color",
+              "        _negative // Negative Color",
+              "    )",
+              "",
+              "/* STYLE DECLARTIONS */",
+              "VAR _styles = ",
+              "\"",
+              "  <style>",
+              "    text{",
+              "        font-family: Segoe UI;",
+              "    }",
+              "    .backgroundCircle{",
+              "      transform:rotate(-90deg) translate(-\"&(_height+_width)/2&\"px, \"&(_width-_height)/2&\"px);",
+              "    }",
+              "    .backgroundCircle{",
+              "      fill: transparent;",
+              "      stroke-width: \"&_paddning&\";",
+              "    }",
+              "    .background{",
+              "      stroke: #e0e0e0;",
+              "    }",
+              "    .filling{",
+              "      stroke: \"&_clr&\";",
+              "      stroke-linecap: round;",
+              "      stroke-dasharray: \"&_round&\";",
+              "      stroke-dashoffset: \"&_ratio&\";",
+              "    }",
+              "    .mainText{",
+              "      fill: \"&_clr&\";",
+              "      font-size: 225%;",
+              "      text-anchor: middle;",
+              "      dominant-baseline: middle;",
+              "      font-weight: bold;",
+              "    }",
+              "    .subTexts{",
+              "      fill: #CCCCCC;",
+              "      font-size: 95%;",
+              "      dominant-baseline: middle;",
+              "    }",
+              "    .leftPositioned{",
+              "        text-anchor: end;",
+              "    }",
+              "    .rightPositioned{",
+              "        text-anchor: start;",
+              "    }",
+              "    .bolden{",
+              "        font-weight: bold;",
+              "    }",
+              "  </style>",
+              "\"",
+              "",
+              "/* SVG DECLARTIONS */",
+              "VAR _svgDeclaration = \"data:image/svg+xml;utf8,\"",
+              "VAR _svgHeader = \"<svg xmlns='http://www.w3.org/2000/svg' height='\" & _height & \"' width='\" & _width & \"'>\"",
+              "VAR _svgEnd = \"</svg>\"",
+              "",
+              "/* CALCULATION */",
+              "VAR _sv =",
+              "\"",
+              "  <g class='backgroundCircle'>",
+              "  <circle r='\"&_r&\"' cx='50%' cy='50%' class='background' />",
+              "  <circle r='\"&_r&\"' cx='50%' cy='50%' class='filling'/>",
+              "  </g>",
+              "  <g class='mainText'>",
+              "  <text x='50%' y='37.5%' >\"&FORMAT(_perc,\"0.0%\")&\"</text>",
+              "  </g>",
+              "  <g class='subTexts'>",
+              "  <g class='leftPositioned'>",
+              "  <text x='51%' y='50.5%' >\"&\"Target:\"&\"</text>",
+              "  <text x='51%' y='60%' >\"&\"Current:\"&\"</text>",
+              "  <text x='51%' y='69.5%' class='bolden'>\"&\"Missing:\"&\"</text>",
+              "  </g>",
+              "  <g class='rightPositioned'>",
+              "  <text x='53%' y='50.5%' >\"&_total&\"</text>",
+              "  <text x='53%' y='60%' >\"&ROUND(_value,1)&\"</text>",
+              "  <text x='53%' y='69.5%' class='bolden'>\"&ROUND(_total-_value,1)&\"</text>",
+              "  </g>",
+              "  </g>",
+              "\"",
+              "VAR _result = _svgDeclaration & _svgHeader & _styles & _sv & _svgEnd ",
+              "RETURN",
+              "   _result"
+            ],
+            "lineageTag": "9f7ba69f-7cec-4a41-a562-10e51f9ac0a2"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "4. Report-Specific SVG Measures",
+            "mode": "import",
+            "source": {
+              "expression": "{1}",
               "type": "calculated"
             }
           }

@@ -1214,6 +1214,48 @@
               "   _result"
             ],
             "lineageTag": "9f7ba69f-7cec-4a41-a562-10e51f9ac0a2"
+          },
+          {
+            "name": "svgBarCertifications",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR _td = TODAY()",
+              "VAR _renewDate = [Sum]",
+              "VAR _endDate = [Average]",
+              "VAR _header = \"data:image/svg+xml;utf8,\"",
+              "VAR _svgDeclaration = \"<svg xmlns='http://www.w3.org/2000/svg'>\"",
+              "VAR _svgEnding = \"</svg>\"",
+              "VAR _style = ",
+              "\"<svg>",
+              ".mainText{",
+              "    font-family:Segoe UI;",
+              "    font-size:75%;",
+              "    fill:#CCCCCC;",
+              "}",
+              ".bolder{",
+              "    font-weight:bold;",
+              "    fill:#808080;",
+              "}",
+              "</svg>\"",
+              "VAR _content =   ",
+              "    \"<g class='mainText'>",
+              "        <text y='10%'>",
+              "            Renewable in <tspan class='bolder'>\"& DATEDIFF(_td,_renewDate,DAY) &\"</tspan> days",
+              "        </text>",
+              "        <text y='22.5%'>",
+              "            Ends in <tspan class='bolder'>\"& DATEDIFF(_td,_endDate,DAY) &\"</tspan> days",
+              "        </text>",
+              "    </g>\"",
+              "RETURN",
+              "_header & _svgDeclaration & _content & _svgEnding"
+            ],
+            "lineageTag": "c2f6787a-34a5-42fc-99a8-da203f868e63"
           }
         ],
         "partitions": [

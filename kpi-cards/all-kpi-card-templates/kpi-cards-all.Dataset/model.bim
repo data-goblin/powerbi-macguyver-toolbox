@@ -8,7 +8,7 @@
       },
       {
         "name": "PBIDesktopVersion",
-        "value": "2.120.731.0 (23.08)"
+        "value": "2.120.963.0 (23.08)"
       },
       {
         "name": "PBI_QueryOrder",
@@ -73,6 +73,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -200,7 +204,7 @@
                 "    DateList2023 = ",
                 "        List.Dates(",
                 "            #date(#\"CY\", 1, 1), ",
-                "            Duration.Days(Date.From(DateTime.FixedLocalNow()) - #date(#\"CY\", 1, 1)) + 1, ",
+                "            Duration.Days(#date(#\"CY\", 8, 31) - #date(#\"CY\", 1, 1)) + 1, ",
                 "            #duration(1, 0, 0, 0)",
                 "        ),",
                 "    ",
@@ -914,11 +918,17 @@
           },
           {
             "name": "Context Subtitle",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
             "expression": [
               "",
               "VAR _Perc = [Sum (Δ% '22 - '23)]",
               "VAR _Color = \"   ( \" & IF ( _Perc < 1, UNICHAR ( 9660 ), UNICHAR ( 9650 ) )",
-              "VAR _Target = [Sum (PY)]",
+              "VAR _Target = [Sum (PY YTD)]",
               "RETURN",
               "\"1 Year Prior: \" & FORMAT ( _Target, \"#,##0\" ) & _Color & FORMAT ( _Perc, \" #,##0.0%; #,##0.0%; #,##0%\" ) & \" )\""
             ],

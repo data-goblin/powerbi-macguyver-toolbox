@@ -24,19 +24,6 @@
       }
     ],
     "culture": "en-US",
-    "cultures": [
-      {
-        "name": "en-US",
-        "linguisticMetadata": {
-          "content": {
-            "DynamicImprovement": "HighConfidence",
-            "Language": "en-US",
-            "Version": "1.0.0"
-          },
-          "contentType": "json"
-        }
-      }
-    ],
     "dataAccessOptions": {
       "legacyRedirects": true,
       "returnErrorValuesAsNull": true
@@ -51,7 +38,7 @@
           "ClientMachine": "DESKTOP-NV69I5J",
           "DeploymentMode": "SaveUI",
           "TabularEditorBuild": "3.9.0.2972",
-          "Time": "2023-08-30T19:15:50.5729051+02:00",
+          "Time": "2023-09-01T09:56:29.4920984+02:00",
           "User": "DESKTOP-NV69I5J\\Klonk-Temp"
         }
       }
@@ -89,6 +76,8 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "Columns",
+            "isHidden": true,
             "lineageTag": "b6428db5-956a-46cf-8e0d-f78eb01375b5",
             "sourceColumn": "Dimension",
             "summarizeBy": "none"
@@ -102,6 +91,8 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "Columns",
+            "isHidden": true,
             "lineageTag": "5e30f180-4ec3-494a-b8ad-8c11697dd2f6",
             "sourceColumn": "SubDimension",
             "summarizeBy": "none"
@@ -119,7 +110,9 @@
               }
             ],
             "dataType": "dateTime",
+            "displayFolder": "Columns",
             "formatString": "Long Date",
+            "isHidden": true,
             "lineageTag": "90826514-1f5c-4f5a-97ec-cb24d73861b0",
             "sourceColumn": "Month",
             "summarizeBy": "none"
@@ -133,7 +126,9 @@
               }
             ],
             "dataType": "int64",
+            "displayFolder": "Columns",
             "formatString": "0",
+            "isHidden": true,
             "lineageTag": "375a89cb-dd50-4436-8b44-7f963752da6a",
             "sourceColumn": "Year",
             "summarizeBy": "sum"
@@ -147,7 +142,9 @@
               }
             ],
             "dataType": "int64",
+            "displayFolder": "Columns",
             "formatString": "0",
+            "isHidden": true,
             "lineageTag": "6707e5e6-d461-4e15-88ef-6d8c60a6e2a5",
             "sourceColumn": "Quantitative",
             "summarizeBy": "sum"
@@ -161,11 +158,14 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "Columns",
+            "isHidden": true,
             "lineageTag": "2ffa966d-3a78-44d3-9521-f4ea6d5686da",
             "sourceColumn": "Boolean Dimension",
             "summarizeBy": "none"
           }
         ],
+        "isHidden": true,
         "lineageTag": "74c7dcbc-f534-4da1-9c59-174298c17e81",
         "partitions": [
           {
@@ -329,130 +329,17 @@
         "lineageTag": "bc077534-c5b0-40dd-9fb4-4bad6abc2bd2",
         "measures": [
           {
-            "name": "1 - Percentage",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "For Stacked Percentages",
-            "expression": "1 - [Percentage] ",
-            "isHidden": true,
-            "lineageTag": "a797f413-2545-4e12-a017-c9decafc3fa4"
-          },
-          {
-            "name": "Zero",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isCustom\":true}"
-              }
-            ],
-            "displayFolder": "Misc",
-            "expression": "0",
-            "formatString": "\" \"",
-            "isHidden": true,
-            "lineageTag": "9c5e001d-acf5-4a94-8c79-b36b22eddff2"
-          },
-          {
-            "name": "90% of Sum",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "Control Axis Ranges",
-            "expression": "0.9 * [Sum]",
-            "isHidden": true,
-            "lineageTag": "3dfd2c42-1784-48db-b00d-f2279171b90d"
-          },
-          {
             "name": "Transparent",
             "displayFolder": "Control Colours",
-            "expression": "\"#00000000\"",
+            "expression": [
+              "",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "\"#00000000\""
+            ],
             "isHidden": true,
             "lineageTag": "7af08448-2e99-4e55-a505-8e431865c8dd"
-          },
-          {
-            "name": "One",
-            "displayFolder": "Misc",
-            "expression": "1",
-            "formatString": "0.0%;-0.0%;0.0%",
-            "isHidden": true,
-            "lineageTag": "ac584242-db7d-4988-837c-5bd76985c46d"
-          },
-          {
-            "name": "5% of Sum",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "Control Axis Ranges",
-            "expression": "0.05 * [Sum]",
-            "isHidden": true,
-            "lineageTag": "7bf36b78-b7d5-408b-860f-e141b73f3749"
-          },
-          {
-            "name": "110% of Highest Sum",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "Control Axis Ranges",
-            "expression": [
-              "",
-              "1.1 ",
-              "* ",
-              "CALCULATE(",
-              "    [Sum],",
-              "    TOPN(",
-              "        1,",
-              "        VALUES( 'Table'[Dimension] ),",
-              "        [Sum]",
-              "    )",
-              ")"
-            ],
-            "isHidden": true,
-            "lineageTag": "5b18d1b8-9148-45f3-8893-a6f86d294363"
-          },
-          {
-            "name": "Min One",
-            "displayFolder": "Misc",
-            "expression": "-1",
-            "formatString": "0",
-            "isHidden": true,
-            "lineageTag": "ebff2474-2af1-4c1e-b138-c5f3c295c261"
-          },
-          {
-            "name": "120% of Highest Sum",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "Control Axis Ranges",
-            "expression": [
-              "",
-              "1.2 ",
-              "* ",
-              "CALCULATE(",
-              "    [Sum],",
-              "    TOPN(",
-              "        1,",
-              "        VALUES( 'Table'[Dimension] ),",
-              "        [Sum]",
-              "    )",
-              ")"
-            ],
-            "isHidden": true,
-            "lineageTag": "372933e1-0e0e-457e-8349-6aaaaa5cb5d9"
           },
           {
             "name": "Sum (2022; Inverse)",
@@ -462,33 +349,17 @@
                 "value": "{\"isCustom\":true}"
               }
             ],
-            "displayFolder": "For Format Strings",
-            "expression": "- [Sum (PY)]",
+            "displayFolder": "Dynamic Format Strings",
+            "expression": [
+              "",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "-[Sum (PY)]"
+            ],
             "formatString": "#,##0; #,##0; #,##0",
             "isHidden": true,
             "lineageTag": "2ad4db16-6991-4157-8219-d80f6deb39ed"
-          },
-          {
-            "name": "2022",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isCustom\":true}"
-              }
-            ],
-            "displayFolder": "For Legends",
-            "expression": "[Sum (2022; Inverse)]",
-            "formatString": "#,##0; #,##0; #,##0",
-            "isHidden": true,
-            "lineageTag": "bec9c999-6fec-47de-8f1f-6e2ae0cd4437"
-          },
-          {
-            "name": "2023",
-            "displayFolder": "For Legends",
-            "expression": "[Sum (CY YTD)]",
-            "formatString": "0",
-            "isHidden": true,
-            "lineageTag": "8bcf8528-5a56-46a4-8577-7c5cfa488766"
           },
           {
             "name": "Year Colour",
@@ -501,220 +372,17 @@
             "displayFolder": "Control Colours",
             "expression": [
               "",
-              "IF (",
-              "    SELECTEDVALUE ( 'Table'[Year] ) = 2022,",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "IF(",
+              "    SELECTEDVALUE( 'Table'[Year] ) = 2022,",
               "    \"#ece6da\",",
               "    \"#737068\"",
               ")"
             ],
             "isHidden": true,
             "lineageTag": "7a633807-acfb-4667-bf5f-0f51cfe82c98"
-          },
-          {
-            "name": "Bar Chart & Candlestick - Change (Lower)",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "For Bar Chart & Candlestick",
-            "expression": [
-              "",
-              "IF ( ",
-              "    SELECTEDVALUE ( '3. Report-Specific Disconnected Table'[Attribute] ) = \"CHANGE\",",
-              "    MIN ( [Sum (PY)], [Sum (CY YTD)] )",
-              ")"
-            ],
-            "isHidden": true,
-            "lineageTag": "42be94b5-2cf7-403f-b817-e793d939313a"
-          },
-          {
-            "name": "Bar Chart & Candlestick - Change (Higher)",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "For Bar Chart & Candlestick",
-            "expression": [
-              "",
-              "IF ( ",
-              "    SELECTEDVALUE ( '3. Report-Specific Disconnected Table'[Attribute] ) = \"CHANGE\",",
-              "    MAX ( [Sum (PY)], [Sum (CY YTD)] )",
-              ")"
-            ],
-            "isHidden": true,
-            "lineageTag": "06a8e96e-b86e-4795-ae87-d11205f3f7ee"
-          },
-          {
-            "name": "Bar Chart & Candlestick - Bar Color",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "For Bar Chart & Candlestick",
-            "expression": [
-              "",
-              "VAR _Attribute = SELECTEDVALUE ( '3. Report-Specific Disconnected Table'[Attribute] )",
-              "RETURN",
-              "IF ( ",
-              "    _Attribute = \"CHANGE\",",
-              "    \"#00000000\",",
-              "    IF (",
-              "        _Attribute = \"2023\", \"#737068\",",
-              "        \"#ece6da\"",
-              "    )",
-              ")"
-            ],
-            "isHidden": true,
-            "lineageTag": "2ac1fede-d563-4021-b19f-cb3ad7697b75"
-          },
-          {
-            "name": "120% of Highest Sum by Year",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "Control Axis Ranges",
-            "expression": [
-              "",
-              "1.2 ",
-              "* ",
-              "CALCULATE(",
-              "    [Sum],",
-              "    TOPN(",
-              "        1,",
-              "        VALUES( 'Table'[Year] ),",
-              "        [Sum]",
-              "    )",
-              ")"
-            ],
-            "isHidden": true,
-            "lineageTag": "72ea17f8-178e-48f7-a73d-2a0479fdd182"
-          },
-          {
-            "name": "Bar Chart & Candlestick - Label Color",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "For Bar Chart & Candlestick",
-            "expression": [
-              "",
-              "VAR _Attribute = SELECTEDVALUE ( '3. Report-Specific Disconnected Table'[Attribute] )",
-              "RETURN",
-              "IF ( ",
-              "    _Attribute = \"CHANGE\",",
-              "    IF ( [Sum (Δ% '22 - '23)] > 0, \"#1f84bb\", \"#ec8b69\" ), \"#00000000\" )"
-            ],
-            "isHidden": true,
-            "lineageTag": "0442ff64-b4ae-4dd0-bab9-992d9e1ec8f5"
-          },
-          {
-            "name": "120% of Highest Delta",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "Control Axis Ranges",
-            "expression": [
-              "",
-              "1.2 ",
-              "* ",
-              "CALCULATE(",
-              "    MAX( [Sum (PY)], [Sum (CY YTD)] ),",
-              "    TOPN(",
-              "        1,",
-              "        VALUES( 'Table'[Dimension] ),",
-              "        MAX( [Sum (PY)], [Sum (CY YTD)] )",
-              "    )",
-              ")"
-            ],
-            "isHidden": true,
-            "lineageTag": "e64df63d-9b51-4dea-b0c7-7cfd61781d41"
-          },
-          {
-            "name": "Min 2",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "Duplicated Measures for Formatting",
-            "expression": "-2",
-            "isHidden": true,
-            "lineageTag": "8a4b18d3-f2cd-440b-a115-9c6339b8ae7a"
-          },
-          {
-            "name": "Zero #3",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "Duplicated Measures for Formatting",
-            "expression": "0",
-            "isHidden": true,
-            "lineageTag": "a4149ffb-966e-4875-a3a3-d540e6ece0e0"
-          },
-          {
-            "name": "Goblins",
-            "displayFolder": "For Progress Bar III",
-            "expression": "IF ( SELECTEDVALUE( 'Table'[Dimension] ) = \"Goblins\", 0.75 )",
-            "formatString": "0%;-0%;0%",
-            "lineageTag": "159adc75-7072-42b0-93ca-599cd80e5992"
-          },
-          {
-            "name": "Y-Axis (Progress III)",
-            "displayFolder": "For Progress Bar III",
-            "expression": [
-              "",
-              "VAR _Dimension = SELECTEDVALUE ( 'Table'[Dimension] ) ",
-              "RETURN",
-              "SWITCH(",
-              "    _Dimension,",
-              "    \"Halflings\", 0.95, ",
-              "    \"Goblins\", 0.70,",
-              "    \"Orcs\", 0.45,",
-              "    \"Elves\", 0.20",
-              "    ,0",
-              ")"
-            ],
-            "formatString": "0%;-0%;0%",
-            "lineageTag": "3ae4415e-2da2-4c0a-9850-4dc0e09a9821"
-          },
-          {
-            "name": "Yellow",
-            "displayFolder": "For Progress Bar III",
-            "expression": "0.25",
-            "formatString": "0%;-0%;0%",
-            "lineageTag": "7b2ecbaf-aa8b-439d-aeb4-dd5a256af54d"
-          },
-          {
-            "name": "Orcs",
-            "displayFolder": "For Progress Bar III",
-            "expression": "IF ( SELECTEDVALUE( 'Table'[Dimension] ) = \"Goblins\", 0.5 )",
-            "formatString": "0%;-0%;0%",
-            "lineageTag": "c3bfd392-d6d1-4ed7-ba57-e90ec17dc9e8"
-          },
-          {
-            "name": "Halflings",
-            "displayFolder": "For Progress Bar III",
-            "expression": "IF ( SELECTEDVALUE( 'Table'[Dimension] ) = \"Halflings\", 1 )",
-            "formatString": "0%;-0%;0%",
-            "lineageTag": "69d09b41-5a01-404b-b885-00bcb54f8111"
           },
           {
             "name": "Count (Format String)",
@@ -724,21 +392,29 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
-            "expression": "[Count]",
+            "displayFolder": "Dynamic Format Strings",
+            "expression": [
+              "",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "[Count]"
+            ],
             "formatStringDefinition": {
               "expression": [
-                "",
                 "VAR _Count = [Count]",
                 "VAR _Symbol =",
-                "    SWITCH ( TRUE (),",
-                "        _Count > 0, UNICHAR ( 10008 ),",
+                "    SWITCH(",
+                "        TRUE( ),",
+                "        _Count > 0, UNICHAR( 10008 ),",
                 "        _Count = 0, UNICHAR( 10004 ),",
-                "        BLANK ()",
+                "        BLANK( )",
                 "    )",
                 "RETURN",
-                "   \"#,##0 \" & _Symbol"
+                "    \"#,##0 \" & _Symbol"
               ]
             },
+            "isHidden": true,
             "lineageTag": "a823e998-d1ef-493c-a9a7-8e843dc61fc9"
           },
           {
@@ -746,22 +422,38 @@
             "displayFolder": "Waffle Chart (DAX Unicode)",
             "expression": [
               "",
-              "VAR _Result = [Sum ('23 vs. '22)]",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "VAR _Result = [Sum (% of PY YTD)]",
               "RETURN",
-              "\"Progress: \" & FORMAT ( _Result, \"#,##0%\" )"
+              "    \"Progress: \"",
+              "        & FORMAT( _Result, \"#,##0%\" )"
             ],
+            "isHidden": true,
             "lineageTag": "fb2bb51a-f88a-49e0-b70d-2c8f9bfe8a11"
           },
           {
-            "name": "Color Indicator",
+            "name": "Dynamic Title (Color Indicator)",
+            "displayFolder": "Dynamic Titles",
             "expression": [
               "",
-              "VAR _Result = [Sum ('23 vs. '22)]",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "VAR _Result = [Sum (% of PY YTD)]",
               "VAR _Actuals = [Sum (CY YTD)]",
-              "VAR _Color = IF ( _Result < 1, UNICHAR ( 128308 ), UNICHAR ( 129482 ) )",
+              "VAR _Color =",
+              "    IF(",
+              "        _Result < 1,",
+              "        UNICHAR( 128308 ),",
+              "        UNICHAR( 129482 )",
+              "    )",
               "RETURN",
-              "_Color & \" Actuals:\" & FORMAT ( _Actuals, \" #,##0\" )"
+              "    _Color & \" Actuals:\"",
+              "        & FORMAT( _Actuals, \" #,##0\" )"
             ],
+            "isHidden": true,
             "lineageTag": "65c9248a-39c8-491d-87ce-125866b90de7"
           },
           {
@@ -769,117 +461,76 @@
             "displayFolder": "Rating (DAX Unicode)",
             "expression": [
               "",
-              "VAR _Rating = [Sum ('23 vs. '22)] * 5",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "VAR _Rating = [Sum (% of PY YTD)] * 5",
               "RETURN",
-              "\"Rating: \" & FORMAT ( _Rating, \"#,##0\" )"
+              "    \"Rating: \" & FORMAT( _Rating, \"#,##0\" )"
             ],
+            "isHidden": true,
             "lineageTag": "22a84017-ed7c-4e73-a82b-0982319caeab"
-          },
-          {
-            "name": "Dumbbell Candle Lower (Green)",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "Dumbbell Candlestick",
-            "expression": [
-              "",
-              "VAR _CY = [Sum (CY YTD)]",
-              "VAR _PY = [Sum (PY)]",
-              "RETURN",
-              "IF ( _CY > _PY, _PY )"
-            ],
-            "lineageTag": "efacd5f7-169e-4e7d-b4fd-746f35c92480"
-          },
-          {
-            "name": "Dumbbell Candle Lower (Red)",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "Dumbbell Candlestick",
-            "expression": [
-              "",
-              "VAR _CY = [Sum (CY YTD)]",
-              "VAR _PY = [Sum (PY)]",
-              "RETURN",
-              "IF ( _CY < _PY, _CY )"
-            ],
-            "lineageTag": "38f51b3a-e517-4ced-8582-2c1941fc8caf"
-          },
-          {
-            "name": "Dumbbell Candle Upper (Green)",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "Dumbbell Candlestick",
-            "expression": [
-              "",
-              "VAR _CY = [Sum (CY YTD)]",
-              "VAR _PY = [Sum (PY)]",
-              "RETURN",
-              "IF ( _CY > _PY, _CY )"
-            ],
-            "lineageTag": "ddabfcbe-403f-4e32-bb5c-9c775387f4fe"
-          },
-          {
-            "name": "Dumbbell Candle Upper (Red)",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "displayFolder": "Dumbbell Candlestick",
-            "expression": [
-              "",
-              "VAR _CY = [Sum (CY YTD)]",
-              "VAR _PY = [Sum (PY)]",
-              "RETURN",
-              "IF ( _CY < _PY, _PY )"
-            ],
-            "lineageTag": "d636fe70-992e-4e3b-a007-3613a2b538a8"
           },
           {
             "name": "Waffle",
             "displayFolder": "Waffle Chart (DAX Unicode)",
             "expression": [
               "",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
               "-- Init",
               "VAR _Actuals = [Sum (CY YTD)]",
               "VAR _Target = [Sum (PY)]",
-              "VAR _Perc = MIN(1, DIVIDE(_Actuals, _Target))  ",
+              "VAR _Perc =",
+              "    MIN( 1, DIVIDE( _Actuals, _Target ) )",
               "VAR _TotalCells = 100",
               "VAR _RowLength = 10",
-              "VAR _TotalRows = CEILING(DIVIDE(_TotalCells, _RowLength), 1)",
-              "VAR _FilledCount = ROUND(_Perc * _TotalCells, 0) ",
+              "VAR _TotalRows =",
+              "    CEILING(",
+              "        DIVIDE( _TotalCells, _RowLength ),",
+              "        1",
+              "    )",
+              "VAR _FilledCount =",
+              "    ROUND( _Perc * _TotalCells, 0 )",
               "",
               "-- Unicode characters",
-              "VAR _Filled = UNICHAR(9632) & \" \" -- ■",
-              "VAR _Empty = UNICHAR(9633) & \" \"  -- □",
-              "",
+              "VAR _Filled = UNICHAR( 9632 ) & \" \" -- ■",
+              "VAR _Empty = UNICHAR( 9633 ) & \" \"  -- □",
               "-- Figure out the waffle Height x Width etc.",
-              "VAR _FullFilledLines = INT(_FilledCount / _RowLength)",
-              "VAR _FilledPartial = MOD(_FilledCount, _RowLength)",
-              "VAR _EmptyPartial = _RowLength - _FilledPartial ",
-              "VAR _FullEmptyLines = _TotalRows - _FullFilledLines - IF(_FilledPartial > 0, 1, 0)",
+              "VAR _FullFilledLines =",
+              "    INT( _FilledCount / _RowLength )",
+              "VAR _FilledPartial =",
+              "    MOD( _FilledCount, _RowLength )",
+              "VAR _EmptyPartial =",
+              "    _RowLength - _FilledPartial",
+              "VAR _FullEmptyLines =",
+              "    _TotalRows - _FullFilledLines",
+              "        - IF( _FilledPartial > 0, 1, 0 )",
               "",
               "-- Result",
               "VAR _Waffle =",
-              "    REPT(REPT(_Empty, _RowLength) & UNICHAR(10), _FullEmptyLines) &",
-              "    IF(_FilledPartial > 0, REPT(_Filled, _FilledPartial) & REPT(_Empty, _EmptyPartial) & UNICHAR(10), \"\") &",
-              "    REPT(REPT(_Filled, _RowLength) & UNICHAR(10), _FullFilledLines)",
+              "    REPT(",
+              "        REPT( _Empty, _RowLength )",
+              "            & UNICHAR( 10 ),",
+              "        _FullEmptyLines",
+              "    )",
+              "        & IF(",
+              "            _FilledPartial > 0,",
+              "            REPT( _Filled, _FilledPartial )",
+              "                & REPT( _Empty, _EmptyPartial )",
+              "                & UNICHAR( 10 ),",
+              "            \"\"",
+              "        )",
+              "        & REPT(",
+              "            REPT( _Filled, _RowLength )",
+              "                & UNICHAR( 10 ),",
+              "            _FullFilledLines",
+              "        )",
               "RETURN",
-              "    _Waffle",
-              ""
+              "    _Waffle"
             ],
+            "isHidden": true,
             "lineageTag": "2ccd2bf1-9988-423e-abd0-12ccb403f7ae"
           },
           {
@@ -887,79 +538,107 @@
             "displayFolder": "Rating (DAX Unicode)",
             "expression": [
               "",
-              "-- Init",
-              "VAR _Actuals = [Sum (CY YTD)] ",
-              "VAR _Target = [Sum (PY)]  ",
-              "VAR _Perc = MIN(1, DIVIDE(_Actuals, _Target))  ",
-              "VAR _MaxStars = 5",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
               "",
-              "VAR _FilledStarsCount = INT(_Perc * _MaxStars)",
-              "VAR _HalfStar = IF(MOD(_Perc * _MaxStars, 1) >= 0.5, 1, 0)",
-              "VAR _EmptyStarsCount = _MaxStars - _FilledStarsCount - _HalfStar",
+              "-- Init",
+              "VAR _Actuals = [Sum (CY YTD)]",
+              "VAR _Target = [Sum (PY YTD)]",
+              "VAR _Perc =",
+              "    MIN( 1, DIVIDE( _Actuals, _Target ) )",
+              "VAR _MaxStars = 5",
+              "VAR _FilledStarsCount =",
+              "    INT( _Perc * _MaxStars )",
+              "VAR _EmptyStarsCount =",
+              "    _MaxStars - _FilledStarsCount",
               "",
               "",
               "-- Unicode characters",
-              "VAR _FilledStar = UNICHAR(9733)         -- ★",
-              "VAR _HalfFilledStar = UNICHAR(10030)    -- ✮",
-              "VAR _EmptyStar = UNICHAR(9734)          -- ☆",
-              "",
-              "",
+              "VAR _FilledStar = UNICHAR( 9733 )         -- ★",
+              "VAR _EmptyStar = UNICHAR( 9734 )          -- ☆",
               "-- Result",
               "VAR _StarRating =",
-              "    REPT(_FilledStar, _FilledStarsCount) &",
-              "    REPT(_HalfFilledStar, _HalfStar) &",
-              "    REPT(_EmptyStar, _EmptyStarsCount)",
-              "",
+              "    REPT( _FilledStar, _FilledStarsCount )",
+              "        & REPT( _EmptyStar, _EmptyStarsCount )",
               "RETURN",
-              "    _StarRating & UNICHAR (10)",
-              ""
+              "    _StarRating & UNICHAR( 10 )"
             ],
+            "isHidden": true,
             "lineageTag": "860209d7-5ea2-4a48-9ea1-2f9e7df39fce"
           },
           {
-            "name": "Context Subtitle",
+            "name": "Dynamic Subtitle (Context)",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
+            "displayFolder": "Dynamic Titles",
             "expression": [
               "",
-              "VAR _Perc = [Sum (Δ% '22 - '23)]",
-              "VAR _Color = \"   ( \" & IF ( _Perc < 1, UNICHAR ( 9660 ), UNICHAR ( 9650 ) )",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "VAR _Perc = [Sum (Δ% PY YTD)]",
+              "VAR _Color =",
+              "    \"   ( \"",
+              "        & IF(",
+              "            _Perc < 1,",
+              "            UNICHAR( 9660 ),",
+              "            UNICHAR( 9650 )",
+              "        )",
               "VAR _Target = [Sum (PY YTD)]",
               "RETURN",
-              "\"1 Year Prior: \" & FORMAT ( _Target, \"#,##0\" ) & _Color & FORMAT ( _Perc, \" #,##0.0%; #,##0.0%; #,##0%\" ) & \" )\""
+              "    \"1 Year Prior: \"",
+              "        & FORMAT( _Target, \"#,##0\" )",
+              "        & _Color",
+              "        & FORMAT(",
+              "            _Perc,",
+              "            \" #,##0.0%; #,##0.0%; #,##0%\"",
+              "        )",
+              "        & \" )\""
             ],
+            "isHidden": true,
             "lineageTag": "faf3bed7-a8d6-42b2-b0e4-edc35cd41bed"
           },
           {
-            "name": "% Goblins",
+            "name": "% Claims Approved",
+            "displayFolder": "KPI Doughnut",
             "expression": [
               "",
-              "VAR _Goblins = CALCULATE ( [Sum], 'Table'[Boolean Dimension] = \"Approved\" )",
-              "VAR _Perc = DIVIDE ( _Goblins, [Sum] )",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "VAR _ApprovedClaims =",
+              "    CALCULATE(",
+              "        [Sum],",
+              "        'Table'[Boolean Dimension] = \"Approved\"",
+              "    )",
+              "VAR _Perc = DIVIDE( _ApprovedClaims, [Sum] )",
               "RETURN",
-              "FORMAT ( _Perc, \"#,##0%\" )"
+              "    FORMAT( _Perc, \"#,##0%\" )"
             ],
-            "formatString": "0%;-0%;0%",
+            "isHidden": true,
             "lineageTag": "e8761060-f832-42a7-8816-f806e256b7bd"
           },
           {
-            "name": "# Goblins",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
+            "name": "# Claims Approved",
+            "displayFolder": "KPI Bar",
             "expression": [
               "",
-              "VAR _Goblins = CALCULATE ( [Sum], 'Table'[Boolean Dimension] = \"Approved\" )",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "VAR _ApprovedClaims =",
+              "    CALCULATE(",
+              "        [Sum],",
+              "        'Table'[Boolean Dimension] = \"Approved\"",
+              "    )",
               "RETURN",
-              "FORMAT ( _Goblins, \"#,##0,.0K\" )"
+              "    FORMAT( _ApprovedClaims, \"#,##0,.0K\" )"
             ],
+            "isHidden": true,
             "lineageTag": "1778fef3-fdfe-49f2-806a-74e0ca8b7fc8"
           },
           {
@@ -970,33 +649,45 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
+            "displayFolder": "Dynamic Titles",
             "expression": [
               "",
-              "VAR _Increase = UNICHAR(8599)",
-              "VAR _Decrease = UNICHAR(8600)",
-              "VAR _Delta = [Sum (Δ '22 - '23)]",
-              "VAR _Arrow = ",
-              "    IF ( ",
-              "        _Delta > 0, ",
-              "        _Increase, ",
-              "        _Decrease ",
-              "    ) ",
-              "VAR _Result = ",
-              "    _Arrow & \" \" & FORMAT ( [Sum (Δ% '22 - '23)], \"#,##0%\" ) & \" vs. LY\" ",
-              "RETURN",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
               "",
+              "VAR _Increase = UNICHAR( 8599 )",
+              "VAR _Decrease = UNICHAR( 8600 )",
+              "VAR _Delta = [Sum (Δ PY YTD)]",
+              "VAR _Arrow =",
+              "    IF( _Delta > 0, _Increase, _Decrease )",
+              "VAR _Result =",
+              "    _Arrow & \" \"",
+              "        & FORMAT( [Sum (Δ% PY YTD)], \"#,##0%\" )",
+              "        & \" vs. LY\"",
+              "RETURN",
               "    _Result"
             ],
+            "isHidden": true,
             "lineageTag": "01eae849-d1a7-49ec-9afd-af6363015ed4"
           },
           {
             "name": "KPI Bullet Title",
+            "displayFolder": "Dynamic Titles",
             "expression": [
               "",
-              "VAR _Goblins = CALCULATE ( [Sum], 'Table'[Boolean Dimension] = \"Approved\" )",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "VAR _Goblins =",
+              "    CALCULATE(",
+              "        [Sum],",
+              "        'Table'[Boolean Dimension] = \"Approved\"",
+              "    )",
               "RETURN",
-              "FORMAT ( _Goblins, \"#,##0,.0K\" ) & \" Approved Claims\""
+              "    FORMAT( _Goblins, \"#,##0,.0K\" )",
+              "        & \" Approved Claims\""
             ],
+            "isHidden": true,
             "lineageTag": "72cf28a2-c0bd-4d61-9e8e-591de15c40f4"
           },
           {
@@ -1007,18 +698,28 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
+            "displayFolder": "KPI Trend",
             "expression": [
               "",
-              "VAR _LatestDate = CALCULATE( MAX( 'Table'[Month] ), REMOVEFILTERS() )",
-              "VAR _LatestMonth = MONTH ( _LatestDate )",
-              "VAR _LatestYear = YEAR ( _LatestDate )",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "",
+              "VAR _LatestDate =",
+              "    CALCULATE(",
+              "        MAX( 'Table'[Month] ),",
+              "        REMOVEFILTERS( )",
+              "    )",
+              "VAR _LatestMonth = MONTH( _LatestDate )",
+              "VAR _LatestYear = YEAR( _LatestDate )",
               "RETURN",
-              "    CALCULATE( ",
+              "    CALCULATE(",
               "        [Sum],",
-              "        'Date'[MM] = _LatestMonth,",
-              "        'Date'[Year] = _LatestYear",
+              "        'Date'[Month (MM)] = _LatestMonth,",
+              "        'Date'[Year (YYYY)] = _LatestYear",
               "    )"
             ],
+            "isHidden": true,
             "lineageTag": "421c52e3-3109-4681-a6e4-b4c41c09908d"
           },
           {
@@ -1029,76 +730,92 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
+            "displayFolder": "Dynamic Titles",
             "expression": [
               "",
-              "    FORMAT ( [Sum (Latest Data Point)], \"#,##0,.0K\" )"
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "FORMAT(",
+              "    [Sum (Latest Data Point)],",
+              "    \"#,##0,.0K\"",
+              ")"
             ],
+            "isHidden": true,
             "lineageTag": "5a737d28-fd3a-4785-bdcd-52e8904a178a"
           },
           {
             "name": "KPI Trend Line Subtitle",
+            "displayFolder": "Dynamic Titles",
             "expression": [
               "",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "",
               "VAR _LatestDate =",
-              "    CALCULATE (",
-              "        MIN ( 'Table'[Month] ),",
-              "        VALUES ( 'Date'[Year] ),",
-              "        REMOVEFILTERS ( )",
+              "    CALCULATE(",
+              "        MIN( 'Table'[Month] ),",
+              "        VALUES( 'Date'[Year (YYYY)] ),",
+              "        REMOVEFILTERS( )",
               "    )",
-              "VAR _LatestMonth = MONTH ( _LatestDate )",
-              "VAR _LatestYear = YEAR ( _LatestDate )",
-              "VAR _Start = ",
-              "    CALCULATE (",
+              "VAR _LatestMonth = MONTH( _LatestDate )",
+              "VAR _LatestYear = YEAR( _LatestDate )",
+              "VAR _Start =",
+              "    CALCULATE(",
               "        [Sum],",
-              "        'Date'[MM] = _LatestMonth,",
-              "        'Date'[Year] = _LatestYear",
+              "        'Date'[Month (MM)] = _LatestMonth,",
+              "        'Date'[Year (YYYY)] = _LatestYear",
               "    )",
               "VAR _Finish = [Sum (Latest Data Point)]",
-              "VAR _Increase = UNICHAR(8599)",
-              "VAR _Decrease = UNICHAR(8600)",
+              "VAR _Increase = UNICHAR( 8599 )",
+              "VAR _Decrease = UNICHAR( 8600 )",
               "VAR _Delta = _Finish - _Start",
-              "VAR _Arrow = ",
-              "    IF ( ",
-              "        _Delta > 0, ",
-              "        _Increase & \" Trending up\", ",
+              "VAR _Arrow =",
+              "    IF(",
+              "        _Delta > 0,",
+              "        _Increase & \" Trending up\",",
               "        _Decrease & \" Trending down\"",
-              "    ) ",
+              "    )",
               "RETURN",
-              "_Arrow"
+              "    _Arrow"
             ],
+            "isHidden": true,
             "lineageTag": "cf8326ce-38a8-4c1f-91b8-fdd8f9b89b39"
           },
           {
             "name": "KPI Trend Conditional Formatting",
+            "displayFolder": "Control Colours",
             "expression": [
               "",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "",
               "VAR _LatestDate =",
-              "    CALCULATE (",
-              "        MIN ( 'Table'[Month] ),",
-              "        VALUES ( 'Date'[Year] ),",
-              "        REMOVEFILTERS ( )",
+              "    CALCULATE(",
+              "        MIN( 'Table'[Month] ),",
+              "        VALUES( 'Date'[Year (YYYY)] ),",
+              "        REMOVEFILTERS( )",
               "    )",
-              "VAR _LatestMonth = MONTH ( _LatestDate )",
-              "VAR _LatestYear = YEAR ( _LatestDate )",
-              "VAR _Start = ",
-              "    CALCULATE (",
+              "VAR _LatestMonth = MONTH( _LatestDate )",
+              "VAR _LatestYear = YEAR( _LatestDate )",
+              "VAR _Start =",
+              "    CALCULATE(",
               "        [Sum],",
-              "        'Date'[MM] = _LatestMonth,",
-              "        'Date'[Year] = _LatestYear",
+              "        'Date'[Month (MM)] = _LatestMonth,",
+              "        'Date'[Year (YYYY)] = _LatestYear",
               "    )",
               "VAR _Finish = [Sum (Latest Data Point)]",
-              "VAR _Increase = UNICHAR(8599)",
-              "VAR _Decrease = UNICHAR(8600)",
+              "VAR _Increase = UNICHAR( 8599 )",
+              "VAR _Decrease = UNICHAR( 8600 )",
               "VAR _Delta = _Finish - _Start",
-              "VAR _Arrow = ",
-              "    IF ( ",
-              "        _Delta > 0, ",
-              "        \"#74afcc\", ",
-              "        \"#c56161\"",
-              "    ) ",
+              "VAR _Arrow =",
+              "    IF( _Delta > 0, \"#74afcc\", \"#c56161\" )",
               "RETURN",
-              "_Arrow"
+              "    _Arrow"
             ],
+            "isHidden": true,
             "lineageTag": "e17710f3-dd05-4d60-ab0d-2faa2d3f6a19"
           },
           {
@@ -1109,193 +826,194 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
+            "displayFolder": "KPI Trend",
             "expression": [
               "",
-              "VAR _LatestDate = CALCULATE( MAX( 'Table'[Month] ), REMOVEFILTERS() )",
-              "VAR _LatestMonth = MONTH ( _LatestDate )",
-              "VAR _LatestYear = YEAR ( _LatestDate )",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "",
+              "VAR _LatestDate =",
+              "    CALCULATE(",
+              "        MAX( 'Table'[Month] ),",
+              "        REMOVEFILTERS( )",
+              "    )",
+              "VAR _LatestMonth = MONTH( _LatestDate )",
+              "VAR _LatestYear = YEAR( _LatestDate )",
               "RETURN",
-              "    CALCULATE( ",
+              "    CALCULATE(",
               "        [Sum],",
-              "        'Date'[MM] <> _LatestMonth,",
-              "        'Date'[Year] = _LatestYear",
+              "        'Date'[Month (MM)] <> _LatestMonth,",
+              "        'Date'[Year (YYYY)] = _LatestYear",
               "    )"
             ],
+            "isHidden": true,
             "lineageTag": "c9e25d30-0f33-45d0-9b4c-9b0318ce13de"
           },
           {
             "name": "KPI Trend Comparison Subtitle",
+            "displayFolder": "Dynamic Titles",
             "expression": [
               "",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "",
               "VAR _LatestDate =",
-              "    CALCULATE (",
-              "        MAX ( 'Table'[Month] ),",
-              "        VALUES ( 'Date'[Year] ),",
-              "        REMOVEFILTERS ( )",
+              "    CALCULATE(",
+              "        MAX( 'Table'[Month] ),",
+              "        VALUES( 'Date'[Year (YYYY)] ),",
+              "        REMOVEFILTERS( )",
               "    )",
-              "VAR _LatestMonth = MONTH ( _LatestDate )",
-              "VAR _LatestYear = YEAR ( _LatestDate )",
-              "VAR _Start = ",
-              "    CALCULATE (",
+              "VAR _LatestMonth = MONTH( _LatestDate )",
+              "VAR _LatestYear = YEAR( _LatestDate )",
+              "VAR _Start =",
+              "    CALCULATE(",
               "        [Sum (PY)],",
-              "        'Date'[MM] = _LatestMonth,",
-              "        'Date'[Year] = _LatestYear",
+              "        'Date'[Month (MM)] = _LatestMonth,",
+              "        'Date'[Year (YYYY)] = _LatestYear",
               "    )",
               "VAR _Finish = [Sum (Latest Data Point)]",
-              "VAR _Increase = UNICHAR(9650)",
-              "VAR _Decrease = UNICHAR(9660)",
+              "VAR _Increase = UNICHAR( 9650 )",
+              "VAR _Decrease = UNICHAR( 9660 )",
               "VAR _Delta = _Finish - _Start",
-              "VAR _Arrow = ",
-              "    IF ( ",
-              "        _Delta > 0, ",
-              "        _Increase & \" Higher than last year\", ",
+              "VAR _Arrow =",
+              "    IF(",
+              "        _Delta > 0,",
+              "        _Increase & \" Higher than last year\",",
               "        _Decrease & \" Lower than last year\"",
-              "    ) ",
+              "    )",
               "RETURN",
-              "_Arrow"
+              "    _Arrow"
             ],
+            "isHidden": true,
             "lineageTag": "05fa42ff-6662-4b17-a9ac-7ebb19000a65"
           },
           {
             "name": "KPI Trend Comparison Conditional Formatting",
+            "displayFolder": "Control Colours",
             "expression": [
               "",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "",
               "VAR _LatestDate =",
-              "    CALCULATE (",
-              "        MAX ( 'Table'[Month] ),",
-              "        VALUES ( 'Date'[Year] ),",
-              "        REMOVEFILTERS ( )",
+              "    CALCULATE(",
+              "        MAX( 'Table'[Month] ),",
+              "        VALUES( 'Date'[Year (YYYY)] ),",
+              "        REMOVEFILTERS( )",
               "    )",
-              "VAR _LatestMonth = MONTH ( _LatestDate )",
-              "VAR _LatestYear = YEAR ( _LatestDate )",
-              "VAR _Start = ",
-              "    CALCULATE (",
+              "VAR _LatestMonth = MONTH( _LatestDate )",
+              "VAR _LatestYear = YEAR( _LatestDate )",
+              "VAR _Start =",
+              "    CALCULATE(",
               "        [Sum (PY)],",
-              "        'Date'[MM] = _LatestMonth,",
-              "        'Date'[Year] = _LatestYear",
+              "        'Date'[Month (MM)] = _LatestMonth,",
+              "        'Date'[Year (YYYY)] = _LatestYear",
               "    )",
               "VAR _Finish = [Sum (Latest Data Point)]",
-              "VAR _Increase = UNICHAR(9650)",
-              "VAR _Decrease = UNICHAR(9660)",
+              "VAR _Increase = UNICHAR( 9650 )",
+              "VAR _Decrease = UNICHAR( 9660 )",
               "VAR _Delta = _Finish - _Start",
-              "VAR _Arrow = ",
-              "    IF ( ",
-              "        _Delta > 0, ",
-              "        \"#74afcc\", ",
-              "        \"#c56161\"",
-              "    ) ",
+              "VAR _Arrow =",
+              "    IF( _Delta > 0, \"#74afcc\", \"#c56161\" )",
               "RETURN",
-              "_Arrow"
+              "    _Arrow"
             ],
+            "isHidden": true,
             "lineageTag": "572d9a0b-6fba-4154-b6b0-a073e99ec6eb"
           },
           {
             "name": "KPI Sparkline Trend Up/Down",
+            "displayFolder": "Dynamic Titles",
             "expression": [
+              "",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
               "",
               "VAR _LatestDate =",
               "    CALCULATE (",
               "        MIN ( 'Table'[Month] ),",
-              "        VALUES ( 'Date'[Year] ),",
+              "        VALUES ( 'Date'[Year (YYYY)] ),",
               "        REMOVEFILTERS ( )",
               "    )",
               "VAR _LatestMonth = MONTH ( _LatestDate )",
               "VAR _LatestYear = YEAR ( _LatestDate )",
-              "VAR _Start = ",
+              "VAR _Start =",
               "    CALCULATE (",
               "        [Sum],",
-              "        'Date'[MM] = _LatestMonth,",
-              "        'Date'[Year] = _LatestYear",
+              "        'Date'[Month (MM)] = _LatestMonth,",
+              "        'Date'[Year (YYYY)] = _LatestYear",
               "    )",
               "VAR _Finish = [Sum (Latest Data Point)]",
-              "VAR _Increase = UNICHAR(8599)",
-              "VAR _Decrease = UNICHAR(8600)",
+              "VAR _Increase = UNICHAR ( 8599 )",
+              "VAR _Decrease = UNICHAR ( 8600 )",
               "VAR _Delta = _Finish - _Start",
-              "VAR _Arrow = ",
-              "    IF ( ",
-              "        _Delta > 0, ",
-              "        _Increase,",
-              "        _Decrease",
-              "    ) ",
+              "VAR _Arrow =",
+              "    IF ( _Delta > 0, _Increase, _Decrease )",
               "RETURN",
-              "_Arrow"
+              "    _Arrow"
             ],
+            "isHidden": true,
             "lineageTag": "5d85f1a7-96b2-4a9f-a873-143edcd54282"
           },
           {
-            "name": "Horizontal Gauge 0 - 33%",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "expression": [
-              "",
-              "    0.33"
-            ],
-            "lineageTag": "8aabb0b9-54cd-4c59-b352-ec311e5d4149"
-          },
-          {
-            "name": "Horizontal Gauge 33 - 67%",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "expression": [
-              "",
-              "    0.33"
-            ],
-            "lineageTag": "21622c41-9940-4a99-9717-c4ce0a894103"
-          },
-          {
-            "name": "Horizontal Gauge 67 - 100%",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "expression": [
-              "",
-              "    0.34"
-            ],
-            "lineageTag": "2226310a-d875-4b66-bdbe-21f5107a3edc"
-          },
-          {
             "name": "Gauge %",
+            "displayFolder": "KPI Gauge",
             "expression": [
               "",
-              "VAR _Goblins = CALCULATE ( [Sum], 'Table'[Boolean Dimension] = \"Approved\" )",
-              "VAR _Perc = DIVIDE ( _Goblins, [Sum] )",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "VAR _Goblins =",
+              "    CALCULATE(",
+              "        [Sum],",
+              "        'Table'[Boolean Dimension] = \"Approved\"",
+              "    )",
+              "VAR _Perc = DIVIDE( _Goblins, [Sum] )",
               "RETURN",
-              "_Perc"
+              "    _Perc"
             ],
             "formatString": "0%;-0%;0%",
+            "isHidden": true,
             "lineageTag": "c70eae56-3b9c-4b78-8306-110a1a9c49e2"
           },
           {
-            "name": "# Issues (Text)",
-            "expression": "REPT ( UNICHAR ( 10008 ), [Count] )",
-            "lineageTag": "b8c93b14-6f6e-44f4-92a4-208bca84475b"
-          },
-          {
             "name": "Issues or No Issues",
+            "displayFolder": "Boolean Conditional Text",
             "expression": [
+              "",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
               "",
               "VAR _Count = [Count]",
               "VAR _Symbol =",
-              "    SWITCH ( TRUE (),",
-              "        _Count > 0, UNICHAR ( 10008 ),",
+              "    SWITCH(",
+              "        TRUE( ),",
+              "        _Count > 0, UNICHAR( 10008 ),",
               "        _Count = 0, UNICHAR( 10004 ),",
-              "        BLANK ()",
+              "        BLANK( )",
               "    )",
               "RETURN",
-              "   _Symbol"
+              "    _Symbol"
             ],
+            "isHidden": true,
             "lineageTag": "0075047b-501d-420f-91c0-6c4974a9ff2f"
+          },
+          {
+            "name": "# Issues (Text)",
+            "displayFolder": "Repeated Text",
+            "expression": [
+              "",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "REPT( UNICHAR( 10008 ), [Count] )"
+            ],
+            "isHidden": true,
+            "lineageTag": "b8c93b14-6f6e-44f4-92a4-208bca84475b"
           }
         ],
         "partitions": [
@@ -1303,7 +1021,10 @@
             "name": "2. Report-Specific Objects",
             "mode": "import",
             "source": {
-              "expression": "{1}",
+              "expression": [
+                "",
+                "{ 1 }"
+              ],
               "type": "calculated"
             }
           }
@@ -1341,14 +1062,23 @@
         "measures": [
           {
             "name": "Percentage",
+            "displayFolder": "Percent",
             "expression": [
               "",
-              "VAR _Total = CALCULATE( SUM ( 'Table'[Quantitative] ), REMOVEFILTERS ( ) )",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "VAR _Total =",
+              "    CALCULATE(",
+              "        SUM( 'Table'[Quantitative] ),",
+              "        REMOVEFILTERS( )",
+              "    )",
               "RETURN",
-              "DIVIDE ( ",
-              "    SUM ( 'Table'[Quantitative] ), ",
-              "    _Total",
-              ") + 0.15"
+              "    DIVIDE(",
+              "        SUM( 'Table'[Quantitative] ),",
+              "        _Total",
+              "    )",
+              "        + 0.15"
             ],
             "formatString": "0%;-0%;0%",
             "lineageTag": "ccbbf42b-88e3-4b49-8192-f592b6d02dc4"
@@ -1361,20 +1091,30 @@
                 "value": "{\"isCustom\":true}"
               }
             ],
-            "expression": "SUM ( 'Table'[Quantitative] )",
+            "displayFolder": "Sum",
+            "expression": [
+              "",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "SUM( 'Table'[Quantitative] )"
+            ],
             "formatString": "  #,##0",
             "lineageTag": "71445de7-2cd6-43b8-81cb-8b9dd1159740"
           },
           {
             "name": "Sum (CY YTD)",
+            "displayFolder": "Sum\\YTD",
             "expression": [
               "",
-              "// This would normally be just the sum; where Sum (2022) would be using time intelligence or a similar method to calculate PY",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
               "CALCULATE(",
               "    [Sum],",
               "    CALCULATETABLE(",
-              "        DATESYTD('Date'[Date]),",
-              "        'Date'[DatesWithSales]",
+              "        DATESYTD( 'Date'[Date] ),",
+              "        'Date'[DatesWithSales (True/False)]",
               "    )",
               ")"
             ],
@@ -1383,60 +1123,74 @@
           },
           {
             "name": "Sum (PY)",
+            "displayFolder": "Sum",
             "expression": [
               "",
-              "// This would normally be calculated using time intelligence or a similar method to calculate PY",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
               "CALCULATE(",
               "    [Sum],",
-              "    SAMEPERIODLASTYEAR('Date'[Date])",
+              "    SAMEPERIODLASTYEAR( 'Date'[Date] )",
               ")"
             ],
             "formatString": "0",
             "lineageTag": "6fe52e9a-2944-457b-97e7-ee4aadcdc2cc"
           },
           {
-            "name": "Sum (Δ '22 - '23)",
+            "name": "Sum (Δ PY YTD)",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isCustom\":true}"
               }
             ],
+            "displayFolder": "Sum\\YTD\\vs. PY",
             "expression": [
+              "",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
               "",
               "VAR _CY = [Sum (CY YTD)]",
               "VAR _PY = [Sum (PY YTD)]",
               "VAR _Delta = _CY - _PY",
               "RETURN",
-              "_Delta"
+              "    _Delta"
             ],
             "formatString": "+#,##0;-#,##0;#,##0",
             "lineageTag": "4cb18752-6c6d-444e-b2dd-dff2e86ce817"
           },
           {
-            "name": "Sum (Δ% '22 - '23)",
+            "name": "Sum (Δ% PY YTD)",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isCustom\":true}"
               }
             ],
+            "displayFolder": "Sum\\YTD\\vs. PY",
             "expression": [
               "",
-              "DIVIDE (",
-              "    [Sum (Δ '22 - '23)],",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "DIVIDE(",
+              "    [Sum (Δ PY YTD)],",
               "    [Sum (PY)]",
               ")"
             ],
             "formatStringDefinition": {
               "expression": [
-                "",
-                "VAR _UpArrow = UNICHAR(8595)",
-                "VAR _DownArrow = UNICHAR(8593)",
+                "VAR _UpArrow = UNICHAR( 8595 )",
+                "VAR _DownArrow = UNICHAR( 8593 )",
                 "RETURN",
-                "   _DownArrow & \" #,##0.0%\" & \";\" &    // Negative numbers",
-                "   _UpArrow & \" #,##0.0%\" & \";\" &      // Positive numbers",
-                "   \"#,##0.0\"                           // Zero"
+                "    _DownArrow & \" #,##0.0%\" & \";\"",
+                "        &    // Negative numbers",
+                "        _UpArrow",
+                "        & \" #,##0.0%\"",
+                "        & \";\"",
+                "        &      // Positive numbers",
+                "        \"#,##0.0\"                           // Zero"
               ]
             },
             "lineageTag": "546753a4-f8e4-45be-92c8-3a0ccdc60f66"
@@ -1449,44 +1203,17 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
-            "expression": "COUNTROWS( VALUES('Table'[Dimension]) )",
+            "displayFolder": "Count",
+            "expression": [
+              "",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "COUNTROWS(",
+              "    VALUES( 'Table'[Dimension] )",
+              ")"
+            ],
             "lineageTag": "4b4de92d-e3ee-4139-a985-1b450ff40060"
-          },
-          {
-            "name": "Sum ('23 vs. '22)",
-            "expression": [
-              "",
-              "VAR _Actuals = [Sum (CY YTD)]",
-              "VAR _Target = [Sum (PY)]",
-              "VAR _Perc = DIVIDE(_Actuals, _Target)",
-              "RETURN",
-              "    _Perc"
-            ],
-            "formatString": "#,##0 %",
-            "lineageTag": "efdaa006-24a4-4a68-a810-343bf07e07ee"
-          },
-          {
-            "name": "Rolling 2-Week Sum",
-            "expression": [
-              "",
-              "VAR _RollingSum = ",
-              "    CALCULATE(",
-              "        [Sum],",
-              "        DATESINPERIOD(",
-              "            'Date'[Date],",
-              "            LASTDATE('Date'[Date]),",
-              "            -14,",
-              "            DAY",
-              "        )",
-              "    )",
-              "VAR _MaxDateTable = MAX ( 'Date'[Date] )",
-              "VAR _MaxDate = MAX ( 'Table'[Month] )",
-              "VAR _Result = ",
-              "    IF (_MaxDateTable > _MaxDate, _RollingSum )",
-              "RETURN",
-              "    _Result"
-            ],
-            "lineageTag": "2a3d3b47-00b8-44e3-9f64-d00a9b2f77bb"
           },
           {
             "name": "Sum (PY YTD)",
@@ -1496,17 +1223,38 @@
                 "value": "{\"isGeneralNumber\":true}"
               }
             ],
+            "displayFolder": "Sum\\YTD",
             "expression": [
               "",
-              "    CALCULATE( ",
-              "        [Sum (PY)],",
-              "        CALCULATETABLE(",
-              "            DATESYTD( 'Date'[Date] ),",
-              "            'Date'[DatesWithSales]",
-              "        )",
-              "    )"
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "CALCULATE(",
+              "    [Sum (PY)],",
+              "    CALCULATETABLE(",
+              "        DATESYTD( 'Date'[Date] ),",
+              "        'Date'[DatesWithSales (True/False)]",
+              "    )",
+              ")"
             ],
             "lineageTag": "56036eba-a803-48bd-9ad7-2d0f2af882bc"
+          },
+          {
+            "name": "Sum (% of PY YTD)",
+            "displayFolder": "Sum\\YTD\\vs. PY",
+            "expression": [
+              "",
+              "--Disclaimer: DAX in these templates doesn't follow best practices",
+              "--            Don't use this DAX as-is; the templates are intended to be illustrative.",
+              "",
+              "VAR _Actuals = [Sum (CY YTD)]",
+              "VAR _Target = [Sum (PY YTD)]",
+              "VAR _Perc = DIVIDE( _Actuals, _Target )",
+              "RETURN",
+              "    _Perc"
+            ],
+            "formatString": "#,##0 %",
+            "lineageTag": "efdaa006-24a4-4a68-a810-343bf07e07ee"
           }
         ],
         "partitions": [
@@ -1514,176 +1262,9 @@
             "name": "1. Measures",
             "mode": "import",
             "source": {
-              "expression": "{1}",
-              "type": "calculated"
-            }
-          }
-        ]
-      },
-      {
-        "name": "3. Report-Specific Calculation Group",
-        "calculationGroup": {
-          "calculationItems": [
-            {
-              "name": "2023",
-              "expression": "[Sum (CY YTD)]",
-              "formatStringDefinition": {
-                "expression": "SELECTEDMEASUREFORMATSTRING ()"
-              },
-              "ordinal": 1
-            },
-            {
-              "name": "2022",
-              "expression": "[Sum (PY)]",
-              "formatStringDefinition": {
-                "expression": "SELECTEDMEASUREFORMATSTRING ()"
-              },
-              "ordinal": 0
-            },
-            {
-              "name": "CHANGE",
               "expression": [
                 "",
-                "MAX ( [Sum (PY)], [Sum (CY YTD)] )",
-                ""
-              ],
-              "formatStringDefinition": {
-                "expression": "[Sum (Δ% '22 - '23)]"
-              },
-              "ordinal": 2
-            }
-          ]
-        },
-        "columns": [
-          {
-            "name": "Attribute",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "isHidden": true,
-            "lineageTag": "46153ef3-7f1e-4409-9fd9-da8badcc1c16",
-            "sortByColumn": "Ordinal",
-            "sourceColumn": "Name",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "Ordinal",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "int64",
-            "isHidden": true,
-            "lineageTag": "eb4d2363-14da-44a2-b9e8-6a6b70069eea",
-            "sourceColumn": "Ordinal",
-            "summarizeBy": "sum"
-          }
-        ],
-        "isHidden": true,
-        "lineageTag": "e8e227b7-fd27-4a64-87a2-95da79648028",
-        "partitions": [
-          {
-            "name": "Partition",
-            "mode": "import",
-            "source": {
-              "type": "calculationGroup"
-            }
-          }
-        ]
-      },
-      {
-        "name": "3. Report-Specific Disconnected Table",
-        "annotations": [
-          {
-            "name": "PBI_Id",
-            "value": "803854adc3014b728952e70307c7162a"
-          }
-        ],
-        "columns": [
-          {
-            "name": "Attribute",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "isDataTypeInferred": true,
-            "isHidden": true,
-            "isNameInferred": true,
-            "lineageTag": "b683d841-5ca8-40dc-a3aa-b94c9aa78716",
-            "sortByColumn": "Order",
-            "sourceColumn": "[Attribute]",
-            "summarizeBy": "none",
-            "type": "calculatedTableColumn"
-          },
-          {
-            "name": "Order",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "int64",
-            "formatString": "0",
-            "isDataTypeInferred": true,
-            "isHidden": true,
-            "isNameInferred": true,
-            "lineageTag": "781445e6-72e9-47cf-ae90-7148209c7c40",
-            "sourceColumn": "[Order]",
-            "summarizeBy": "sum",
-            "type": "calculatedTableColumn"
-          }
-        ],
-        "isHidden": true,
-        "lineageTag": "fe2cdcff-7270-464b-bddc-7b06cdc7fdc3",
-        "measures": [
-          {
-            "name": "Bar Chart & Candlestick",
-            "expression": [
-              "",
-              "// sqlbi measure replacement method",
-              "CALCULATE( ",
-              "    [Zero],",
-              "    TREATAS(",
-              "        DISTINCT( '3. Report-Specific Disconnected Table'[Attribute] ),",
-              "        '3. Report-Specific Calculation Group'[Attribute]",
-              "    )",
-              ")"
-            ],
-            "formatStringDefinition": {
-              "expression": [
-                "IF ( ",
-                "    SELECTEDVALUE ( '3. Report-Specific Disconnected Table'[Attribute] ) = \"CHANGE\",",
-                "    FORMAT( [Sum (Δ% '22 - '23)], \"+0\\.0%;-0\\.0%;0\\.0%\"),",
-                "    \"#,##0\"",
-                ")"
-              ]
-            },
-            "isHidden": true,
-            "lineageTag": "0e596993-63a5-42a9-9dc0-aa320666263d"
-          }
-        ],
-        "partitions": [
-          {
-            "name": "3. Report-Specific Disconnected Table",
-            "mode": "import",
-            "source": {
-              "expression": [
-                "",
-                "SELECTCOLUMNS( ",
-                "    '3. Report-Specific Calculation Group',",
-                "    \"Attribute\", '3. Report-Specific Calculation Group'[Attribute],",
-                "    \"Order\", '3. Report-Specific Calculation Group'[Ordinal] ",
-                ")"
+                "{ 1 }"
               ],
               "type": "calculated"
             }
@@ -1712,6 +1293,7 @@
               }
             ],
             "dataType": "dateTime",
+            "displayFolder": "3. Calendar Date",
             "formatString": "YYYY/MM/DD",
             "isDataTypeInferred": true,
             "isNameInferred": true,
@@ -1721,23 +1303,7 @@
             "type": "calculatedTableColumn"
           },
           {
-            "name": "Month Year",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "isDataTypeInferred": true,
-            "isNameInferred": true,
-            "lineageTag": "72d1b233-6932-4389-8501-3541eeaff684",
-            "sourceColumn": "[Month Year]",
-            "summarizeBy": "none",
-            "type": "calculatedTableColumn"
-          },
-          {
-            "name": "MM",
+            "name": "Year (YYYY)",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -1745,16 +1311,17 @@
               }
             ],
             "dataType": "int64",
+            "displayFolder": "1. Year",
             "formatString": "0",
             "isDataTypeInferred": true,
             "isNameInferred": true,
-            "lineageTag": "50e97e44-b1fc-4ca7-adc3-58cbc6849bb0",
-            "sourceColumn": "[MM]",
+            "lineageTag": "e06802b7-acbd-4c08-aef6-9e0a94266bbd",
+            "sourceColumn": "[Year (YYYY)]",
             "summarizeBy": "none",
             "type": "calculatedTableColumn"
           },
           {
-            "name": "Month",
+            "name": "Month Year (MMYYYY)",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -1762,16 +1329,17 @@
               }
             ],
             "dataType": "string",
+            "displayFolder": "2. Month",
             "isDataTypeInferred": true,
+            "isHidden": true,
             "isNameInferred": true,
-            "lineageTag": "3d8f24be-c447-4e80-8161-7ba927026d65",
-            "sortByColumn": "MM",
-            "sourceColumn": "[Month]",
+            "lineageTag": "ce8c040b-4b49-4b02-aade-3f61ce62b490",
+            "sourceColumn": "[Month Year (MMYYYY)]",
             "summarizeBy": "none",
             "type": "calculatedTableColumn"
           },
           {
-            "name": "Year",
+            "name": "Month (MM)",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -1779,16 +1347,35 @@
               }
             ],
             "dataType": "int64",
+            "displayFolder": "2. Month",
             "formatString": "0",
             "isDataTypeInferred": true,
             "isNameInferred": true,
-            "lineageTag": "d134daed-b27b-4a39-9b5d-b6feac0c2fe5",
-            "sourceColumn": "[Year]",
+            "lineageTag": "584fa0c0-68d8-464b-a6f9-d1e9016a4bdc",
+            "sourceColumn": "[Month (MM)]",
             "summarizeBy": "none",
             "type": "calculatedTableColumn"
           },
           {
-            "name": "DatesWithSales",
+            "name": "Month (MMM)",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "displayFolder": "2. Month",
+            "isDataTypeInferred": true,
+            "isNameInferred": true,
+            "lineageTag": "81b7a0c8-099d-443f-87e9-eb904f328750",
+            "sortByColumn": "Month (MM)",
+            "sourceColumn": "[Month (MMM)]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "DatesWithSales (True/False)",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -1796,12 +1383,25 @@
               }
             ],
             "dataType": "boolean",
+            "displayFolder": "4. Indicators",
             "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
             "isDataTypeInferred": true,
+            "isHidden": true,
             "isNameInferred": true,
-            "lineageTag": "875f8a4e-c613-4c77-8b1c-5fc2bde34b6d",
-            "sourceColumn": "[DatesWithSales]",
+            "lineageTag": "2313f5c5-cfd7-4d66-a709-8f57cc2b8adf",
+            "sourceColumn": "[DatesWithSales (True/False)]",
             "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "IsThisYear (True/False)",
+            "dataType": "boolean",
+            "displayFolder": "4. Indicators",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "3d5a6501-7143-47f8-9b21-163efaf9a014",
+            "sourceColumn": "[IsThisYear (True/False)]",
             "type": "calculatedTableColumn"
           }
         ],
@@ -1813,14 +1413,23 @@
             "source": {
               "expression": [
                 "",
-                "    ADDCOLUMNS(",
-                "        CALENDAR( DATE(2022, 1, 1), DATE(2023, 12, 31) ),",
-                "        \"Year\", YEAR( [Date] ),",
-                "        \"Month Year\", FORMAT( [Date], \"MMYYYY\" ),",
-                "        \"MM\", MONTH( [Date] ),",
-                "        \"Month\", FORMAT ( [Date], \"MMM\" ),",
-                "        \"DatesWithSales\", [Date] < MAX( 'Table'[Month] )",
-                "    )    "
+                "VAR _LatestDate = MAX ( 'Table'[Month] )",
+                "RETURN",
+                "    ADDCOLUMNS (",
+                "        CALENDAR (",
+                "            DATE ( 2022, 1, 1 ),",
+                "            DATE ( 2023, 12, 31 )",
+                "        ),",
+                "        \"Year (YYYY)\", YEAR ( ''[Date] ),",
+                "        \"Month Year (MMYYYY)\",",
+                "            FORMAT ( ''[Date], \"MMYYYY\" ),",
+                "        \"Month (MM)\", MONTH ( ''[Date] ),",
+                "        \"Month (MMM)\", FORMAT ( ''[Date], \"MMM\" ),",
+                "        \"DatesWithSales (True/False)\",",
+                "            ''[Date] < _LatestDate,",
+                "        \"IsThisYear (True/False)\",",
+                "            YEAR ( ''[Date] ) = YEAR ( _LatestDate )",
+                "    )"
               ],
               "type": "calculated"
             }

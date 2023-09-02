@@ -754,6 +754,17 @@
             ],
             "expression": "AVERAGE( 'Table'[Quantitative] )",
             "lineageTag": "9e1730ae-9fa7-4e42-ab67-b1258eff1fa6"
+          },
+          {
+            "name": "blank",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "BLANK()",
+            "lineageTag": "e2bd1c20-73ea-48b7-8247-4e79a5c662e1"
           }
         ],
         "partitions": [

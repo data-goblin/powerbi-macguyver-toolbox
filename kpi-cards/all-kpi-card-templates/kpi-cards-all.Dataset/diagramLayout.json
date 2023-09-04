@@ -4,7 +4,7 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 1,
+        "x": 0,
         "y": 0
       },
       "nodes": [
@@ -16,7 +16,7 @@
           "nodeIndex": "Table",
           "nodeLineageTag": "74c7dcbc-f534-4da1-9c59-174298c17e81",
           "size": {
-            "height": 128,
+            "height": 209,
             "width": 234
           },
           "zIndex": 0
@@ -47,35 +47,11 @@
         },
         {
           "location": {
-            "x": 1136,
-            "y": 36
+            "x": 0,
+            "y": 282
           },
-          "nodeIndex": "3. Report-Specific Calculation Group",
-          "nodeLineageTag": "e8e227b7-fd27-4a64-87a2-95da79648028",
-          "size": {
-            "height": 128,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 1420,
-            "y": 0
-          },
-          "nodeIndex": "3. Report-Specific Disconnected Table",
-          "size": {
-            "height": 200,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 1704,
-            "y": 0
-          },
-          "nodeIndex": "4. Report-Specific SVG Measures",
+          "nodeIndex": "Date",
+          "nodeLineageTag": "42924f7d-1875-49e1-abad-09dccdadd421",
           "size": {
             "height": 200,
             "width": 234

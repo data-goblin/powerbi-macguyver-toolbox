@@ -1,7 +1,28 @@
 {
-  "name": "SemanticModel",
   "compatibilityLevel": 1601,
   "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.120.963.0 (23.08)"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"Table\"]"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      },
+      {
+        "name": "TabularEditor_SerializeOptions",
+        "value": "{\"IgnoreInferredObjects\":true,\"IgnoreInferredProperties\":true,\"IgnoreTimestamps\":true,\"SplitMultilineStrings\":true,\"PrefixFilenames\":false,\"LocalTranslations\":false,\"LocalPerspectives\":false,\"LocalRelationships\":false,\"Levels\":[\"Data Sources\",\"Perspectives\",\"Relationships\",\"Roles\",\"Shared Expressions\",\"Tables\",\"Tables/Calculation Items\",\"Tables/Columns\",\"Tables/Hierarchies\",\"Tables/Measures\",\"Tables/Partitions\",\"Translations\"]}"
+      }
+    ],
     "culture": "en-US",
     "dataAccessOptions": {
       "legacyRedirects": true,
@@ -9,52 +30,75 @@
     },
     "defaultPowerBIDataSourceVersion": "powerBI_V3",
     "discourageImplicitMeasures": true,
+    "extendedProperties": [
+      {
+        "name": "TabularEditor_DeploymentMetadata",
+        "type": "json",
+        "value": {
+          "ClientMachine": "DESKTOP-NV69I5J",
+          "DeploymentMode": "SaveUI",
+          "TabularEditorBuild": "3.9.0.2972",
+          "Time": "2023-09-01T09:56:29.4920984+02:00",
+          "User": "DESKTOP-NV69I5J\\Klonk-Temp"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "name": "afb3546c-43d8-48ac-aad4-ca45f6d7bf38",
+        "fromColumn": "Month",
+        "fromTable": "Table",
+        "toColumn": "Date",
+        "toTable": "Date"
+      }
+    ],
     "sourceQueryCulture": "en-US",
     "tables": [
       {
         "name": "Table",
-        "isHidden": true,
-        "lineageTag": "74c7dcbc-f534-4da1-9c59-174298c17e81",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
         "columns": [
           {
             "name": "Dimension",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "Dimension",
-            "displayFolder": "Columns",
-            "lineageTag": "b6428db5-956a-46cf-8e0d-f78eb01375b5",
-            "summarizeBy": "none",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "dataType": "string",
+            "displayFolder": "Columns",
+            "isHidden": true,
+            "lineageTag": "b6428db5-956a-46cf-8e0d-f78eb01375b5",
+            "sourceColumn": "Dimension",
+            "summarizeBy": "none"
           },
           {
             "name": "SubDimension",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "SubDimension",
-            "displayFolder": "Columns",
-            "lineageTag": "5e30f180-4ec3-494a-b8ad-8c11697dd2f6",
-            "summarizeBy": "none",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "dataType": "string",
+            "displayFolder": "Columns",
+            "isHidden": true,
+            "lineageTag": "5e30f180-4ec3-494a-b8ad-8c11697dd2f6",
+            "sourceColumn": "SubDimension",
+            "summarizeBy": "none"
           },
           {
             "name": "Month",
-            "dataType": "dateTime",
-            "isHidden": true,
-            "sourceColumn": "Month",
-            "formatString": "Long Date",
-            "displayFolder": "Columns",
-            "lineageTag": "90826514-1f5c-4f5a-97ec-cb24d73861b0",
-            "summarizeBy": "none",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -64,62 +108,70 @@
                 "name": "UnderlyingDateTimeDataType",
                 "value": "Date"
               }
-            ]
+            ],
+            "dataType": "dateTime",
+            "displayFolder": "Columns",
+            "formatString": "Long Date",
+            "isHidden": true,
+            "lineageTag": "90826514-1f5c-4f5a-97ec-cb24d73861b0",
+            "sourceColumn": "Month",
+            "summarizeBy": "none"
           },
           {
             "name": "Year",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "Year",
-            "formatString": "0",
-            "displayFolder": "Columns",
-            "lineageTag": "375a89cb-dd50-4436-8b44-7f963752da6a",
-            "summarizeBy": "sum",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "dataType": "int64",
+            "displayFolder": "Columns",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "375a89cb-dd50-4436-8b44-7f963752da6a",
+            "sourceColumn": "Year",
+            "summarizeBy": "sum"
           },
           {
             "name": "Quantitative",
-            "dataType": "int64",
-            "isHidden": true,
-            "sourceColumn": "Quantitative",
-            "formatString": "0",
-            "displayFolder": "Columns",
-            "lineageTag": "6707e5e6-d461-4e15-88ef-6d8c60a6e2a5",
-            "summarizeBy": "sum",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "dataType": "int64",
+            "displayFolder": "Columns",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "6707e5e6-d461-4e15-88ef-6d8c60a6e2a5",
+            "sourceColumn": "Quantitative",
+            "summarizeBy": "sum"
           },
           {
             "name": "Boolean Dimension",
-            "dataType": "string",
-            "isHidden": true,
-            "sourceColumn": "Boolean Dimension",
-            "displayFolder": "Columns",
-            "lineageTag": "2ffa966d-3a78-44d3-9521-f4ea6d5686da",
-            "summarizeBy": "none",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "dataType": "string",
+            "displayFolder": "Columns",
+            "isHidden": true,
+            "lineageTag": "2ffa966d-3a78-44d3-9521-f4ea6d5686da",
+            "sourceColumn": "Boolean Dimension",
+            "summarizeBy": "none"
           }
         ],
+        "isHidden": true,
+        "lineageTag": "74c7dcbc-f534-4da1-9c59-174298c17e81",
         "partitions": [
           {
             "name": "Table",
             "mode": "import",
             "source": {
-              "type": "m",
               "expression": [
                 "let",
                 "    Dimensions = ",
@@ -197,15 +249,15 @@
                 "            each ",
                 "                let ",
                 "                    YearValue = Date.Year([Month]),",
-                "                    RandomValue = Number.RoundDown(20 + Number.RandomBetween(-25, 25)),",
+                "                    RandomValue = Number.RoundDown(20 + Number.RandomBetween(-25, 50)),",
                 "                    BaseValue = 0 + RandomValue",
                 "                in",
                 "                    if YearValue = #\"PY\" then",
                 "                        BaseValue",
                 "                    else if YearValue = #\"CY\" and [Dimension] <> \"Goblins\" then",
-                "                        BaseValue * 0.82",
+                "                        BaseValue * 0.89",
                 "                    else if YearValue = #\"CY\" and [Dimension] = \"Goblins\" then",
-                "                        BaseValue * 1.07",
+                "                        BaseValue * 1.11",
                 "                    else 0",
                 "        ),",
                 "",
@@ -239,61 +291,46 @@
                 "        )",
                 "in",
                 "    #\"Goblins/Others\""
-              ]
+              ],
+              "type": "m"
             }
-          }
-        ],
-        "annotations": [
-          {
-            "name": "PBI_ResultType",
-            "value": "Table"
-          },
-          {
-            "name": "PBI_NavigationStepName",
-            "value": "Navigation"
           }
         ]
       },
       {
         "name": "2. Report-Specific Objects",
-        "isHidden": true,
-        "lineageTag": "bc077534-c5b0-40dd-9fb4-4bad6abc2bd2",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "21661cfde1db4d40be113778b97a84f2"
+          }
+        ],
         "columns": [
           {
-            "type": "calculatedTableColumn",
             "name": "Value",
-            "dataType": "int64",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "isHidden": true,
-            "sourceColumn": "[Value]",
-            "formatString": "0",
-            "lineageTag": "05cd4f72-d741-444a-8849-796154a583d9",
-            "summarizeBy": "sum",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "05cd4f72-d741-444a-8849-796154a583d9",
+            "sourceColumn": "[Value]",
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
           }
         ],
-        "partitions": [
-          {
-            "name": "2. Report-Specific Objects",
-            "mode": "import",
-            "source": {
-              "type": "calculated",
-              "expression": [
-                "",
-                "{ 1 }"
-              ]
-            }
-          }
-        ],
+        "isHidden": true,
+        "lineageTag": "bc077534-c5b0-40dd-9fb4-4bad6abc2bd2",
         "measures": [
           {
             "name": "Transparent",
+            "displayFolder": "Control Colours",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -302,11 +339,17 @@
               "\"#00000000\""
             ],
             "isHidden": true,
-            "displayFolder": "Control Colours",
             "lineageTag": "7af08448-2e99-4e55-a505-8e431865c8dd"
           },
           {
             "name": "Sum (2022; Inverse)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isCustom\":true}"
+              }
+            ],
+            "displayFolder": "Dynamic Format Strings",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -316,17 +359,17 @@
             ],
             "formatString": "#,##0; #,##0; #,##0",
             "isHidden": true,
-            "displayFolder": "Dynamic Format Strings",
-            "lineageTag": "2ad4db16-6991-4157-8219-d80f6deb39ed",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isCustom\":true}"
-              }
-            ]
+            "lineageTag": "2ad4db16-6991-4157-8219-d80f6deb39ed"
           },
           {
             "name": "Year Colour",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Control Colours",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -339,17 +382,17 @@
               ")"
             ],
             "isHidden": true,
-            "displayFolder": "Control Colours",
-            "lineageTag": "7a633807-acfb-4667-bf5f-0f51cfe82c98",
+            "lineageTag": "7a633807-acfb-4667-bf5f-0f51cfe82c98"
+          },
+          {
+            "name": "Count (Format String)",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
-          },
-          {
-            "name": "Count (Format String)",
+            ],
+            "displayFolder": "Dynamic Format Strings",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -357,9 +400,6 @@
               "",
               "[Count]"
             ],
-            "isHidden": true,
-            "displayFolder": "Dynamic Format Strings",
-            "lineageTag": "a823e998-d1ef-493c-a9a7-8e843dc61fc9",
             "formatStringDefinition": {
               "expression": [
                 "VAR _Count = [Count]",
@@ -374,15 +414,12 @@
                 "    \"#,##0 \" & _Symbol"
               ]
             },
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ]
+            "isHidden": true,
+            "lineageTag": "a823e998-d1ef-493c-a9a7-8e843dc61fc9"
           },
           {
             "name": "Waffle Subtitle",
+            "displayFolder": "Waffle Chart (DAX Unicode)",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -394,11 +431,11 @@
               "        & FORMAT( _Result, \"#,##0%\" )"
             ],
             "isHidden": true,
-            "displayFolder": "Waffle Chart (DAX Unicode)",
             "lineageTag": "fb2bb51a-f88a-49e0-b70d-2c8f9bfe8a11"
           },
           {
             "name": "Dynamic Title (Color Indicator)",
+            "displayFolder": "Dynamic Titles",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -410,18 +447,18 @@
               "    IF(",
               "        _Result < 1,",
               "        UNICHAR( 128308 ),",
-              "        UNICHAR( 129482 )",
+              "        UNICHAR( 128309 )",
               "    )",
               "RETURN",
               "    _Color & \" Actuals:\"",
               "        & FORMAT( _Actuals, \" #,##0\" )"
             ],
             "isHidden": true,
-            "displayFolder": "Dynamic Titles",
             "lineageTag": "65c9248a-39c8-491d-87ce-125866b90de7"
           },
           {
             "name": "Rating Subtitle",
+            "displayFolder": "Rating (DAX Unicode)",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -432,11 +469,11 @@
               "    \"Rating: \" & FORMAT( _Rating, \"#,##0\" )"
             ],
             "isHidden": true,
-            "displayFolder": "Rating (DAX Unicode)",
             "lineageTag": "22a84017-ed7c-4e73-a82b-0982319caeab"
           },
           {
             "name": "Waffle",
+            "displayFolder": "Waffle Chart (DAX Unicode)",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -444,7 +481,7 @@
               "",
               "-- Init",
               "VAR _Actuals = [Sum (CY YTD)]",
-              "VAR _Target = [Sum (PY)]",
+              "VAR _Target = [Sum (PY YTD)]",
               "VAR _Perc =",
               "    MIN( 1, DIVIDE( _Actuals, _Target ) )",
               "VAR _TotalCells = 100",
@@ -462,7 +499,7 @@
               "VAR _Empty = UNICHAR( 9633 ) & \" \"  -- □",
               "-- Figure out the waffle Height x Width etc.",
               "VAR _FullFilledLines =",
-              "    INT( _FilledCount / _RowLength )",
+              "        INT ( _FilledCount / _RowLength )",
               "VAR _FilledPartial =",
               "    MOD( _FilledCount, _RowLength )",
               "VAR _EmptyPartial =",
@@ -494,11 +531,11 @@
               "    _Waffle"
             ],
             "isHidden": true,
-            "displayFolder": "Waffle Chart (DAX Unicode)",
             "lineageTag": "2ccd2bf1-9988-423e-abd0-12ccb403f7ae"
           },
           {
             "name": "Rating",
+            "displayFolder": "Rating (DAX Unicode)",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -527,11 +564,17 @@
               "    _StarRating & UNICHAR( 10 )"
             ],
             "isHidden": true,
-            "displayFolder": "Rating (DAX Unicode)",
             "lineageTag": "860209d7-5ea2-4a48-9ea1-2f9e7df39fce"
           },
           {
             "name": "Dynamic Subtitle (Context)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Dynamic Titles",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -557,17 +600,11 @@
               "        & \" )\""
             ],
             "isHidden": true,
-            "displayFolder": "Dynamic Titles",
-            "lineageTag": "faf3bed7-a8d6-42b2-b0e4-edc35cd41bed",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ]
+            "lineageTag": "faf3bed7-a8d6-42b2-b0e4-edc35cd41bed"
           },
           {
             "name": "% Claims Approved",
+            "displayFolder": "KPI Doughnut",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -583,11 +620,11 @@
               "    FORMAT( _Perc, \"#,##0%\" )"
             ],
             "isHidden": true,
-            "displayFolder": "KPI Doughnut",
             "lineageTag": "e8761060-f832-42a7-8816-f806e256b7bd"
           },
           {
             "name": "# Claims Approved",
+            "displayFolder": "KPI Bar",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -602,11 +639,17 @@
               "    FORMAT( _ApprovedClaims, \"#,##0,.0K\" )"
             ],
             "isHidden": true,
-            "displayFolder": "KPI Bar",
             "lineageTag": "1778fef3-fdfe-49f2-806a-74e0ca8b7fc8"
           },
           {
             "name": "KPI Bullet Subtitle",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Dynamic Titles",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -625,17 +668,11 @@
               "    _Result"
             ],
             "isHidden": true,
-            "displayFolder": "Dynamic Titles",
-            "lineageTag": "01eae849-d1a7-49ec-9afd-af6363015ed4",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ]
+            "lineageTag": "01eae849-d1a7-49ec-9afd-af6363015ed4"
           },
           {
             "name": "KPI Bullet Title",
+            "displayFolder": "Dynamic Titles",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -651,11 +688,17 @@
               "        & \" Approved Claims\""
             ],
             "isHidden": true,
-            "displayFolder": "Dynamic Titles",
             "lineageTag": "72cf28a2-c0bd-4d61-9e8e-591de15c40f4"
           },
           {
             "name": "Sum (Latest Data Point)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "KPI Trend",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -677,17 +720,17 @@
               "    )"
             ],
             "isHidden": true,
-            "displayFolder": "KPI Trend",
-            "lineageTag": "421c52e3-3109-4681-a6e4-b4c41c09908d",
+            "lineageTag": "421c52e3-3109-4681-a6e4-b4c41c09908d"
+          },
+          {
+            "name": "KPI Trend Line Title",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
-          },
-          {
-            "name": "KPI Trend Line Title",
+            ],
+            "displayFolder": "Dynamic Titles",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -699,17 +742,11 @@
               ")"
             ],
             "isHidden": true,
-            "displayFolder": "Dynamic Titles",
-            "lineageTag": "5a737d28-fd3a-4785-bdcd-52e8904a178a",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ]
+            "lineageTag": "5a737d28-fd3a-4785-bdcd-52e8904a178a"
           },
           {
             "name": "KPI Trend Line Subtitle",
+            "displayFolder": "Dynamic Titles",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -744,11 +781,11 @@
               "    _Arrow"
             ],
             "isHidden": true,
-            "displayFolder": "Dynamic Titles",
             "lineageTag": "cf8326ce-38a8-4c1f-91b8-fdd8f9b89b39"
           },
           {
             "name": "KPI Trend Conditional Formatting",
+            "displayFolder": "Control Colours",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -779,11 +816,17 @@
               "    _Arrow"
             ],
             "isHidden": true,
-            "displayFolder": "Control Colours",
             "lineageTag": "e17710f3-dd05-4d60-ab0d-2faa2d3f6a19"
           },
           {
             "name": "Sum (All Except Latest Point)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "KPI Trend",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -805,17 +848,11 @@
               "    )"
             ],
             "isHidden": true,
-            "displayFolder": "KPI Trend",
-            "lineageTag": "c9e25d30-0f33-45d0-9b4c-9b0318ce13de",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ]
+            "lineageTag": "c9e25d30-0f33-45d0-9b4c-9b0318ce13de"
           },
           {
             "name": "KPI Trend Comparison Subtitle",
+            "displayFolder": "Dynamic Titles",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -850,11 +887,11 @@
               "    _Arrow"
             ],
             "isHidden": true,
-            "displayFolder": "Dynamic Titles",
             "lineageTag": "05fa42ff-6662-4b17-a9ac-7ebb19000a65"
           },
           {
             "name": "KPI Trend Comparison Conditional Formatting",
+            "displayFolder": "Control Colours",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -885,11 +922,11 @@
               "    _Arrow"
             ],
             "isHidden": true,
-            "displayFolder": "Control Colours",
             "lineageTag": "572d9a0b-6fba-4154-b6b0-a073e99ec6eb"
           },
           {
             "name": "KPI Sparkline Trend Up/Down",
+            "displayFolder": "Dynamic Titles",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -920,11 +957,11 @@
               "    _Arrow"
             ],
             "isHidden": true,
-            "displayFolder": "Dynamic Titles",
             "lineageTag": "5d85f1a7-96b2-4a9f-a873-143edcd54282"
           },
           {
             "name": "Gauge %",
+            "displayFolder": "KPI Gauge",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -941,11 +978,11 @@
             ],
             "formatString": "0%;-0%;0%",
             "isHidden": true,
-            "displayFolder": "KPI Gauge",
             "lineageTag": "c70eae56-3b9c-4b78-8306-110a1a9c49e2"
           },
           {
             "name": "Issues or No Issues",
+            "displayFolder": "Boolean Conditional Text",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -963,11 +1000,11 @@
               "    _Symbol"
             ],
             "isHidden": true,
-            "displayFolder": "Boolean Conditional Text",
             "lineageTag": "0075047b-501d-420f-91c0-6c4974a9ff2f"
           },
           {
             "name": "# Issues (Text)",
+            "displayFolder": "Repeated Text",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -976,56 +1013,56 @@
               "REPT( UNICHAR( 10008 ), [Count] )"
             ],
             "isHidden": true,
-            "displayFolder": "Repeated Text",
             "lineageTag": "b8c93b14-6f6e-44f4-92a4-208bca84475b"
           }
         ],
-        "annotations": [
+        "partitions": [
           {
-            "name": "PBI_Id",
-            "value": "21661cfde1db4d40be113778b97a84f2"
+            "name": "2. Report-Specific Objects",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "",
+                "{ 1 }"
+              ],
+              "type": "calculated"
+            }
           }
         ]
       },
       {
         "name": "1. Measures",
-        "lineageTag": "4bd4c7d3-ed8c-4fc9-802b-4eb3b0893f5d",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "724d8a875a79418db6f9113a2cf5d8eb"
+          }
+        ],
         "columns": [
           {
-            "type": "calculatedTableColumn",
             "name": "Value",
-            "dataType": "int64",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "isHidden": true,
-            "sourceColumn": "[Value]",
-            "formatString": "0",
-            "lineageTag": "18e219e8-e8e5-4a4e-8c86-825ff8a663c7",
-            "summarizeBy": "sum",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "18e219e8-e8e5-4a4e-8c86-825ff8a663c7",
+            "sourceColumn": "[Value]",
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
           }
         ],
-        "partitions": [
-          {
-            "name": "1. Measures",
-            "mode": "import",
-            "source": {
-              "type": "calculated",
-              "expression": [
-                "",
-                "{ 1 }"
-              ]
-            }
-          }
-        ],
+        "lineageTag": "4bd4c7d3-ed8c-4fc9-802b-4eb3b0893f5d",
         "measures": [
           {
             "name": "Percentage",
+            "displayFolder": "Percent",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -1044,11 +1081,17 @@
               "        + 0.15"
             ],
             "formatString": "0%;-0%;0%",
-            "displayFolder": "Percent",
             "lineageTag": "ccbbf42b-88e3-4b49-8192-f592b6d02dc4"
           },
           {
             "name": "Sum",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isCustom\":true}"
+              }
+            ],
+            "displayFolder": "Sum",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -1057,17 +1100,11 @@
               "SUM( 'Table'[Quantitative] )"
             ],
             "formatString": "  #,##0",
-            "displayFolder": "Sum",
-            "lineageTag": "71445de7-2cd6-43b8-81cb-8b9dd1159740",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isCustom\":true}"
-              }
-            ]
+            "lineageTag": "71445de7-2cd6-43b8-81cb-8b9dd1159740"
           },
           {
             "name": "Sum (CY YTD)",
+            "displayFolder": "Sum\\YTD",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -1082,11 +1119,11 @@
               ")"
             ],
             "formatString": "#,0",
-            "displayFolder": "Sum\\YTD",
             "lineageTag": "202a6bc8-71c3-41cc-9349-cde551b031a0"
           },
           {
             "name": "Sum (PY)",
+            "displayFolder": "Sum",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -1098,11 +1135,17 @@
               ")"
             ],
             "formatString": "0",
-            "displayFolder": "Sum",
             "lineageTag": "6fe52e9a-2944-457b-97e7-ee4aadcdc2cc"
           },
           {
             "name": "Sum (Δ PY YTD)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isCustom\":true}"
+              }
+            ],
+            "displayFolder": "Sum\\YTD\\vs. PY",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -1115,17 +1158,17 @@
               "    _Delta"
             ],
             "formatString": "+#,##0;-#,##0;#,##0",
-            "displayFolder": "Sum\\YTD\\vs. PY",
-            "lineageTag": "4cb18752-6c6d-444e-b2dd-dff2e86ce817",
+            "lineageTag": "4cb18752-6c6d-444e-b2dd-dff2e86ce817"
+          },
+          {
+            "name": "Sum (Δ% PY YTD)",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isCustom\":true}"
               }
-            ]
-          },
-          {
-            "name": "Sum (Δ% PY YTD)",
+            ],
+            "displayFolder": "Sum\\YTD\\vs. PY",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -1136,8 +1179,6 @@
               "    [Sum (PY)]",
               ")"
             ],
-            "displayFolder": "Sum\\YTD\\vs. PY",
-            "lineageTag": "546753a4-f8e4-45be-92c8-3a0ccdc60f66",
             "formatStringDefinition": {
               "expression": [
                 "VAR _UpArrow = UNICHAR( 8595 )",
@@ -1152,15 +1193,17 @@
                 "        \"#,##0.0\"                           // Zero"
               ]
             },
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isCustom\":true}"
-              }
-            ]
+            "lineageTag": "546753a4-f8e4-45be-92c8-3a0ccdc60f66"
           },
           {
             "name": "Count",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Count",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -1170,17 +1213,17 @@
               "    VALUES( 'Table'[Dimension] )",
               ")"
             ],
-            "displayFolder": "Count",
-            "lineageTag": "4b4de92d-e3ee-4139-a985-1b450ff40060",
+            "lineageTag": "4b4de92d-e3ee-4139-a985-1b450ff40060"
+          },
+          {
+            "name": "Sum (PY YTD)",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
-          },
-          {
-            "name": "Sum (PY YTD)",
+            ],
+            "displayFolder": "Sum\\YTD",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -1194,17 +1237,11 @@
               "    )",
               ")"
             ],
-            "displayFolder": "Sum\\YTD",
-            "lineageTag": "56036eba-a803-48bd-9ad7-2d0f2af882bc",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ]
+            "lineageTag": "56036eba-a803-48bd-9ad7-2d0f2af882bc"
           },
           {
             "name": "Sum (% of PY YTD)",
+            "displayFolder": "Sum\\YTD\\vs. PY",
             "expression": [
               "",
               "--Disclaimer: DAX in these templates doesn't follow best practices",
@@ -1217,37 +1254,44 @@
               "    _Perc"
             ],
             "formatString": "#,##0 %",
-            "displayFolder": "Sum\\YTD\\vs. PY",
             "lineageTag": "efdaa006-24a4-4a68-a810-343bf07e07ee"
           },
           {
             "name": "Average",
             "expression": "AVERAGE ( 'Table'[Quantitative] )",
             "lineageTag": "c753646f-4f8f-4d29-b960-da8cc2c49070"
+          },
+          {
+            "name": "blank",
+            "expression": "BLANK ()",
+            "lineageTag": "07ef9694-e931-4ed5-8a15-eeb204d88f65"
           }
         ],
-        "annotations": [
+        "partitions": [
           {
-            "name": "PBI_Id",
-            "value": "724d8a875a79418db6f9113a2cf5d8eb"
+            "name": "1. Measures",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "",
+                "{ 1 }"
+              ],
+              "type": "calculated"
+            }
           }
         ]
       },
       {
         "name": "Date",
-        "lineageTag": "42924f7d-1875-49e1-abad-09dccdadd421",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "163d92fff6ed49ff9051b07d98c0444d"
+          }
+        ],
         "columns": [
           {
-            "type": "calculatedTableColumn",
             "name": "Date",
-            "dataType": "dateTime",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[Date]",
-            "formatString": "YYYY/MM/DD",
-            "displayFolder": "3. Calendar Date",
-            "lineageTag": "79acd4a7-177f-46ac-b3f5-bd96e78c9259",
-            "summarizeBy": "none",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -1257,117 +1301,126 @@
                 "name": "PBI_FormatHint",
                 "value": "{\"isCustom\":true}"
               }
-            ]
+            ],
+            "dataType": "dateTime",
+            "displayFolder": "3. Calendar Date",
+            "formatString": "YYYY/MM/DD",
+            "isDataTypeInferred": true,
+            "isNameInferred": true,
+            "lineageTag": "79acd4a7-177f-46ac-b3f5-bd96e78c9259",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
           },
           {
-            "type": "calculatedTableColumn",
             "name": "Year (YYYY)",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
             "dataType": "int64",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[Year (YYYY)]",
-            "formatString": "0",
             "displayFolder": "1. Year",
-            "lineageTag": "e06802b7-acbd-4c08-aef6-9e0a94266bbd",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "Month Year (MMYYYY)",
-            "dataType": "string",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "isHidden": true,
-            "sourceColumn": "[Month Year (MMYYYY)]",
-            "displayFolder": "2. Month",
-            "lineageTag": "ce8c040b-4b49-4b02-aade-3f61ce62b490",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "Month (MM)",
-            "dataType": "int64",
-            "isNameInferred": true,
-            "isDataTypeInferred": true,
-            "sourceColumn": "[Month (MM)]",
             "formatString": "0",
-            "displayFolder": "2. Month",
-            "lineageTag": "584fa0c0-68d8-464b-a6f9-d1e9016a4bdc",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "Month (MMM)",
-            "dataType": "string",
-            "isNameInferred": true,
             "isDataTypeInferred": true,
-            "sourceColumn": "[Month (MMM)]",
-            "sortByColumn": "Month (MM)",
-            "displayFolder": "2. Month",
-            "lineageTag": "81b7a0c8-099d-443f-87e9-eb904f328750",
+            "isNameInferred": true,
+            "lineageTag": "e06802b7-acbd-4c08-aef6-9e0a94266bbd",
+            "sourceColumn": "[Year (YYYY)]",
             "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Month Year (MMYYYY)",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
-          },
-          {
-            "type": "calculatedTableColumn",
-            "name": "DatesWithSales (True/False)",
-            "dataType": "boolean",
-            "isNameInferred": true,
+            ],
+            "dataType": "string",
+            "displayFolder": "2. Month",
             "isDataTypeInferred": true,
             "isHidden": true,
-            "sourceColumn": "[DatesWithSales (True/False)]",
-            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
-            "displayFolder": "4. Indicators",
-            "lineageTag": "2313f5c5-cfd7-4d66-a709-8f57cc2b8adf",
+            "isNameInferred": true,
+            "lineageTag": "ce8c040b-4b49-4b02-aade-3f61ce62b490",
+            "sourceColumn": "[Month Year (MMYYYY)]",
             "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Month (MM)",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
               }
-            ]
+            ],
+            "dataType": "int64",
+            "displayFolder": "2. Month",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isNameInferred": true,
+            "lineageTag": "584fa0c0-68d8-464b-a6f9-d1e9016a4bdc",
+            "sourceColumn": "[Month (MM)]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
           },
           {
-            "type": "calculatedTableColumn",
+            "name": "Month (MMM)",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "displayFolder": "2. Month",
+            "isDataTypeInferred": true,
+            "isNameInferred": true,
+            "lineageTag": "81b7a0c8-099d-443f-87e9-eb904f328750",
+            "sortByColumn": "Month (MM)",
+            "sourceColumn": "[Month (MMM)]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "DatesWithSales (True/False)",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "displayFolder": "4. Indicators",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "2313f5c5-cfd7-4d66-a709-8f57cc2b8adf",
+            "sourceColumn": "[DatesWithSales (True/False)]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
             "name": "IsThisYear (True/False)",
             "dataType": "boolean",
-            "isNameInferred": true,
+            "displayFolder": "4. Indicators",
             "isDataTypeInferred": true,
             "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "3d5a6501-7143-47f8-9b21-163efaf9a014",
             "sourceColumn": "[IsThisYear (True/False)]",
-            "displayFolder": "4. Indicators",
-            "lineageTag": "3d5a6501-7143-47f8-9b21-163efaf9a014"
+            "type": "calculatedTableColumn"
           }
         ],
+        "lineageTag": "42924f7d-1875-49e1-abad-09dccdadd421",
         "partitions": [
           {
             "name": "Date",
             "mode": "import",
             "source": {
-              "type": "calculated",
               "expression": [
                 "",
                 "VAR _LatestDate = MAX ( 'Table'[Month] )",
@@ -1387,45 +1440,41 @@
                 "        \"IsThisYear (True/False)\",",
                 "            YEAR ( ''[Date] ) = YEAR ( _LatestDate )",
                 "    )"
-              ]
+              ],
+              "type": "calculated"
             }
-          }
-        ],
-        "annotations": [
-          {
-            "name": "PBI_Id",
-            "value": "163d92fff6ed49ff9051b07d98c0444d"
           }
         ]
       },
       {
         "name": "3. Report-Specific SVG Measures",
-        "lineageTag": "ee113197-d1e5-4c9d-8849-1ca2827012de",
         "columns": [
           {
-            "type": "calculatedTableColumn",
             "name": "Value",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
             "dataType": "int64",
-            "isNameInferred": true,
+            "formatString": "0",
             "isDataTypeInferred": true,
             "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "e20a7e9a-fe81-4c04-9d07-aff8626286fc",
             "sourceColumn": "[Value]",
-            "lineageTag": "e20a7e9a-fe81-4c04-9d07-aff8626286fc"
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
           }
         ],
-        "partitions": [
-          {
-            "name": "3. Report-Specific SVG Measures",
-            "mode": "import",
-            "source": {
-              "type": "calculated",
-              "expression": "{1}"
-            }
-          }
-        ],
+        "isHidden": true,
+        "lineageTag": "ee113197-d1e5-4c9d-8849-1ca2827012de",
         "measures": [
           {
             "name": "Card with Columns and Target",
+            "dataCategory": "ImageUrl",
+            "displayFolder": "SVG Measures",
             "expression": [
               "",
               "/* SETUP */",
@@ -1438,12 +1487,12 @@
               "    // ADD YOUR TABLE, PERIOD COLUMN (DATE, MONTH, QUARTER, YEAR,...) + MEASURE HERE",
               "    ADDCOLUMNS (",
               "        SELECTCOLUMNS (",
-              "            SUMMARIZE ( 'Table', 'Table'[Quantitative] ),",
-              "            \"@xAxisPeriod\", 'Table'[Quantitative]",
+              "            SUMMARIZE ( 'Table', 'Date'[Month (MMM)] ),",
+              "            \"@xAxisPeriod\", 'Date'[Month (MMM)]",
               "        ),",
-              "        \"@val\", [Sum]",
+              "        \"@val\", [Sum (CY YTD)]",
               "    )",
-              "VAR _target = [Average] // Target value or measure",
+              "VAR _target = [Sum (PY YTD)] // Target value or measure",
               "",
               "/* TEXT DECLARTIONS */",
               "VAR _firstLineInitialText = \"Total target is on\"",
@@ -1548,18 +1597,19 @@
               "    SVGImageURL",
               ""
             ],
-            "displayFolder": "SVG Measures",
-            "lineageTag": "9dd04f9a-fd6b-44dd-863c-d742478ff381",
-            "dataCategory": "ImageUrl",
+            "isHidden": true,
+            "lineageTag": "9dd04f9a-fd6b-44dd-863c-d742478ff381"
+          },
+          {
+            "name": "Card with Donut progress",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
-          },
-          {
-            "name": "Card with Donut progress",
+            ],
+            "dataCategory": "ImageUrl",
+            "displayFolder": "SVG Measures",
             "expression": [
               "",
               "/* SETUP */",
@@ -1697,18 +1747,19 @@
               "RETURN",
               "    _result"
             ],
-            "displayFolder": "SVG Measures",
-            "lineageTag": "e6173774-b377-4cb8-a121-e5cf0130bacd",
-            "dataCategory": "ImageUrl",
+            "isHidden": true,
+            "lineageTag": "e6173774-b377-4cb8-a121-e5cf0130bacd"
+          },
+          {
+            "name": "KPI Target Checker",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
-          },
-          {
-            "name": "KPI Target Checker",
+            ],
+            "dataCategory": "ImageUrl",
+            "displayFolder": "SVG Measures",
             "expression": [
               "",
               "/* SETUP */",
@@ -1802,18 +1853,12 @@
               "RETURN",
               "    _result"
             ],
-            "displayFolder": "SVG Measures",
-            "lineageTag": "66b99bbf-e44b-47d2-accc-3473b92254bf",
-            "dataCategory": "ImageUrl",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ]
+            "isHidden": true,
+            "lineageTag": "66b99bbf-e44b-47d2-accc-3473b92254bf"
           },
           {
             "name": "KPI Trend Line",
+            "displayFolder": "SVG Measures",
             "expression": [
               "",
               "/* SETUP */",
@@ -1823,7 +1868,7 @@
               "VAR _padding = 15 // Padding between SVG image and border",
               "VAR _preparedTbl = // Insert your table, quantitative column and measure",
               "    ADDCOLUMNS(",
-              "        SELECTCOLUMNS( SUMMARIZE( 'Table', 'Table'[Quantitative] ), \"@xAxis\", 'Table'[Quantitative] ),",
+              "        SELECTCOLUMNS( SUMMARIZE( 'Table', 'Date'[Date] ), \"@xAxis\", 'Date'[Date] ),",
               "        \"@vl\", [Sum]",
               "    )",
               "",
@@ -1949,29 +1994,25 @@
               "RETURN",
               "    _result"
             ],
-            "displayFolder": "SVG Measures",
-            "lineageTag": "73f8e70a-d500-4cde-88ed-bdebb5133b12",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ]
+            "isHidden": true,
+            "lineageTag": "73f8e70a-d500-4cde-88ed-bdebb5133b12"
           },
           {
             "name": "Matrix Bullet KPI",
+            "dataCategory": "ImageUrl",
+            "displayFolder": "SVG Measures",
             "expression": [
               "",
               "/* SETUP */",
-              "VAR _currentValue = [Sum (CY YTD)] // Current Value",
-              "VAR _target = [Sum (PY YTD)] // Target Value",
+              "VAR _currentValue = [Sum] // Current Value",
+              "VAR _target = [Sum (PY)] // Target Value",
               "",
               "/* COLOR DEFINITION */",
               "VAR _positive = \"#658E95\" // Positive Color",
               "VAR _negative = \"#7D1D3A\" // Negative Color",
               "VAR _targetLineColor = \"#252526\" // Color for Target Line",
-              "VAR _lightGreyBar = \"#EDEBE9\" // Color for support bar in behinde",
-              "VAR _lightTextColor = \"#CCC\" // Color for support text",
+              "VAR _lightGreyBar = \"#EDEBE9\" // Color for support bar in behind",
+              "VAR _lightTextColor = \"#9C9A95\" // Color for support text",
               "VAR _colorSelection =",
               "    IF ( _currentValue >= _target, _positive, _negative ) ",
               "    ",
@@ -2012,7 +2053,7 @@
               "VAR _svgEnding = \"</svg>\" ",
               "",
               "/* CALCULATION */",
-              "VAR _boxPadding = 25",
+              "VAR _boxPadding = 35",
               "VAR _barUsableWidth = 100 - _boxPadding - 10",
               "VAR _diff = _currentValue - _target",
               "VAR _div =",
@@ -2039,18 +2080,19 @@
               "    _header & _svgDeclaration & _sortingSupport & _style & _content & _svgEnding",
               ""
             ],
-            "displayFolder": "SVG Measures",
-            "lineageTag": "9d8ee708-3137-4e5a-a881-bf8c9c2eba86",
-            "dataCategory": "ImageUrl",
+            "isHidden": true,
+            "lineageTag": "9d8ee708-3137-4e5a-a881-bf8c9c2eba86"
+          },
+          {
+            "name": "Matrix Text KPI",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
-          },
-          {
-            "name": "Matrix Text KPI",
+            ],
+            "dataCategory": "ImageUrl",
+            "displayFolder": "SVG Measures",
             "expression": [
               "",
               "/* SETUP */",
@@ -2112,18 +2154,18 @@
               "RETURN",
               "    _header & _svgDeclaration & _sortingSupport & _style & _content & _svgEnding"
             ],
-            "displayFolder": "SVG Measures",
-            "lineageTag": "3ea64bbb-b211-458e-ab09-102c6691a7da",
-            "dataCategory": "ImageUrl",
+            "isHidden": true,
+            "lineageTag": "3ea64bbb-b211-458e-ab09-102c6691a7da"
+          },
+          {
+            "name": "Progress More Complex bar chart",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
-          },
-          {
-            "name": "Progress More Complex bar chart",
+            ],
+            "displayFolder": "SVG Measures",
             "expression": [
               "",
               "/* SETUP */",
@@ -2254,17 +2296,18 @@
               "RETURN",
               "    _result"
             ],
-            "displayFolder": "SVG Measures",
-            "lineageTag": "9e11a62d-4257-40f6-a543-42592e23c020",
+            "isHidden": true,
+            "lineageTag": "9e11a62d-4257-40f6-a543-42592e23c020"
+          },
+          {
+            "name": "Progress Simple bar chart",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
-          },
-          {
-            "name": "Progress Simple bar chart",
+            ],
+            "displayFolder": "SVG Measures",
             "expression": [
               "",
               "/* SETUP */",
@@ -2352,17 +2395,18 @@
               "RETURN",
               "    _result"
             ],
-            "displayFolder": "SVG Measures",
-            "lineageTag": "61e84c6d-95bc-46ad-ad38-862a779b1ebd",
+            "isHidden": true,
+            "lineageTag": "61e84c6d-95bc-46ad-ad38-862a779b1ebd"
+          },
+          {
+            "name": "Range Progress Card",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
-          },
-          {
-            "name": "Range Progress Card",
+            ],
+            "displayFolder": "SVG Measures",
             "expression": [
               "",
               "/* SETUP */",
@@ -2502,17 +2546,18 @@
               "RETURN",
               "    _result"
             ],
-            "displayFolder": "SVG Measures",
-            "lineageTag": "b7f0283f-ff4d-4801-b061-ef5f3783925e",
+            "isHidden": true,
+            "lineageTag": "b7f0283f-ff4d-4801-b061-ef5f3783925e"
+          },
+          {
+            "name": "Slope KPI Chart",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
-          },
-          {
-            "name": "Slope KPI Chart",
+            ],
+            "displayFolder": "SVG Measures",
             "expression": [
               "",
               "/* SETUP */",
@@ -2671,17 +2716,19 @@
               "RETURN",
               "    _result"
             ],
-            "displayFolder": "SVG Measures",
-            "lineageTag": "66342746-5d8a-40e1-8408-83ec13ece380",
+            "isHidden": true,
+            "lineageTag": "66342746-5d8a-40e1-8408-83ec13ece380"
+          },
+          {
+            "name": "Text Card ShowCase One",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
-          },
-          {
-            "name": "Text Card ShowCase One",
+            ],
+            "dataCategory": "ImageUrl",
+            "displayFolder": "SVG Measures",
             "expression": [
               "",
               "/* SETUP */",
@@ -2737,18 +2784,18 @@
               "RETURN",
               "    _header & _svgDeclaration & _style & _content & _svgEnding"
             ],
-            "displayFolder": "SVG Measures",
-            "lineageTag": "fa7e0dfb-5ed0-4b70-9aad-fead2642382b",
-            "dataCategory": "ImageUrl",
+            "isHidden": true,
+            "lineageTag": "fa7e0dfb-5ed0-4b70-9aad-fead2642382b"
+          },
+          {
+            "name": "Text Card ShowCase Three",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
-          },
-          {
-            "name": "Text Card ShowCase Three",
+            ],
+            "displayFolder": "SVG Measures",
             "expression": [
               "",
               "/* SETUP */",
@@ -2807,17 +2854,18 @@
               "    _header & _svgDeclaration & _style & _content & _svgEnding",
               ""
             ],
-            "displayFolder": "SVG Measures",
-            "lineageTag": "6f9080e9-f161-4954-9024-5290f41dc090",
+            "isHidden": true,
+            "lineageTag": "6f9080e9-f161-4954-9024-5290f41dc090"
+          },
+          {
+            "name": "Text Card ShowCase Two",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
-          },
-          {
-            "name": "Text Card ShowCase Two",
+            ],
+            "displayFolder": "SVG Measures",
             "expression": [
               "",
               "/* SETUP */",
@@ -2872,17 +2920,18 @@
               "    _header & _svgDeclaration & _style & _content & _svgEnding",
               ""
             ],
-            "displayFolder": "SVG Measures",
-            "lineageTag": "4526c332-b2de-422f-acc9-66e573af14f1",
+            "isHidden": true,
+            "lineageTag": "4526c332-b2de-422f-acc9-66e573af14f1"
+          },
+          {
+            "name": "Text Comparer Extended",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
-          },
-          {
-            "name": "Text Comparer Extended",
+            ],
+            "displayFolder": "SVG Measures",
             "expression": [
               "",
               "/* SETUP */",
@@ -2993,17 +3042,18 @@
               "RETURN",
               "    _header & _svgDeclaration & _style & _subLine & _content & _svgEnding"
             ],
-            "displayFolder": "SVG Measures",
-            "lineageTag": "d3dd4195-50f7-4695-8ffb-b16becc710d9",
+            "isHidden": true,
+            "lineageTag": "d3dd4195-50f7-4695-8ffb-b16becc710d9"
+          },
+          {
+            "name": "Waffle Filling Card",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
-          },
-          {
-            "name": "Waffle Filling Card",
+            ],
+            "displayFolder": "SVG Measures",
             "expression": [
               "",
               "/* SETUP */",
@@ -3086,17 +3136,18 @@
               "RETURN",
               "    _result"
             ],
-            "displayFolder": "SVG Measures",
-            "lineageTag": "df24829a-a15e-4341-bb7a-05edd449687f",
+            "isHidden": true,
+            "lineageTag": "df24829a-a15e-4341-bb7a-05edd449687f"
+          },
+          {
+            "name": "Waffle Icon Filling Card",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
                 "value": "{\"isGeneralNumber\":true}"
               }
-            ]
-          },
-          {
-            "name": "Waffle Icon Filling Card",
+            ],
+            "displayFolder": "SVG Measures",
             "expression": [
               "",
               "/* SETUP */",
@@ -3224,60 +3275,20 @@
               "    _result",
               ""
             ],
-            "displayFolder": "SVG Measures",
-            "lineageTag": "0ec51430-0e8d-42a6-9809-13d4c05dd7b2",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ]
+            "isHidden": true,
+            "lineageTag": "0ec51430-0e8d-42a6-9809-13d4c05dd7b2"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "3. Report-Specific SVG Measures",
+            "mode": "import",
+            "source": {
+              "expression": "{1}",
+              "type": "calculated"
+            }
           }
         ]
-      }
-    ],
-    "relationships": [
-      {
-        "name": "afb3546c-43d8-48ac-aad4-ca45f6d7bf38",
-        "fromTable": "Table",
-        "fromColumn": "Month",
-        "toTable": "Date",
-        "toColumn": "Date"
-      }
-    ],
-    "extendedProperties": [
-      {
-        "type": "json",
-        "name": "TabularEditor_DeploymentMetadata",
-        "value": {
-          "ClientMachine": "DESKTOP-NV69I5J",
-          "DeploymentMode": "SaveUI",
-          "TabularEditorBuild": "3.9.0.2972",
-          "Time": "2023-09-01T09:56:29.4920984+02:00",
-          "User": "DESKTOP-NV69I5J\\Klonk-Temp"
-        }
-      }
-    ],
-    "annotations": [
-      {
-        "name": "__PBI_TimeIntelligenceEnabled",
-        "value": "0"
-      },
-      {
-        "name": "PBIDesktopVersion",
-        "value": "2.120.963.0 (23.08)"
-      },
-      {
-        "name": "PBI_QueryOrder",
-        "value": "[\"Table\"]"
-      },
-      {
-        "name": "PBI_ProTooling",
-        "value": "[\"DevMode\"]"
-      },
-      {
-        "name": "TabularEditor_SerializeOptions",
-        "value": "{\"IgnoreInferredObjects\":true,\"IgnoreInferredProperties\":true,\"IgnoreTimestamps\":true,\"SplitMultilineStrings\":true,\"PrefixFilenames\":false,\"LocalTranslations\":false,\"LocalPerspectives\":false,\"LocalRelationships\":false,\"Levels\":[\"Data Sources\",\"Perspectives\",\"Relationships\",\"Roles\",\"Shared Expressions\",\"Tables\",\"Tables/Calculation Items\",\"Tables/Columns\",\"Tables/Hierarchies\",\"Tables/Measures\",\"Tables/Partitions\",\"Translations\"]}"
       }
     ]
   }

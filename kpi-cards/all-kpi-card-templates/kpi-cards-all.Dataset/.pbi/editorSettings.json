@@ -1,5 +1,6 @@
 {
   "version": "1.0",
+  "showHiddenFields": true,
   "autodetectRelationships": true,
   "parallelQueryLoading": true,
   "relationshipImportEnabled": true

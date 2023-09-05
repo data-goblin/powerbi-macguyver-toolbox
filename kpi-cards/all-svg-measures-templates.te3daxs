@@ -1,0 +1,1800 @@
+-- This is a DAX Script to use in Tabular Editor 3.
+-- You can use this script to automatically write the SVG measure templates to your model.
+
+--------------------------------------
+-- Measure: [Waffle Icon Filling Card]
+--------------------------------------
+MEASURE '3. Report-Specific SVG Measures'[Waffle Icon Filling Card] = 
+    -- For illustrative and educational purposes.
+    -- You'll need to adjust these SVG measures for use in your own solutions.
+    
+    -- When using SVG measures, be aware that they're custom 'microvisuals'.
+    -- They require more time and effort to build, test, and maintain.
+    
+    
+    /* SETUP */
+    VAR _val =
+        ( DIVIDE ( [Sum (CY YTD)], [Sum (PY YTD)] ) * 0.75 ) * 100 + 0.2 // INSERT YOUR MEASURE HERE <- OUTPUT OF MEASURE SHOUD BE WHOLE NUMBER BETWEEN 0 AND 100
+    VAR _space = 5 // SPACE BETWEEN CUBES
+    VAR _width = 365 // Width size of the SVG
+    VAR _height = 240 // Height size of the SVG
+    VAR _padding = 15 // Padding between border and SVG
+    
+    /* PRECALCULATIONS */
+    VAR _doublePadding = _padding * 2 // DOUBLE PADDING
+    VAR _usableHeight = _height - _doublePadding // HEIGHT OF USABLE SPACE
+    VAR _usableWidth = _width - _doublePadding // WIDTH OF USABLE SPACE
+    VAR _imageSize =
+        MIN ( _usableHeight, _usableWidth ) // HEIGHT SIZE OF IMAGE
+    
+    /* COLORS DECLARTIONS */
+    VAR _positive = "#658E95" // Positive Color
+    VAR _neutral = "#E7E74E" // Neutral Color
+    VAR _negative = "#7D1D3A" // Negative Color
+    VAR _filledCubeColor =
+        // COLOR OF FILLED CUBES 
+        SWITCH (
+            TRUE (),
+            _val >= 80, _positive,
+            _val > 70, _neutral,
+            _negative
+        ) 
+    
+    /* SVG DECLARTIONS */
+    VAR _svgDeclaration = "data:image/svg+xml;utf8,"
+    VAR _svgHeader = "<svg xmlns='http://www.w3.org/2000/svg' height = '" & _height & "' width = '" & _width & "'>"
+    VAR _svgEnd = "</svg>" 
+    
+    /* ICONS DECLARATIONS */
+    VAR _defs = "<defs>
+            <svg id='skeleton' viewBox='0 0 90 90' xmlns:space='preserve'>
+      <defs>
+        <filter id='f1' x='-50%' y='-50%' width='200%' height='200%'>
+          <feGaussianBlur in='SourceGraphic' stdDeviation='2' result='blur' />
+          <feColorMatrix in='blur' type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 100 -10' result='goo' />
+          <feBlend in='SourceGraphic' in2='goo' />
+        </filter>
+      </defs>
+      <g filter='url(#f1)'><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90' data-tags='body'>
+          <g class='bones' stroke='#000' stroke-width='2.25'>
+            <path fill='#ffffff' data-layer='skeleton/bones' d='M43.2 39.6h3.6v36h-3.6z' />
+            <path
+              d='M45 81l-1.8-1.8-1.8-3.6 1.8-1.8h3.6l1.8 1.8-1.8 3.6zM41.4 63.537c.624 1.899.58 3.692 0 5.4h7.2c-.503-1.77-.574-3.566 0-5.4zM41.4 51.794c.624 1.898.58 3.691 0 5.4h7.2c-.503-1.77-.574-3.567 0-5.4zM41.4 42.104c.624 1.899.58 3.692 0 5.4h7.2c-.503-1.77-.574-3.566 0-5.4z'
+              fill='#ffffff' data-layer='skeleton/bones' />
+            <path
+              d='M45 9C28.8 9 14.4 19.8 11.062 33c-1.38 5.461 2.558 8.44 8.75 10.062v5.532h50.376v-5.532c6.192-1.623 10.13-4.6 8.75-10.062C75.6 19.8 61.2 9 45 9z'
+              fill='#ffffff' data-layer='skeleton/bones' />
+            <path d='M27 41.4v7.2m7.2-7.2v7.2m7.2-7.2v7.2m7.2-7.2v7.2m7.2-7.2v7.2m7.2-7.2v7.2' fill='none' />
+            <path
+              d='M22.594 50.217a4.5 4.5 0 0 0-4.5 4.5c0 1.021.363 1.932.937 2.687-.574.755-.937 1.666-.937 2.688a4.5 4.5 0 0 0 8.906.906h36a4.5 4.5 0 0 0 8.906-.906c0-1.022-.363-1.933-.937-2.688.574-.755.937-1.666.937-2.687A4.5 4.5 0 0 0 63 53.81H27a4.5 4.5 0 0 0-4.406-3.593z'
+              fill='#ffffff' data-layer='skeleton/bones' />
+            <path
+              d='M31.594 64.819a4.5 4.5 0 0 0-4.5 4.5c0 1.022.363 1.932.937 2.687-.574.756-.937 1.666-.937 2.688A4.5 4.5 0 0 0 36 75.6h18a4.5 4.5 0 0 0 8.906-.906c0-1.022-.363-1.932-.937-2.688.574-.755.937-1.665.937-2.687A4.5 4.5 0 0 0 54 68.413H36a4.5 4.5 0 0 0-4.406-3.594z'
+              fill='#ffffff' data-layer='skeleton/bones' />
+          </g>
+          <g class='sockets' fill='#000000' stroke='#000' stroke-width='2.25'>
+            <path
+              d='M34.179 26.377c-.529 2.834-3.254 5.131-6.088 5.131s-4.703-2.297-4.175-5.131c.529-2.834 3.254-5.132 6.088-5.132s4.703 2.298 4.175 5.132zM55.959 26.377c.528 2.834 3.254 5.131 6.088 5.131s4.703-2.297 4.174-5.131c-.528-2.834-3.254-5.132-6.088-5.132s-4.703 2.298-4.174 5.132z'
+              data-layer='skeleton/sockets' />
+          </g>
+        </svg></g>
+    </svg>
+        <svg id='goblin' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90' xml:space='preserve'>
+      <defs>
+        <filter id='f1' x='-50%' y='-50%' width='200%' height='200%'>
+          <feGaussianBlur in='SourceGraphic' stdDeviation='2' result='blur'/>
+          <feColorMatrix in='blur' type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 100 -10' result='goo'/>
+          <feBlend in='SourceGraphic' in2='goo'/>
+        </filter>
+      </defs><g filter='url(#f1)'><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90' data-tags='clothing'><defs><linearGradient id='d-rmefh-a'><stop offset='0'/><stop offset='1' stop-opacity='0'/></linearGradient></defs><path d='M48 73.938c-2.432 2.403-5.47 4.653-9.281 6.5A36.03 36.03 0 0 0 45 81c3.868 0 7.602-.59 11.094-1.719-3.182-1.678-5.861-3.506-8.094-5.343z' fill='#b4b4b4' data-layer='leaf-garment/shirt' stroke='#000' stroke-width='2.25' stroke-linecap='round'/><g class='leaf-right' fill='#31542D' stroke='#000'><path d='M79.219 50.094C71.92 52.449 59.745 54 45.906 54c-2.527 0-4.977-.058-7.375-.156l-.718 7.344S46.8 84.6 84.6 86.4c1.8-9-3.6-35.994-3.6-35.994z' data-layer='leaf-garment/leaf-right' stroke-width='2.25'/><path d='M64.8 61.2c3.6 14.4 19.8 25.2 19.8 25.2' data-layer='leaf-garment/leaf-right' stroke-width='2.25' stroke-linecap='round'/><path d='M73.167 75.09c2.667-3.103 6.597-2.854 6.597-2.854M76.279 79.2c-2.479 0-3.5 2.336-3.5 2.336M69.296 70.028c-5.4 1.8-7.2 5.4-7.2 5.4M66.6 66.6c3.6-5.4 10.8-5.4 10.8-5.4' data-layer='leaf-garment/leaf-right' stroke-width='1.125' stroke-linecap='round'/></g><g class='leaf-left' fill='#31542D' stroke='#000'><path d='M9 48.594s-5.4 18.006-3.594 36C55.8 90 57.594 54 57.594 54l-.375-.375c-3.59.234-7.38.375-11.313.375-16.282 0-30.285-2.14-36.718-5.219.114-.283-.163-.162-.188-.187z' data-layer='leaf-garment/leaf-left' stroke-width='2.25'/><path d='M28.8 59.4C23.4 70.2 7.2 82.8 7.2 82.8' data-layer='leaf-garment/leaf-left' stroke-width='2.25' stroke-linecap='round'/><path d='M15.915 75.04C12.982 72 9 73.8 9 73.8M18.636 71.773c8.364.227 11.326 4.28 11.326 4.28M23.025 67.976c-3.936-5.26-11.136-3.46-11.136-3.46M25.914 63.096C36 63 40.847 68.854 40.847 68.854' data-layer='leaf-garment/leaf-left' stroke-width='1.125' stroke-linecap='round'/></g></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90' data-tags='body+fantasy'><path d='M9.113 9c-1.8 3.6-3.02 9.495-3.625 14.406-.734 5.955-2.832 12.71 0 18 .55 1.027 2.054 1.953 3.343 2.625-.009.325-.03.642-.03.969 0 19.882 16.117 36 36 36 19.881 0 36-16.118 36-36 0-.274.005-.54 0-.812 1.344-.674 2.998-1.67 3.593-2.782 2.831-5.29.733-12.045 0-18C83.789 18.496 82.6 12.6 80.8 9c-1.8 3.6-2.789 9.202-3.594 10.812-1.012 2.025-1.462 4.587-1.656 6.47C69.23 15.921 57.823 9 44.8 9c-12.862 0-24.133 6.76-30.5 16.906-.213-1.84-.649-4.203-1.594-6.094C11.901 18.202 10.913 12.6 9.113 9z' fill='#809F5A' data-layer='elf/body' stroke='#000' stroke-width='2.25' stroke-linecap='round'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90' data-tags='hair'><defs><linearGradient id='d-f4ULu-a'><stop offset='0'/><stop offset='1' stop-opacity='0'/></linearGradient></defs><path d='M43.2 9s-18-5.4-28.8 10.8c-1.8 3.6-2.076 8.329-9 10.8 0 0 0 1.8 3.6 3.6 0 0 0 1.8-3.6 5.4 3.6 3.6 10.8-7.2 10.8-7.2L18 36s10.8-5.4 14.4-10.8c1.8 1.8 3.6 3.6 3.6 7.2C50.4 27 50.4 19.8 50.4 19.8l9 7.2s3.6-1.8 3.6-5.4c3.6 1.8 7.2 9 7.2 9l1.8-5.4c3.6 7.2 10.8 5.4 10.8 5.4-1.8-1.8-7.2-10.8-7.2-10.8C61.2 1.8 43.2 9 43.2 9z' fill='#0D5704' data-layer='relaxed-hair/hair' stroke='#000' stroke-width='2.25'/></svg><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90' data-tags='clothing+modern'><path d='M9.18 48.781c1.887 18.108 17.205 32.22 35.813 32.22 18.334 0 33.474-13.713 35.718-31.438C73.66 52.208 60.741 54 45.9 54c-16.282 0-30.286-2.14-36.719-5.219z' fill='#6D6A65' data-layer='bulletproof-vest/shirt' stroke='#000' stroke-width='2.25' stroke-linecap='round'/><g class='tie' fill='#b4b4b4' stroke='#000' stroke-width='2.25'><path d='M45.36 57.24h-2.427l-1.618 13.907 4.045 6.954 4.045-6.954-1.618-13.907z' data-layer='bulletproof-vest/tie'/><path d='M41.399 53.906c-.064 1.25-.045 2.588.295 3.344.76 1.692 3.677 2.5 3.677 2.5s2.894-.808 3.654-2.5c.34-.756.36-2.094.295-3.344-1.17.044-2.354.094-3.563.094-1.479 0-2.94-.029-4.358-.094z' data-layer='bulletproof-vest/tie'/></g><path style='marker:none' d='M28.969 53.156c-.01 7.912-4.012 14.604-9.594 17.125C25.905 76.896 34.971 81 45 81c10.059 0 19.154-4.129 25.688-10.781-5.468-2.561-9.376-9.141-9.438-16.906-2.65.244-5.443.417-8.344.53-.088 4.672-3.412 8.438-7.531 8.438-4.129 0-7.488-3.782-7.563-8.468-3.08-.14-6.062-.371-8.843-.657z' fill='#B1564D' data-layer='bulletproof-vest/vest' color='#000' stroke='#000' stroke-width='2.25' stroke-linejoin='round' overflow='visible'/><g class='vest-pads' fill='#b4b4b4' color='#000' stroke='#000' stroke-width='2.25' stroke-linejoin='round'><path style='marker:none' d='M61.844 58.313l-4.282 2.468c-2.1 1.213-2.857 3.849-1.687 5.875 1.17 2.027 3.836 2.682 5.938 1.469L65.5 66c-1.684-2.117-2.962-4.737-3.656-7.688zM28.188 59.063c-.796 2.907-2.174 5.47-3.938 7.5l2.688 1.562c2.1 1.213 4.767.558 5.937-1.469 1.17-2.026.414-4.662-1.688-5.875l-3-1.718z' data-layer='bulletproof-vest/vest-pads' overflow='visible'/></g></svg></g></svg>
+        </defs>" 
+    
+    /* CALCULATION */
+    VAR _size = 10
+    VAR _roundedValue =
+        ROUND ( _val, 1 )
+    VAR _generateSeries =
+        SELECTCOLUMNS ( GENERATESERIES ( 0, ( _size * _size ) - 1, 1 ), "@vl", [Value] )
+    VAR _cubeSize =
+        ROUND ( DIVIDE ( _imageSize - ( ( _size + 1 ) * _space ), _size ), 1 )
+    VAR _cubes =
+        CONCATENATEX (
+            _generateSeries,
+            VAR _mod =
+                _size - MOD ( [@vl], _size )
+            VAR _rounder =
+                _size
+                    - ROUNDUP ( DIVIDE ( [@vl] + 1, _size ), 0 )
+            VAR _cubeXPosition = ( _mod * _cubeSize ) + ( _space * _mod ) - ( _cubeSize + _space )
+            VAR _cubeYPosition = ( _rounder * _cubeSize ) + ( _space * _rounder + 1 )
+            VAR _cubes =
+                SWITCH (
+                    TRUE (),
+                    _val >= [@vl] + 1,
+                        "<use href='#goblin' x='" & _cubeXPosition + _padding & "' y='" & _cubeYPosition + _padding & "' height='" & _cubeSize & "' width='" & _cubeSize & "' />",
+                    _val >= [@vl]
+                        && _val <= [@vl] + 1,
+                        VAR _positionModificator = _val - [@vl]
+                        VAR _update = 1 - _positionModificator
+                        VAR _x = _cubeXPosition + _padding
+                        VAR _y = _cubeYPosition + _padding
+                        RETURN
+                            "<use href='#skeleton' x='" & _x & "' y='" & _y & "' height='" & _cubeSize * _update & "' width='" & _cubeSize * _update & "' />
+                        <use href='#goblin' x='" & _x + ( _cubeSize * _update ) & "' y='" & _y + ( _cubeSize * _update ) & "' height='" & _cubeSize * _positionModificator & "' width='" & _cubeSize * _positionModificator & "' />",
+                    "<use href='#skeleton' x='" & _cubeXPosition + _padding & "' y='" & _cubeYPosition + _padding & "' height='" & _cubeSize & "' width='" & _cubeSize & "' />"
+                )
+            RETURN
+                _cubes
+        )
+    VAR _text =
+        VAR _rounder =
+            _size - ROUNDUP ( DIVIDE ( _val, _size ), 0 )
+        VAR _textYPosition = ( _rounder * _cubeSize ) + ( _space * _rounder + 1 ) + ( ( _cubeSize + _space ) / 2 )
+        RETURN
+            "<text x='" & _imageSize - _space + _padding & "' y='" & _textYPosition + _padding & "' fill='" & _filledCubeColor & "' font-family='Segoe UI' alignment-baseline='middle' font-weight='bold' font-size='95%'>🡄 " & _roundedValue & "%</text>"
+    VAR _result = _svgDeclaration & _svgHeader & _defs & _cubes & _text & _svgEnd
+    RETURN
+        _result
+    DisplayFolder = "SVG Measures"
+    Visible = FALSE
+
+---------------------------------
+-- Measure: [Waffle Filling Card]
+---------------------------------
+MEASURE '3. Report-Specific SVG Measures'[Waffle Filling Card] = 
+    -- For illustrative and educational purposes.
+    -- You'll need to adjust these SVG measures for use in your own solutions.
+    
+    -- When using SVG measures, be aware that they're custom 'microvisuals'.
+    -- They require more time and effort to build, test, and maintain.
+    
+    
+    /* SETUP */
+    VAR _val =
+        DIVIDE ( [Sum (CY YTD)], [Sum (PY YTD)] ) * 100 // INSERT YOUR MEASURE HERE <- OUTPUT OF MEASURE SHOUD BE WHOLE NUMBER BETWEEN 0 AND 100
+    VAR _space = 5 // SPACE BETWEEN CUBES
+    VAR _width = 365 // Width size of the SVG
+    VAR _height = 240 // Height size of the SVG
+    VAR _padding = 15 // Padding between border and SVG
+    
+    /* PRECALCULATIONS */
+    VAR _doublePadding = _padding * 2
+    VAR _usableHeight = _height - _doublePadding
+    VAR _usableWidth = _width - _doublePadding
+    VAR _imageSize =
+        MIN ( _usableHeight, _usableWidth ) // HEIGHT SIZE OF IMAGE
+    
+    /* COLORS DECLARTIONS */
+    VAR _nonfilledCubeColor = "#CCCCCC" // COLOR OF NON FILLED CUBES
+    VAR _positive = "#658E95" // Positive Color
+    VAR _neutral = "#E7E74E" // Neutral Color
+    VAR _negative = "#7D1D3A" // Negative Color
+    VAR _filledCubeColor =
+        // COLOR OF FILLED CUBES 
+        SWITCH (
+            TRUE (),
+            _val >= 80, _positive,
+            _val > 70, _neutral,
+            _negative
+        ) 
+    
+    /* SVG DECLARTIONS */
+    VAR _svgDeclaration = "data:image/svg+xml;utf8,"
+    VAR _svgHeader = "<svg xmlns='http://www.w3.org/2000/svg' height = '" & _height & "' width = '" & _width & "'>"
+    VAR _svgEnd = "</svg>" 
+    
+    /* CALCULATION */
+    VAR _size = 10
+    VAR _roundedValue =
+        ROUND ( _val, 1 )
+    VAR _generateSeries =
+        SELECTCOLUMNS ( GENERATESERIES ( 0, ( _size * _size ) - 1, 1 ), "@vl", [Value] )
+    VAR _cubeSize =
+        ROUND ( DIVIDE ( _imageSize - ( ( _size + 1 ) * _space ), _size ), 1 )
+    VAR _cubes =
+        CONCATENATEX (
+            _generateSeries,
+            VAR _mod =
+                _size - MOD ( [@vl], _size )
+            VAR _rounder =
+                _size
+                    - ROUNDUP ( DIVIDE ( [@vl] + 1, _size ), 0 )
+            VAR _cubeXPosition = ( _mod * _cubeSize ) + ( _space * _mod ) - ( _cubeSize + _space )
+            VAR _cubeYPosition = ( _rounder * _cubeSize ) + ( _space * _rounder + 1 )
+            VAR _cubes =
+                SWITCH (
+                    TRUE (),
+                    _val >= [@vl] + 1,
+                        "<rect x='" & _cubeXPosition + _padding & "' y='" & _cubeYPosition + _padding & "' height='" & _cubeSize & "' width='" & _cubeSize & "' fill='" & _filledCubeColor & "' />",
+                    _val >= [@vl]
+                        && _val <= [@vl] + 1,
+                        VAR _positionModificator = _val - [@vl]
+                        VAR _x = _cubeXPosition + _padding
+                        VAR _y = _cubeYPosition + _padding
+                        RETURN
+                            "<rect x='" & _x & "' y='" & _y & "' height='" & _cubeSize & "' width='" & _cubeSize & "' fill='" & _nonfilledCubeColor & "' />
+                        <rect x='" & _x + ( _cubeSize * ( 1 - _positionModificator ) ) & "' y='" & _y & "' height='" & _cubeSize & "' width='" & _cubeSize * _positionModificator & "' fill='" & _filledCubeColor & "' />",
+                    "<rect x='" & _cubeXPosition + _padding & "' y='" & _cubeYPosition + _padding & "' height='" & _cubeSize & "' width='" & _cubeSize & "' fill='" & _nonfilledCubeColor & "' />"
+                )
+            RETURN
+                _cubes
+        )
+    VAR _text =
+        VAR _rounder =
+            _size - ROUNDUP ( DIVIDE ( _val, _size ), 0 )
+        VAR _textYPosition = ( _rounder * _cubeSize ) + ( _space * _rounder + 1 ) + ( ( _cubeSize + _space ) / 2 )
+        RETURN
+            "<text x='" & _imageSize - _space + _padding & "' y='" & _textYPosition + _padding & "' fill='" & _filledCubeColor & "' font-family='Segoe UI' alignment-baseline='middle' font-weight='bold' font-size='95%'>🡄 " & _roundedValue & "%</text>"
+    VAR _result = _svgDeclaration & _svgHeader & _cubes & _text & _svgEnd
+    RETURN
+        _result
+    DisplayFolder = "SVG Measures"
+    Visible = FALSE
+
+------------------------------------
+-- Measure: [Text Comparer Extended]
+------------------------------------
+MEASURE '3. Report-Specific SVG Measures'[Text Comparer Extended] = 
+    -- For illustrative and educational purposes.
+    -- You'll need to adjust these SVG measures for use in your own solutions.
+    
+    -- When using SVG measures, be aware that they're custom 'microvisuals'.
+    -- They require more time and effort to build, test, and maintain.
+    
+    
+    /* SETUP */
+    VAR _yearDefinition =
+        MAX ( 'Table'[Year] ) // Get the year from the context
+    VAR _actualQuantity = [Sum (CY YTD)] // Get the actual quantity from the context (Usually it would be measure for the actual year)
+    VAR _previousQuantity = [Sum (PY YTD)] // Get the previous quantity from the context (Usually it would be measure for the previous year)
+    VAR _target = _previousQuantity
+    VAR _previousTarget = _previousQuantity * 0.92 // CANVAS SIZE
+    VAR _width = 365 // Width size of the SVG
+    VAR _height = 220 // Height size of the SVG
+    // PADDING SETUP
+    VAR _paddning = 15 // Padding between the circle and the canvas
+    
+    /* COLOR DEFINITION */
+    VAR _positive = "#658E95" // Positive Color
+    VAR _neutral = "#E7E74E" // Neutral Color
+    VAR _negative = "#7D1D3A" // Negative Color
+    VAR _grey = "#BBB"
+    VAR _lightGrey = "#CCC"
+    
+    /* STYLE DECLARTIONS */
+    VAR _style =
+        // This is the style of the card, here you can define the style
+        "<style>
+        text{
+            font-family: Segoe UI;
+            fill: " & _lightGrey & ";
+        }
+    .mainText{
+        dominant-baseline: auto;
+        text-anchor: middle;
+        font-size:200%;
+    }
+    .mainTextColor{    fill:"
+            & IF ( _actualQuantity > _previousQuantity, _positive, _negative ) & ";}
+    .bold{
+        font-weight:bold;
+    }
+    .subTexts{
+        dominant-baseline: hanging;
+        font-size:85%;
+        fill:" & _grey & ";
+    }
+    .startText{
+        text-anchor: start;
+    }
+    .endText{
+        text-anchor: end;
+    }
+    .splitLine{
+        stroke:" & _lightGrey & ";
+        stroke-width: 1;
+    }
+    .percentageBase{
+     font-size: 50%;
+    }
+    .italic{
+        font-size: 75%;
+        font-style: italic;
+    }
+    </style>" 
+    
+    /* SVG DECLARTIONS */
+    VAR _header = "data:image/svg+xml;utf8,"
+    VAR _svgDeclaration = "<svg xmlns='http://www.w3.org/2000/svg' height='" & _height & "' width='" & _width & "'>"
+    VAR _svgEnding = "</svg>" 
+    
+    /* CALCULATION */
+    VAR _diff = _actualQuantity - _target
+    VAR _doublePadding = _paddning * 2
+    VAR _usableWidth = _width - _doublePadding
+    VAR _div =
+        DIVIDE ( _actualQuantity, _previousQuantity ) - 1
+    VAR _colorForPercentage =
+        SWITCH ( TRUE (), _div > 0, _positive, _div < 0, _negative, _neutral )
+    VAR _content =
+        "
+        <text class='mainText' y='42.5%' x='50%'>
+            <tspan class='mainTextColor bold'>
+            "
+            & FORMAT ( _diff, "+#,,,,,,,0;-#,,,,,,,0" ) & "
+        </tspan><tspan class='percentageBase'> ~ "
+            & FORMAT ( ABS ( 1 - DIVIDE ( _actualQuantity, _target ) ), "0.0%" ) & "</tspan></text>
+        <g class='subTexts'>
+            <text class='startText' y='57.5%' x='" & _paddning * 1.15 & "'>
+                Actual Year: <tspan class='bold'>" & _actualQuantity & "</tspan>
+            </text>
+            <text class='endText' y='57.5%' x='" & _usableWidth + ( _paddning * 0.85 ) & "'>
+                Previous Year: <tspan class='bold'>" & _previousQuantity & "</tspan>
+            </text>
+            <text class='startText italic' y='67.5%' x='" & _paddning * 1.15 & "'>
+                LY change: "
+            & FORMAT ( DIVIDE ( _actualQuantity, _previousQuantity ) - 1, "0.0%" ) & "
+            </text>
+            <text class='startText' y='77.5%' x='" & _paddning * 1.15 & "'>
+                Current target: <tspan class='bold'>" & _target & "</tspan>
+            </text>
+            <text class='endText' y='77.5%' x='" & _usableWidth + ( _paddning * 0.85 ) & "'>
+                Previous target: <tspan class='bold'>" & _previousTarget & "</tspan>
+            </text>
+            <text class='startText italic' y='87.5%' x='" & _paddning * 1.15 & "'>
+                LY change: "
+            & FORMAT ( DIVIDE ( _target, _previousTarget ) - 1, "0.0%" ) & "
+            </text>
+        </g>"
+    VAR _subLine = "<line class='splitLine' x1='" & _paddning & "' x2='" & _usableWidth + _paddning & "' y1='50%' y2='50%' />"
+    RETURN
+        _header & _svgDeclaration & _style & _subLine & _content & _svgEnding
+    DisplayFolder = "SVG Measures"
+    Visible = FALSE
+
+------------------------------------
+-- Measure: [Text Card ShowCase Two]
+------------------------------------
+MEASURE '3. Report-Specific SVG Measures'[Text Card ShowCase Two] = 
+    -- For illustrative and educational purposes.
+    -- You'll need to adjust these SVG measures for use in your own solutions.
+    
+    -- When using SVG measures, be aware that they're custom 'microvisuals'.
+    -- They require more time and effort to build, test, and maintain.
+    
+    
+    /* SETUP */
+    VAR _yearDefinition =
+        MAX ( 'Table'[Year] ) // Get the year from the context
+    VAR _tableInitiator = // Table with declaration of dimension and scoped measure
+        CALCULATETABLE (
+            ADDCOLUMNS ( VALUES ( 'Table'[Dimension] ), "@counter", [Sum] ),
+            KEEPFILTERS ( 'Table'[Year] = _yearDefinition )
+        ) 
+        
+    /* STYLE DECLARTIONS */
+    VAR _style = 
+    "<style>
+        text{
+            font-family: Segoe UI;
+        }
+    .mainText{
+        font-size:85%;
+        fill:#BBB;
+    }
+    .bolder{
+        font-weight:bold;
+        fill:#808080;
+    }
+    </style>" 
+    
+    /* SVG DECLARTIONS */
+    VAR _header = "data:image/svg+xml;utf8,"
+    VAR _svgDeclaration = "<svg xmlns='http://www.w3.org/2000/svg'>"
+    VAR _svgEnding = "</svg>" 
+    
+    /* CALCULATION */
+    VAR _counter =
+        COUNTROWS ( _tableInitiator )
+    VAR _topRow =
+        INDEX ( 1, _tableInitiator, ORDERBY ( [@counter], DESC ) )
+    VAR _topRace =
+        SELECTCOLUMNS ( _topRow, 'Table'[Dimension] )
+    VAR _topRaceMembers =
+        SELECTCOLUMNS ( _topRow, [@counter] )
+    VAR _content = 
+    "<g class='mainText'>
+            <text y='10%'>
+                In evidence are <tspan class='bolder'>" & _counter & "</tspan> races.
+            </text>
+            <text y='22.5%'>
+                Largest race currently are <tspan class='bolder'>" & _topRace & "</tspan> with <tspan class='bolder'>" & _topRaceMembers & "</tspan> members.
+            </text>
+        </g>"
+    RETURN
+        _header & _svgDeclaration & _style & _content & _svgEnding
+    DisplayFolder = "SVG Measures"
+    Visible = FALSE
+
+--------------------------------------
+-- Measure: [Text Card ShowCase Three]
+--------------------------------------
+MEASURE '3. Report-Specific SVG Measures'[Text Card ShowCase Three] = 
+    -- For illustrative and educational purposes.
+    -- You'll need to adjust these SVG measures for use in your own solutions.
+    
+    -- When using SVG measures, be aware that they're custom 'microvisuals'.
+    -- They require more time and effort to build, test, and maintain.
+    
+    
+    /* SETUP */
+    VAR _yearDefinition =
+        MAX ( 'Table'[Year] ) // Get the year from the context
+    VAR _tableInitiator = // Table + sub-dimension + measures scoped on specific dimension (Usually would be based on other calculations)
+        CALCULATETABLE (
+            ADDCOLUMNS ( VALUES ( 'Table'[SubDimension] ), "@counter", [Sum] ),
+            KEEPFILTERS ( 'Table'[Year] = _yearDefinition && 'Table'[Dimension] = "Elves" )
+        ) 
+        
+    /* STYLE DECLARTIONS */
+    VAR _style =
+    "<style>
+        text{
+            font-family: Segoe UI;
+        }
+    .mainText{
+        font-size:85%;
+        fill:#BBB;
+    }
+    .bolder{
+        font-weight:bold;
+        fill:#808080;
+    }
+    .smallerItalic{
+        font-size:85%;
+        font-style: italic;
+    }
+    </style>" 
+    
+    /* SVG DECLARTIONS */
+    VAR _header = "data:image/svg+xml;utf8,"
+    VAR _svgDeclaration = "<svg xmlns='http://www.w3.org/2000/svg'>"
+    VAR _svgEnding = "</svg>" 
+    
+    /* CALCULATION */
+    VAR _counter =
+        COUNTROWS ( _tableInitiator )
+    VAR _topRow =
+        INDEX ( 1, _tableInitiator, ORDERBY ( [@counter], DESC ) )
+    VAR _topRace =
+        SELECTCOLUMNS ( _topRow, 'Table'[SubDimension] )
+    VAR _topRaceMembers =
+        SELECTCOLUMNS ( _topRow, [@counter] )
+    VAR _content =
+    "<g class='mainText'>
+            <text y='10%'>
+                They work in <tspan class='bolder'>" & _counter & "</tspan> professions
+            </text>
+            <text y='22.5%'>
+               and mostly they are <tspan class='bolder'>" & _topRace & "</tspan><tspan class='smallerItalic'> (" & _topRaceMembers & ")</tspan>.
+            </text>
+        </g>"
+    RETURN
+        _header & _svgDeclaration & _style & _content & _svgEnding
+    DisplayFolder = "SVG Measures"
+    Visible = FALSE
+
+------------------------------------
+-- Measure: [Text Card ShowCase One]
+------------------------------------
+MEASURE '3. Report-Specific SVG Measures'[Text Card ShowCase One] = 
+    -- For illustrative and educational purposes.
+    -- You'll need to adjust these SVG measures for use in your own solutions.
+    
+    -- When using SVG measures, be aware that they're custom 'microvisuals'.
+    -- They require more time and effort to build, test, and maintain.
+    
+    
+    /* SETUP */
+    VAR _yearDefinition =
+        MAX ( 'Table'[Year] ) // Get the year from the context
+    VAR _actualQuantity = [Sum (CY YTD)] // Get the actual quantity from the context (Usually it would be measure for the actual year)
+    VAR _previousQuantity = [Sum (PY YTD)] // Get the previous quantity from the context (Usually it would be measure for the previous year)
+    
+    /* COLOR DEFINITION */
+    VAR _positive = "#658E95" // Positive Color
+    VAR _neutral = "#E7E74E" // Neutral Color
+    VAR _negative = "#7D1D3A" // Negative Color
+    VAR _grey = "#BBB" // Grey for normal text
+    VAR _bolderGrey = "#808080" // Grey for bolder text
+    
+    /* STYLE DECLARTIONS */
+    VAR _style = 
+    "<style>
+        text{
+            font-family: Segoe UI;
+        }
+    .mainText{
+        font-size:85%;
+        fill:" & _grey & ";
+    }
+    .bolder{
+        font-weight:bold;
+        fill:" & _bolderGrey & ";
+    }
+    </style>" 
+    
+    /* SVG DECLARTIONS */
+    VAR _header = "data:image/svg+xml;utf8,"
+    VAR _svgDeclaration = "<svg xmlns='http://www.w3.org/2000/svg'>"
+    VAR _svgEnding = "</svg>" 
+    
+    /* CALCULATION */
+    VAR _div =
+        DIVIDE ( _actualQuantity, _previousQuantity ) - 1
+    VAR _colorForPercentage =
+        SWITCH ( TRUE (), _div > 0, _positive, _div < 0, _negative, _neutral )
+    VAR _content =
+        "<g class='mainText'>
+            <text y='10%'>
+                In year " & _yearDefinition & " were <tspan class='bolder'>" & _actualQuantity & "</tspan> members of individual races.
+            </text>
+            <text y='22.5%'>
+                It is about <tspan class='bolder'>"
+            & FORMAT ( _actualQuantity - _previousQuantity, "+# more;-# less" ) & " <tspan font-size='85%' fill='" & _colorForPercentage & "'>( "
+            & FORMAT ( _div, "+0.0%;-0.0%" ) & ")</tspan></tspan> then previous year.
+            </text>
+        </g>"
+    RETURN
+        _header & _svgDeclaration & _style & _content & _svgEnding
+    DisplayFolder = "SVG Measures"
+    Visible = FALSE
+
+-----------------------------
+-- Measure: [Slope KPI Chart]
+-----------------------------
+MEASURE '3. Report-Specific SVG Measures'[Slope KPI Chart] = 
+    -- For illustrative and educational purposes.
+    -- You'll need to adjust these SVG measures for use in your own solutions.
+    
+    -- When using SVG measures, be aware that they're custom 'microvisuals'.
+    -- They require more time and effort to build, test, and maintain.
+    
+    
+    /* SETUP */
+    VAR _preparedTable = // Prepare the table for the chart
+        ADDCOLUMNS (
+            ADDCOLUMNS (
+                SUMMARIZE ( 'Table', 'Table'[Dimension] ), // Table + Category column
+                "@currentValue", [Sum (CY YTD)], // Current Value
+                "@PreviousValue", [Sum (PY YTD)] // Previous Value
+            ),
+            "@change", [@PreviousValue] - [@currentValue]
+        )
+    VAR _width = 365 // Width size of the SVG
+    VAR _height = 250 // Height size of the SVG
+    VAR _padding = 15 // Padding of the SVG
+    VAR _ballsRadius = 5 // Radius of the balls
+    VAR _leftXCategory = "2022" // Left X category
+    VAR _rightXCategory = "2023"  // Right X category
+    
+    /* COLORS DECLARTIONS */
+    VAR _green = "#658E95"
+    VAR _red = "#D64550"
+    VAR _grey = "#EDEBE9"
+    VAR _lightGrey = "#F0F0F0"
+    VAR _darkGrey = "#CCCCCC" 
+    
+    /* SVG DECLARTIONS */
+    VAR _svgDeclaration = "data:image/svg+xml;utf8,"
+    VAR _svgHeader = "<svg xmlns='http://www.w3.org/2000/svg' height='" & _height & "' width='" & _width & "'>"
+    VAR _svgEnd = "</svg>"
+    
+    /* STYLE DECLARTIONS */
+    VAR _style = "
+    <style>
+    text{
+        font-family: Segoe UI;
+    }
+    .greyText{
+         fill: " & _darkGrey & ";
+    }
+    .middleText{
+        text-anchor: middle; 
+        font-size: 10;
+    }
+    .linedText{
+        dominant-baseline: middle; 
+        font-size: 10;
+    }
+    .bolder{
+        font-weight: bold;
+    } 
+    .baseLines{
+        stroke-width: 2;
+        stroke: " & _lightGrey & "; 
+        stroke-dasharray: 5,5;
+    }
+    .lineStroke{
+        stroke-width: 3;
+    }
+    </style>" 
+    
+    /* CALCULATION */
+    VAR _doublePadding = _padding * 2
+    VAR _halfPadding = _padding / 2
+    VAR _usableHeight = _height - _doublePadding * 2
+    VAR _textYPostion = _usableHeight + _doublePadding
+    VAR _betweenLineSpacer = _doublePadding * 3
+    VAR _topRow =
+        INDEX ( 1, _preparedTable, ORDERBY ( MAX ( [@currentValue], [@PreviousValue] ), DESC ) )
+    VAR _bottomRow =
+        INDEX ( 1, _preparedTable, ORDERBY ( MAX ( [@currentValue], [@PreviousValue] ), ASC ) )
+    VAR _maxValue =
+        MAXX ( _topRow, MAX ( [@currentValue], [@PreviousValue] ) )
+    VAR _maxx = _maxValue * 1.1
+    VAR _maxC =
+        MAXX ( _preparedTable, [@change] )
+    VAR _minValue =
+        MINX ( _bottomRow, MIN ( [@currentValue], [@PreviousValue] ) )
+    VAR _minx = _minValue * 0.6
+    VAR _minC =
+        MINX ( _preparedTable, [@change] )
+    VAR _diff = ( _maxx - _minx )
+    VAR _baseTexts =
+        VAR _topOfLine =
+            (
+                1
+                    - DIVIDE ( _maxValue - _minx, _diff )
+            ) * _usableHeight + _halfPadding
+        VAR _bottomOfLine =
+            (
+                1
+                    - DIVIDE ( _minValue - _minx, _diff )
+            ) * _usableHeight + _halfPadding
+        RETURN
+            "<g class='middleText greyText'>
+            <text x='" & _doublePadding & "' y='" & _textYPostion & "'>" & _leftXCategory & "</text>
+            <text x='" & _betweenLineSpacer & "' y='" & _textYPostion & "'>" & _rightXCategory & "</text>
+        </g>
+        <g class='baseLines'>
+            <line x1='" & _doublePadding & "' x2='" & _doublePadding & "' y1='" & _topOfLine & "' y2='" & _bottomOfLine & "'/>
+            <line x1='" & _betweenLineSpacer & "' x2='" & _betweenLineSpacer & "' y1='" & _topOfLine & "' y2='" & _bottomOfLine & "'/>
+        </g>"
+    VAR _circles =
+        CONCATENATEX (
+            FILTER ( _preparedTable, NOT [@change] IN { _maxC, _minC } ),
+            VAR _color =
+                SWITCH ( [@change], _maxC, _green, _minC, _red, _grey )
+            VAR _yOne =
+                (
+                    1
+                        - DIVIDE ( [@currentValue] - _minx, _diff )
+                ) * _usableHeight + _halfPadding
+            VAR _yTwo =
+                (
+                    1
+                        - DIVIDE ( [@PreviousValue] - _minx, _diff )
+                ) * _usableHeight + _halfPadding
+            RETURN
+                "<circle cx='" & _doublePadding & "' cy='" & _yOne & "' r='" & _ballsRadius & "' fill='" & _color & "'/>" & "<circle cx='" & _betweenLineSpacer & "' cy='" & _yTwo & "' r='" & _ballsRadius & "' fill='" & _color & "'/>" & "<line class='lineStroke' x1='" & _doublePadding & "' x2='" & _betweenLineSpacer & "' y1='" & _yOne & "' y2='" & _yTwo & "' stroke='" & _color & "'/>"
+                    & IF (
+                        _color <> _grey,
+                        "<text class='bolderLinedText' x='" & _betweenLineSpacer + _padding & "' y='" & _yTwo & "' fill='" & _color & "'>" & 'Table'[Dimension] & "</text>",
+                        ""
+                    )
+        )
+    VAR _circlesUps =
+        CONCATENATEX (
+            FILTER ( _preparedTable, [@change] IN { _maxC, _minC } ),
+            VAR _color =
+                SWITCH ( [@change], _maxC, _green, _minC, _red, _grey )
+            VAR _div =
+                DIVIDE ( [@PreviousValue], [@currentValue] ) - 1
+            VAR _resultTexts =
+                SWITCH ( [@change], _maxC, "increased by ", _minC, "decreased by " ) & "<tspan class='bolder' fill='" & _color & "'>"
+                    & FORMAT ( _div, "0.0%;0.0%" ) & "</tspan>"
+            VAR _yOne =
+                (
+                    1
+                        - DIVIDE ( [@currentValue] - _minx, _diff )
+                ) * _usableHeight + _halfPadding
+            VAR _yTwo =
+                (
+                    1
+                        - DIVIDE ( [@PreviousValue] - _minx, _diff )
+                ) * _usableHeight + _halfPadding
+            RETURN
+                "<circle cx='" & _doublePadding & "' cy='" & _yOne & "' r='" & _ballsRadius & "' fill='" & _color & "'/>" & "<circle cx='" & _betweenLineSpacer & "' cy='" & _yTwo & "' r='" & _ballsRadius & "' fill='" & _color & "'/>" & "<line class='lineStroke' x1='" & _doublePadding & "' x2='" & _betweenLineSpacer & "' y1='" & _yOne & "' y2='" & _yTwo & "' stroke='" & _color & "'/>"
+                    & IF (
+                        _color <> _grey,
+                        "<text class='linedText' x='" & _betweenLineSpacer + _padding & "' y='"
+                            & IF ( [@change] = _maxC, "45%", "55%" ) & "' fill='" & _darkGrey & "'><tspan class='bolder' fill='" & _color & "'>" & 'Table'[Dimension] & "</tspan> " & _resultTexts & "</text>",
+                        ""
+                    )
+        )
+    VAR _result = _svgDeclaration & _svgHeader & _style & _baseTexts & _circles & _circlesUps & _svgEnd
+    RETURN
+        _result
+    DisplayFolder = "SVG Measures"
+    Visible = FALSE
+
+---------------------------------
+-- Measure: [Range Progress Card]
+---------------------------------
+MEASURE '3. Report-Specific SVG Measures'[Range Progress Card] = 
+    -- For illustrative and educational purposes.
+    -- You'll need to adjust these SVG measures for use in your own solutions.
+    
+    -- When using SVG measures, be aware that they're custom 'microvisuals'.
+    -- They require more time and effort to build, test, and maintain.
+    
+    
+    /* SETUP */
+    VAR _insertedMeasure = ROUND( DIVIDE( [Sum (CY YTD)], [Sum (PY YTD)] ), 2 ) // Measure that you want to use for generating this visual (its value should be one of categories)
+    VAR _categories = 10 // Number of categories/marker lines that you want to have
+    VAR _width = 365 // Width size of the SVG
+    VAR _height = 230 // Height size of the SVG
+    VAR _padding = 15 // Padding between SVG Image and the borders
+    
+    /* COLORS DECLARTIONS */
+    VAR _positive = "#658E95" // Positive Color
+    VAR _neutral = "#E7E74E" // Neutral Color
+    VAR _negative = "#7D1D3A" // Negative Color
+    VAR _darkGrey = "#242425" // Darkgrey Color
+    VAR _lightGrey = "#CCCCCC"
+    VAR _colorDefined = SWITCH(
+            TRUE( ),
+            _insertedMeasure > 0.66, _positive,
+            _insertedMeasure > 0.33, _neutral,
+            _negative
+        )
+    
+    /* STYLE DECLARTIONS */
+    VAR _style =
+        "<style>
+    text{
+        font-family: Segoe UI;
+        text-anchor: middle;
+    }
+    rect{
+        stroke: none;
+    }
+    .negativeBar{
+        fill: "
+            & _negative
+            & ";
+    }
+    .neutralBar{
+        fill: "
+            & _lightGrey
+            & ";
+    }
+    .positiveBar{
+        fill: "
+            & _positive
+            & ";
+    }
+    .supportLines{
+        stroke: "
+            & _lightGrey
+            & ";
+        stroke-width: 2;
+    }
+    .supportText{
+        fill: #CCC;
+    }
+    .hangText{
+        dominant-baseline: hanging;
+    }
+    .mainText{
+        fill: "
+            & _colorDefined
+            & ";
+    }
+    .claimText{
+        font-size: 150%;
+        font-weight: bold;
+        fill: "
+            & _colorDefined
+            & ";
+    }
+    .mainTextGrey{
+        font-size: 150%;
+        fill: "
+            & _lightGrey
+            & ";
+    }
+    .triangleColor{
+        font-size: 150%;
+        dominant-baseline: middle;
+        fill: "
+            & _lightGrey
+            & ";
+        stroke: "
+            & _darkGrey
+            & ";
+    }
+    </style>"
+    
+    /* SVG DECLARTIONS */
+    VAR _svgDeclaration = "data:image/svg+xml;utf8,"
+    VAR _svgHeader = "<svg xmlns='http://www.w3.org/2000/svg' width='" & _width & "' height='" & _height & "'>"
+    VAR _svgEnd = "</svg>"
+    
+    /* CALCULATION */
+    VAR _doublePadding = _padding * 2
+    VAR _usableWidth = _width - _doublePadding
+    VAR _tripledUsableWidth = _usableWidth / 3
+    VAR _usableHeight = _height - _doublePadding
+    VAR _bars =
+        "<rect class='negativeBar' x='" & _padding & "' y='55%' width='" & _tripledUsableWidth
+            & "' height='15%' />
+    <rect class='neutralBar' x='"
+            & _tripledUsableWidth + _padding
+            & "' y='55%' width='"
+            & _tripledUsableWidth
+            & "' height='15%' />
+    <rect class='positiveBar' x='"
+            & ( _tripledUsableWidth * 2 ) + _padding
+            & "' y='55%' width='"
+            & _tripledUsableWidth
+            & "' height='15%' />"
+    VAR _movableTriangle =
+        "<text class='triangleColor' x='" & _padding + ( _usableWidth * IF( _insertedMeasure > 1, 1, _insertedMeasure ) )
+            & "' y='56.125%'>▼</text>"
+    VAR _supportTexts =
+        "<g class='hangText'><text class='supportText' x='" & _padding + ( _tripledUsableWidth / 2 )
+            & "' y='75%'>to 33%</text>
+        <text class='supportText' x='"
+            & _padding + ( _tripledUsableWidth * 1.5 )
+            & "' y='75%'>to 66%</text>
+        <text class='supportText' x='"
+            & _padding + ( _tripledUsableWidth * 2.5 )
+            & "' y='75%'>to 100%</text></g>"
+    VAR _resultText =
+        "<text class='mainTextGrey' x='50%' y='40%'> we reached <tspan class='mainText'>" & FORMAT( _insertedMeasure, "0.0%" )
+            & "</tspan></text>
+        <text class='claimText' x='50%' y='25%'>"
+            & SWITCH(
+                TRUE( ),
+                _insertedMeasure > 0.66, "CLAIM ACCEPTED",
+                _insertedMeasure > 0.33, "NO ABILITY TO DECIDE",
+                "CLAIM NOT ACCEPTED"
+            )
+            & "</text>"
+    VAR _result = _svgDeclaration & _svgHeader & _style & _bars & _movableTriangle & _supportTexts & _resultText & _svgEnd
+    RETURN
+        _result
+    DisplayFolder = "SVG Measures"
+    Visible = FALSE
+
+---------------------------------------
+-- Measure: [Progress Simple bar chart]
+---------------------------------------
+MEASURE '3. Report-Specific SVG Measures'[Progress Simple bar chart] = 
+    -- For illustrative and educational purposes.
+    -- You'll need to adjust these SVG measures for use in your own solutions.
+    
+    -- When using SVG measures, be aware that they're custom 'microvisuals'.
+    -- They require more time and effort to build, test, and maintain.
+    
+    
+    /* SETUP */
+    VAR _target = [Sum (PY YTD)]  // Will be used as a target
+    VAR _value = [Sum (CY YTD)] // Will be used as a current value
+    VAR _width = 365 // Width size of the SVG
+    VAR _height = 220 // Height size of the SVG
+    VAR _paddning = 15 // Padding between the circle and the canvas
+    
+    /* COLOR DEFINITION */
+    VAR _positive = "#658E95" // Positive Color
+    VAR _negative = "#7D1D3A" // Negative Color
+    VAR _darkGrey = "#242425" // Darkgrey Color
+    VAR _stateColor = IF( _target > _value, _negative, _positive )
+    
+    /* SVG DECLARTIONS */
+    VAR _svgDeclaration = "data:image/svg+xml;utf8,"
+    VAR _svgHeader = "<svg xmlns='http://www.w3.org/2000/svg' height='" & _height & "' width='" & _width & "'>"
+    VAR _svgEnd = "</svg>"
+    
+    /* STYLE DECLARATIONS */
+    VAR _style =
+        "
+    <style>
+    text{
+        font-family: Segoe UI;
+        dominant-baseline: middle;
+        text-anchor: middle;
+    }
+    .progressBar{
+        fill: "
+            & _stateColor
+            & ";
+    }
+    .endLine{
+        stroke: "
+            & _darkGrey
+            & ";
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-dasharray: 2.5 5;
+    }
+    .mainText{
+        fill: "
+            & _stateColor
+            & ";
+        font-size: 125%;
+        font-weight: bold;
+    }
+    .supportText{
+        fill:#BBB;
+        font-size: 100%;
+    }
+    </style>"
+    
+    /* CALCULATION */
+    VAR _doublePadding = ( _paddning * 2 )
+    VAR _usableWidth = _width - ( _doublePadding * 2 )
+    VAR _usableHeight = _height - _doublePadding
+    VAR _yStartPosition = _height * 0.50
+    VAR _yEndPosition = _usableHeight * 0.25
+    VAR _barWidth = IF( _target >= _value, DIVIDE( _value, _target ) * _usableWidth, _usableWidth )
+    VAR _linePosition = IF( _target >= _value, _width - _doublePadding, DIVIDE( _target, _value ) * _usableWidth )
+    VAR _bar =
+        "<rect class='progressBar' x='" & _doublePadding & "' y='" & _yStartPosition & "' width='" & _barWidth & "' height='"
+            & _yEndPosition
+            & "' rx='1.5%' />"
+    VAR _endLine =
+        "<line class='endLine' x1='" & _linePosition & "' x2='" & _linePosition & "' y1='" & _yStartPosition * 0.95 & "' y2='"
+            & ( _yStartPosition + _yEndPosition ) * 1.05
+            & "' />"
+    VAR _texts =
+        "<text class='mainText' x='50%' y='" & _yStartPosition * 0.60 & "'>" & FORMAT( DIVIDE( _value, _target ), "0.0%" )
+            & " ~ "
+            & IF( ( _value - _target ) < 0, "Not filled", "Filled" )
+            & "</text>
+        <text class='supportText' x='50%' y='"
+            & _yStartPosition * 0.825
+            & "'>Current: "
+            & _value
+            & " | Target: "
+            & _target
+            & "</text>"
+    VAR _result = _svgDeclaration & _svgHeader & _style & _bar & _texts & _endLine & _svgEnd
+    RETURN
+        _result
+    DisplayFolder = "SVG Measures"
+    Visible = FALSE
+
+---------------------------------------------
+-- Measure: [Progress More Complex bar chart]
+---------------------------------------------
+MEASURE '3. Report-Specific SVG Measures'[Progress More Complex bar chart] = 
+    -- For illustrative and educational purposes.
+    -- You'll need to adjust these SVG measures for use in your own solutions.
+    
+    -- When using SVG measures, be aware that they're custom 'microvisuals'.
+    -- They require more time and effort to build, test, and maintain.
+    
+    
+    /* SETUP */
+    VAR _target = [Sum (PY YTD)]  // Will be used as a target
+    VAR _value = [Sum (CY YTD)] // Will be used as a current value
+    VAR _width = 365 // Width size of the SVG
+    VAR _height = 220 // Height size of the SVG
+    VAR _paddning = 15 // Padding between the circle and the canvas
+    
+    /* COLOR DEFINITION */
+    VAR _positive = "#658E95" // Positive Color
+    VAR _neutral = "#E7E74E" // Neutral Color
+    VAR _negative = "#7D1D3A" // Negative Color
+    VAR _darkGrey = "#242425" // Darkgrey Color
+    VAR _stateColor = IF( _target > _value, _negative, _positive )
+    
+    /* SVG DECLARTIONS */
+    VAR _svgDeclaration = "data:image/svg+xml;utf8,"
+    VAR _svgHeader = "<svg xmlns='http://www.w3.org/2000/svg' height='" & _height & "' width='" & _width & "'>"
+    VAR _svgEnd = "</svg>"
+    
+    /* STYLE DECLARATIONS */
+    VAR _style =
+        "
+    <style>
+    text{
+        font-family: Segoe UI;
+        dominant-baseline: middle;
+        text-anchor: middle;
+    }
+    .progressBar{
+        fill: #CCC;
+    }
+    .endLine{
+        stroke: "
+            & _darkGrey
+            & ";
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-dasharray: 2.5 5;
+    }
+    .mainText{
+        fill: "
+            & _stateColor
+            & ";
+        font-size: 125%;
+    }
+    .supportText{
+        fill:#BBB;
+        font-size: 100%;
+    }
+    .negativeResult{
+        fill: url(#negativePattern);
+        stroke: "
+            & _negative
+            & ";
+        stroke-width: 1;
+        stroke-dasharray: 7 5;
+    }
+    .positiveResult{
+        fill: "
+            & _positive
+            & ";
+        stroke: none;
+    }
+    .negatedPatternLines{
+        fill-opacity: 1;
+        stroke: "
+            & _negative
+            & ";
+    }
+    .bolden{
+        font-weight: bold;
+    }
+    </style>"
+    
+    /* DEFS + PATTERNS DECLARATIONS */
+    VAR _defs =
+        "<defs>
+        <pattern id='negativePattern' x='0' y='0' width='10' height='10' patternUnits='userSpaceOnUse'>
+            <line class='negatedPatternLines' x1='10' x2='0' y1='0' y2='10' />
+        </pattern>
+    </defs>"
+    
+    /* CALCULATION */
+    VAR _doublePadding = ( _paddning * 2 )
+    VAR _usableWidth = _width - ( _doublePadding * 2 )
+    VAR _usableHeight = _height - _doublePadding
+    VAR _yStartPosition = _height * 0.50
+    VAR _yEndPosition = _usableHeight * 0.25
+    VAR _div = DIVIDE( _value, _target )
+    VAR _divModifiedByWidth = _div * _usableWidth
+    VAR _barWidth = IF( _target >= _value, _divModifiedByWidth, _usableWidth )
+    VAR _linePosition = IF( _target >= _value, _width - _doublePadding, DIVIDE( _target, _value ) * _usableWidth )
+    VAR _bar =
+        "<rect class='progressBar' x='" & _doublePadding & "' y='" & _yStartPosition & "' width='" & _barWidth & "' height='"
+            & _yEndPosition
+            & "'/>"
+            & IF(
+                _target > _value,
+                "<rect class='negativeResult' x='" & _doublePadding + _barWidth & "' y='" & _yStartPosition & "' width='"
+                    & _linePosition - ( _doublePadding + _barWidth )
+                    & "' height='"
+                    & _yEndPosition
+                    & "' />",
+                "<rect class='positiveResult' x='" & _linePosition & "' y='" & _yStartPosition & "' width='"
+                    & _barWidth - _linePosition + _doublePadding
+                    & "' height='"
+                    & _yEndPosition
+                    & "' />"
+            )
+    VAR _endLine =
+        "<line class='endLine' x1='" & _linePosition & "' x2='" & _linePosition & "' y1='" & _yStartPosition * 0.95 & "' y2='"
+            & ( _yStartPosition + _yEndPosition ) * 1.05
+            & "' />"
+    VAR _texts =
+        "<text class='mainText bolden' x='50%' y='" & _yStartPosition * 0.60 & "'>" & FORMAT( _div, "0.0%" ) & " ~ "
+            & IF( ( _value - _target ) < 0, "Not filled", "Filled" )
+            & "</text>
+        <text class='supportText' x='50%' y='"
+            & _yStartPosition * 0.825
+            & "'>"
+            & IF( _value >= _target, "Over: ", "Missing: " )
+            & "<tspan class='bolden'>"
+            & ABS( _value - _target )
+            & "</tspan></text>"
+    VAR _result = _svgDeclaration & _svgHeader & _style & _defs & _bar & _texts & _endLine & _svgEnd
+    RETURN
+        _result
+    DisplayFolder = "SVG Measures"
+    Visible = FALSE
+
+-----------------------------
+-- Measure: [Matrix Text KPI]
+-----------------------------
+MEASURE '3. Report-Specific SVG Measures'[Matrix Text KPI] = 
+    -- For illustrative and educational purposes.
+    -- You'll need to adjust these SVG measures for use in your own solutions.
+    
+    -- When using SVG measures, be aware that they're custom 'microvisuals'.
+    -- They require more time and effort to build, test, and maintain.
+    
+    
+    /* SETUP */
+    VAR _yearDefinition =
+        MAX ( 'Table'[Year] ) // Get the year from the context
+    VAR _actualQuantity = [Sum (CY YTD)] // Get the actual quantity from the context (Usually it would be measure for the actual year)
+    VAR _previousQuantity = [Sum (PY YTD)] // Get the previous quantity from the context (Usually it would be measure for the previous year)
+    
+    /* COLOR DEFINITION */
+    VAR _positive = "#658E95" // Positive Color
+    VAR _neutral = "#E7E74E" // Neutral Color
+    VAR _negative = "#7D1D3A" // Negative Color
+    VAR _darkerGrey = "#808080" // Dark Grey Color
+    VAR _lightGrey = "#CCC" // Light Grey Color
+    VAR _colorSelection =
+        IF ( _actualQuantity >= _previousQuantity, _positive, _negative )
+        
+    /* STYLE DECLARTIONS */
+    VAR _style = // This is the style of the card, here you can define the style
+    "<style>
+        text{
+            fill: " & _lightGrey & ";
+            font-family: Segoe UI;
+            dominant-baseline: middle;
+        }
+    .mainText{
+        font-size:85%;
+    }
+    .mainTextColor{
+        fill:" & _colorSelection & ";
+    }
+    .grey{
+        fill:" & _darkerGrey & ";
+    }
+    .bold{
+        font-weight:bold;
+    }
+    </style>" 
+    
+    /* SVG DECLARTIONS */
+    VAR _header = "data:image/svg+xml;utf8,"
+    VAR _svgDeclaration = "<svg xmlns='http://www.w3.org/2000/svg'>"
+    VAR _sortingSupport = "/*" & 10000000 + _actualQuantity & "*/"
+    VAR _svgEnding = "</svg>" 
+    
+    /* CALCULATION */
+    VAR _div =
+        DIVIDE ( _actualQuantity, _previousQuantity ) - 1
+    VAR _colorForPercentage =
+        SWITCH ( TRUE (), _div > 0, _positive, _div < 0, _negative, _neutral )
+    VAR _content =
+        "<g class='mainText'>
+            <text y='50%'><tspan class='mainTextColor bold'>
+                "
+            & IF ( _actualQuantity >= _previousQuantity, "✔", "✘" ) & " " & _actualQuantity & "</tspan> ~ "
+            & FORMAT ( _actualQuantity - _previousQuantity, "over # to; missing # from" ) & " " & _previousQuantity & "
+            </text>
+        </g>"
+    RETURN
+        _header & _svgDeclaration & _sortingSupport & _style & _content & _svgEnding
+    DisplayFolder = "SVG Measures"
+    Visible = FALSE
+
+-------------------------------
+-- Measure: [Matrix Bullet KPI]
+-------------------------------
+MEASURE '3. Report-Specific SVG Measures'[Matrix Bullet KPI] = 
+    -- For illustrative and educational purposes.
+    -- You'll need to adjust these SVG measures for use in your own solutions.
+    
+    -- When using SVG measures, be aware that they're custom 'microvisuals'.
+    -- They require more time and effort to build, test, and maintain.
+    
+    
+    /* SETUP */
+    VAR _currentValue = [Sum] // Current Value
+    VAR _target = [Sum (PY)] // Target Value
+    
+    /* COLOR DEFINITION */
+    VAR _positive = "#658E95" // Positive Color
+    VAR _negative = "#7D1D3A" // Negative Color
+    VAR _targetLineColor = "#252526" // Color for Target Line
+    VAR _lightGreyBar = "#EDEBE9" // Color for support bar in behind
+    VAR _lightTextColor = "#9C9A95" // Color for support text
+    VAR _colorSelection =
+        IF ( _currentValue >= _target, _positive, _negative ) 
+        
+    /* STYLE DECLARTIONS */
+    VAR _style = // This is the style of the card, here you can define the style
+    "<style>
+    text{
+        fill: " & _lightTextColor & ";
+        font-family: Segoe UI;
+    }
+    line{
+        stroke: " & _targetLineColor & ";
+        stroke-width: 1.25;
+    }
+    .mainText{
+        font-size:95%;
+        dominant-baseline: middle;
+        text-anchor: left;
+    }
+    .mainColor{
+        fill:" & _colorSelection & ";
+    }
+    .lightGrey{
+        fill:" & _lightGreyBar & ";
+    }
+    .bold{
+        font-weight:bold;
+    }
+    .smallerText{
+        font-size: 75%;
+    }
+    </style>" 
+    
+    /* SVG DECLARTIONS */
+    VAR _header = "data:image/svg+xml;utf8,"
+    VAR _svgDeclaration = "<svg xmlns='http://www.w3.org/2000/svg'>"
+    VAR _sortingSupport = "/*" & 10000000 + _currentValue & "*/"
+    VAR _svgEnding = "</svg>" 
+    
+    /* CALCULATION */
+    VAR _boxPadding = 35
+    VAR _barUsableWidth = 100 - _boxPadding - 10
+    VAR _diff = _currentValue - _target
+    VAR _div =
+        DIVIDE ( _currentValue, _target )
+    VAR _colorForBar =
+        IF ( _diff >= 0, _positive, _negative )
+    VAR _sizeOfProgressionBar =
+        IF ( _div > 1, 1, _div )
+    VAR _targetLinePosition =
+        IF (
+            _diff > 0,
+            _barUsableWidth * ( 1 - ( _div - 1 ) ) + _boxPadding,
+            _barUsableWidth + _boxPadding
+        )
+    VAR _content =
+        "
+        <rect class='lightGrey' x='" & _boxPadding & "%' y='10%' height='80%' width='" & _barUsableWidth + 5 & "%'/>
+        <rect class='mainColor' x='" & _boxPadding & "%' y='30%' height='40%' width='" & _barUsableWidth * _sizeOfProgressionBar & "%'/>
+        <text class='mainText' x='2.5%' y='50%'><tspan class='mainColor bold'>" & _currentValue & "</tspan> <tspan class='smallerText'> ("
+            & FORMAT ( _diff, "+#,,,,,0;-#,,,,,0" ) & ")</tspan></text>
+        <line x1='" & _targetLinePosition & "%' y1='0%' x2='" & _targetLinePosition & "%' y2='100%' />
+        "
+    RETURN
+        _header & _svgDeclaration & _sortingSupport & _style & _content & _svgEnding
+    DisplayFolder = "SVG Measures"
+    Visible = FALSE
+
+----------------------------
+-- Measure: [KPI Trend Line]
+----------------------------
+MEASURE '3. Report-Specific SVG Measures'[KPI Trend Line] = 
+    -- For illustrative and educational purposes.
+    -- You'll need to adjust these SVG measures for use in your own solutions.
+    
+    -- When using SVG measures, be aware that they're custom 'microvisuals'.
+    -- They require more time and effort to build, test, and maintain.
+    
+    
+    /* SETUP */
+    // INSERT YOUR SETUP VARIABLES HERE
+    VAR _width = 365 // Width size of the SVG
+    VAR _height = 230 // Height size of the SVG
+    VAR _padding = 15 // Padding between SVG image and border
+    VAR _preparedTbl = // Insert your table, quantitative column and measure
+        ADDCOLUMNS(
+            SELECTCOLUMNS( SUMMARIZE( 'Table', 'Date'[Date] ), "@xAxis", 'Date'[Date] ),
+            "@vl", [Sum]
+        )
+    
+    /* COLOR DEFINITION */
+    VAR _positive = "#658E95" // Positive Color
+    VAR _negative = "#7D1D3A" // Negative Color
+    VAR _darkGrey = "#808080" // Will be used for all text
+    VAR _targetLineColor = "#A8A8A8" // Will be used for target line
+    
+    /* PRECALCULATIONS */
+    VAR _maxValue = MAXX( _preparedTbl, [@vl] )
+    VAR _target = AVERAGEX( _preparedTbl, [@vl] )
+    VAR _counter = COUNTROWS( _preparedTbl )
+    VAR _half = _counter / 2
+    VAR _targetFulfillment = COUNTROWS( FILTER( _preparedTbl, [@vl] >= _target ) )
+    
+    /* STYLE DECLARATIONS */
+    VAR _style =
+        "<style> 
+    text{
+        font-size:95%;
+        font-family: Segoe UI;
+        dominant-baseline: hanging;
+        fill:" & _darkGrey
+            & ";
+    }
+    .bolder{ font-weight: bold; }
+    .italic{ font-style: italic; }
+    .lineChart{
+        stroke:"
+            & _targetLineColor
+            & ";
+        stroke-width:2.5;
+        fill: none;
+    }
+    .positiveBar{
+        fill:"
+            & _positive
+            & ";
+        opacity: 0.15;
+    }
+    .stateColor{ fill:"
+            & IF( _targetFulfillment >= _half, _positive, _negative )
+            & "; }
+    .negativeResult{ fill:"
+            & _negative
+            & "; }
+    .positiveResult{ fill:"
+            & _positive
+            & "; }
+    </style>"
+    
+    
+    /* SVG DECLARTIONS */
+    VAR _svgDeclaration = "data:image/svg+xml;utf8,"
+    VAR _svgHeader = "<svg xmlns='http://www.w3.org/2000/svg' width='" & _width & "' height='" & _height & "'>"
+    VAR _svgEnd = "</svg>"
+    
+    /* CALCULATION */
+    VAR _doubePadding = _padding * 2
+    VAR _updatedHeight = ( _height - _doubePadding )
+    VAR _usableWidth = _width - _doubePadding
+    VAR _scale = 0.45
+    VAR _usableHeight = _updatedHeight * _scale
+    VAR _revertedHeight = _updatedHeight * ( 1 - _scale )
+    VAR _targetHeight = ( _usableHeight - ( ( _target / _maxValue ) * _usableHeight ) )
+    VAR _targetHeightModificator = _usableHeight * 0.15
+    VAR _rowsCounter = COUNTROWS( _preparedTbl )
+    VAR _spaceBetweenPoitns = _usableWidth / _rowsCounter
+    VAR _targetSum = ROUND( _target, 1 ) * _counter
+    VAR _resultText = IF( _targetSum > _maxValue, "negativeResult", "positiveResult" )
+    VAR _lineChart =
+        "<path class='lineChart' d='"
+            & CONCATENATEX(
+                _preparedTbl,
+                VAR _rowNumber = ROWNUMBER( _preparedTbl, ORDERBY( [@xAxis], ASC BLANKS DEFAULT ) )
+                VAR _xPostion = ( _rowNumber * _spaceBetweenPoitns )
+                VAR _yPosition = ( _usableHeight - ( ( [@vl] / _maxValue ) * _usableHeight ) ) + _revertedHeight
+                RETURN
+                    IF( _rowNumber = 1, "M ", " L " ) & _xPostion & " " & _yPosition
+            )
+            & "' />"
+    VAR _positiveBar =
+        "<rect class='positiveBar' x='" & _padding & "' y='" & _revertedHeight - _targetHeightModificator & "' width='"
+            & _usableWidth
+            & "' height='"
+            & _targetHeight + _targetHeightModificator
+            & "'  />"
+    VAR _textations =
+        "
+        <text x='" & _padding & "' y='" & _padding & "'><tspan class='stateColor bolder'>"
+            & COUNTROWS( FILTER( _preparedTbl, [@vl] >= _target ) )
+            & "x</tspan> was target hit <tspan class='italic'>~ "
+            & FORMAT( DIVIDE( _targetFulfillment, _counter ), "0.0%" )
+            & "</tspan></text>
+        <text x='"
+            & _padding
+            & "' y='"
+            & _padding * 2.5
+            & "'>Monthly target was "
+            & ROUND( _target, 1 )
+            & ", <tspan class='bolder "
+            & _resultText
+            & "'>"
+            & _targetSum
+            & "</tspan> in total.</text>
+        <text x='"
+            & _padding
+            & "' y='"
+            & _padding * 4
+            & "'>Total sales were <tspan class='bolder "
+            & _resultText
+            & "'>"
+            & _maxValue
+            & "</tspan> ~ "
+            & IF(
+                _targetSum > _maxValue,
+                "<tspan class='negativeResult bolder'>CLAIM NOT APPROVED</tspan>",
+                "<tspan class='positiveResult bolder'>CLAIM APPROVED</tspan>"
+            )
+            & "</text>"
+    VAR _result = _svgDeclaration & _svgHeader & _style & _positiveBar & _lineChart & _textations & _svgEnd
+    RETURN
+        _result
+    DisplayFolder = "SVG Measures"
+    Visible = FALSE
+
+--------------------------------
+-- Measure: [KPI Target Checker]
+--------------------------------
+MEASURE '3. Report-Specific SVG Measures'[KPI Target Checker] = 
+    -- For illustrative and educational purposes.
+    -- You'll need to adjust these SVG measures for use in your own solutions.
+    
+    -- When using SVG measures, be aware that they're custom 'microvisuals'.
+    -- They require more time and effort to build, test, and maintain.
+    
+    
+    /* SETUP */
+    // INSERT YOUR SETUP VARIABLES HERE
+    VAR _width = 365 // Width size of the SVG
+    VAR _height = 230 // Height size of the SVG
+    VAR _padding = 15 // Padding between the SVG image and the border
+    VAR _boxSize = 25 // Size of the boxes
+    VAR _preparedTbl =
+        SELECTCOLUMNS ( // INSERT YOUR MEASURES FROM KPI AND ITS TARGET + FORMAT OF RESULT
+            {
+                ( 1, [Sum (CY YTD)], [Sum (PY YTD)], "#" ),
+                ( 2, DIVIDE ( [Sum (CY YTD)], [Sum (PY YTD)] ), 0.70, "0.0%" ),
+                ( 3, CALCULATE ( [Sum], 'Table'[Dimension] = "Elves" ), CALCULATE ( [Sum], 'Table'[Dimension] = "Orcs" ), "#" ),
+                ( 4, DIVIDE ( CALCULATE ( [Sum], 'Table'[Dimension] = "Goblins" ), [Sum] ), 0.30, "0.0%" ),
+                ( 5, DIVIDE ( CALCULATE ( [Sum], 'Table'[SubDimension] = "Monks" ), [Sum] ), 0.54, "0.0%" )
+            },
+            "@id", [Value1],
+            "@actValue", [Value2],
+            "@targetValue", [Value3],
+            "@format", [Value4]
+        ) 
+        
+    /* COLOR DEFINITION */
+    VAR _positive = "#658E95" // Positive Color
+    VAR _negative = "#7D1D3A" // Negative Color
+    VAR _darkGrey = "#808080" // Will be used for box border and texts
+    
+    /* STYLE DECLARATIONS */
+    VAR _style = "<style>
+    text{
+        font-family: Segoe UI;
+        dominant-baseline: middle;
+        fill: " & _darkGrey & ";
+    }
+    .positiveText{
+        fill: " & _positive & ";
+    }
+    .negativeText{
+        fill: " & _negative & ";
+    }
+    .bolder{
+        font-weight: bold;
+    }
+    .box{
+        fill:none;
+        stroke: " & _darkGrey & ";
+        stroke-width: 2;
+    }
+    .check{
+        fill:none;
+        stroke:" & _positive & ";
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+    </style>" 
+    
+    /* SVG DECLARTIONS */
+    // BASIC SVG DECLARATION
+    VAR _svgDeclaration = "data:image/svg+xml;utf8,"
+    VAR _svgHeader = "<svg xmlns='http://www.w3.org/2000/svg' width='" & _width & "' height='" & _height & "'>"
+    VAR _svgEnd = "</svg>" 
+    
+    /* CALCULATION */
+    VAR _doubePadding = _padding * 2
+    VAR _usableHeight = ( _height - _doubePadding )
+    VAR _rowsCounter =
+        COUNTROWS ( _preparedTbl )
+    VAR _spaceBetweenPoitns = _usableHeight / _rowsCounter
+    VAR _boxSegment = ( _boxSize / 6 )
+    VAR _checkBoxes =
+        CONCATENATEX (
+            _preparedTbl,
+            VAR _rowNumber = [@id] - 1
+            VAR _yPosition = _rowNumber * _spaceBetweenPoitns + _padding
+            RETURN
+                "<rect class='box' rx='1%' x='" & _padding & "' y='" & _yPosition & "' width='" & _boxSize & "' height='" & _boxSize & "' />"
+                    & IF (
+                        [@actValue] >= [@targetValue],
+                        "<path class='check' d='M " & _padding + _boxSegment & " " & _yPosition + ( _boxSize / 2 ) & " L " & _padding + ( _boxSegment * 2 ) & " " & _yPosition + ( _boxSize * ( 3 / 4 ) ) & " L " & _padding + ( _boxSegment * 5 ) & " " & _yPosition + ( _boxSize * ( 1 / 4 ) ) & "' />",
+                        ""
+                    ) & "<text x='" & ( _padding * 2 ) + _boxSize & "' y='" & _yPosition + ( _boxSize / 2 ) & "'>Reached <tspan class='"
+                    & IF ( [@actValue] >= [@targetValue], "positiveText", "negativeText" ) & " bolder'>"
+                    & FORMAT ( [@actValue], [@format] ) & "</tspan> from targeted <tspan class='bolder'>"
+                    & FORMAT ( [@targetValue], [@format] ) & "</tspan></text>",
+            "",
+            [@id], DESC
+        )
+    VAR _result = _svgDeclaration & _svgHeader & _style & _checkBoxes & _svgEnd
+    RETURN
+        _result
+    DisplayFolder = "SVG Measures"
+    Visible = FALSE
+
+--------------------------------------
+-- Measure: [Card with Donut progress]
+--------------------------------------
+MEASURE '3. Report-Specific SVG Measures'[Card with Donut progress] = 
+    -- For illustrative and educational purposes.
+    -- You'll need to adjust these SVG measures for use in your own solutions.
+    
+    -- When using SVG measures, be aware that they're custom 'microvisuals'.
+    -- They require more time and effort to build, test, and maintain.
+    
+    
+    /* SETUP */
+    VAR _total = [Sum (PY YTD)]  // Will be used as a target
+    VAR _value = [Sum (CY YTD)] // Will be used as a current value
+    VAR _width = 365 // Width size of the SVG
+    VAR _height = 220 // Height size of the SVG
+    VAR _CanvasSize = MIN( _height, _width ) // Canvas size
+    VAR _paddning = 15 // Padding between the circle and the canvas
+    
+    /* COLOR DEFINITION */
+    VAR _positive = "#658E95" // Positive Color
+    VAR _neutral = "#E7E74E" // Neutral Color
+    VAR _negative = "#7D1D3A" // Negative Color
+    
+    /* PRE CALCULATION */
+    VAR _halfSize = _CanvasSize / 2 // Half of the canvas size
+    VAR _r = _halfSize - _paddning * 1.5 // Radius of the circle
+    VAR _round = 2 * PI( ) * _r // Circumference of the circle
+    VAR _perc = _value / _total // Percentage of the current value
+    VAR _ratio = _round - _round * _perc // Ratio of the current value
+    VAR _clr =  // Determine the color of the circle based on the percentage
+    SWITCH(
+            TRUE( ),
+            _perc >= 0.75, _positive, // Positive Color
+            _perc >= 0.5, _neutral, // Neutral Color
+            _negative // Negative Color
+        )
+    
+    /* STYLE DECLARTIONS */
+    VAR _styles =
+        "
+      <style>
+        text{
+            font-family: Segoe UI;
+        }
+        .backgroundCircle{
+          transform:rotate(-90deg) translate(-"
+            & ( _height + _width ) / 2
+            & "px, "
+            & ( _width - _height ) / 2
+            & "px);
+        }
+        .backgroundCircle{
+          fill: transparent;
+          stroke-width: "
+            & _paddning
+            & ";
+        }
+        .background{
+          stroke: #e0e0e0;
+        }
+        .filling{
+          stroke: "
+            & _clr
+            & ";
+          stroke-linecap: round;
+          stroke-dasharray: "
+            & _round
+            & ";
+          stroke-dashoffset: "
+            & _ratio
+            & ";
+        }
+        .mainText{
+          fill: "
+            & _clr
+            & ";
+          font-size: 225%;
+          text-anchor: middle;
+          dominant-baseline: middle;
+          font-weight: bold;
+        }
+        .subTexts{
+          fill: #CCCCCC;
+          font-size: 95%;
+          dominant-baseline: middle;
+        }
+        .leftPositioned{
+            text-anchor: end;
+        }
+        .rightPositioned{
+            text-anchor: start;
+        }
+        .bolden{
+            font-weight: bold;
+        }
+      </style>
+    "
+    
+    /* SVG DECLARTIONS */
+    VAR _svgDeclaration = "data:image/svg+xml;utf8,"
+    VAR _svgHeader = "<svg xmlns='http://www.w3.org/2000/svg' height='" & _height & "' width='" & _width & "'>"
+    VAR _svgEnd = "</svg>"
+    
+    /* CALCULATION */
+    VAR _sv =
+        "
+      <g class='backgroundCircle'>
+      <circle r='" & _r & "' cx='50%' cy='50%' class='background' />
+      <circle r='" & _r
+            & "' cx='50%' cy='50%' class='filling'/>
+      </g>
+      <g class='mainText'>
+      <text x='50%' y='37.5%' >"
+            & FORMAT( _perc, "0.0%" )
+            & "</text>
+      </g>
+      <g class='subTexts'>
+      <g class='leftPositioned'>
+      <text x='51%' y='50.5%' >"
+            & "Target:"
+            & "</text>
+      <text x='51%' y='60%' >"
+            & "Current:"
+            & "</text>
+      <text x='51%' y='69.5%' class='bolden'>"
+            & "Missing:"
+            & "</text>
+      </g>
+      <g class='rightPositioned'>
+      <text x='53%' y='50.5%' >"
+            & _total
+            & "</text>
+      <text x='53%' y='60%' >"
+            & ROUND( _value, 1 )
+            & "</text>
+      <text x='53%' y='69.5%' class='bolden'>"
+            & ROUND( _total - _value, 1 )
+            & "</text>
+      </g>
+      </g>
+    "
+    VAR _result = _svgDeclaration & _svgHeader & _styles & _sv & _svgEnd
+    RETURN
+        _result
+    DisplayFolder = "SVG Measures"
+    Visible = FALSE
+
+------------------------------------------
+-- Measure: [Card with Columns and Target]
+------------------------------------------
+MEASURE '3. Report-Specific SVG Measures'[Card with Columns and Target] = 
+    -- For illustrative and educational purposes.
+    -- You'll need to adjust these SVG measures for use in your own solutions.
+    
+    -- When using SVG measures, be aware that they're custom 'microvisuals'.
+    -- They require more time and effort to build, test, and maintain.
+    
+    
+    /* SETUP */
+    VAR _spaceBetweenColumns = 5.5 // Space that will be reserved between columns
+    VAR _maxSizeOfColumn = 3.5 // Max size of column, if the calculated value is bigger than this, the column will be this size
+    VAR _columnRounding = 5 // Rounding of column corners
+    VAR _width = 365 // Width size of the SVG
+    VAR _height = 250 // Height size of the SVG
+    VAR _initialTbl =
+        // ADD YOUR TABLE, PERIOD COLUMN (DATE, MONTH, QUARTER, YEAR,...) + MEASURE HERE
+        ADDCOLUMNS (
+            SELECTCOLUMNS (
+                SUMMARIZE ( 'Table', 'Date'[Month (MMM)] ),
+                "@xAxisPeriod", 'Date'[Month (MMM)]
+            ),
+            "@val", [Sum (CY YTD)]
+        )
+    VAR _target = [Sum (PY YTD)] // Target value or measure
+    
+    /* TEXT DECLARTIONS */
+    VAR _firstLineInitialText = "Total target is on"
+    VAR _firstLineEndText = "~ missing"
+    VAR _secondLineInitialText = "Period target is on"
+    VAR _secondLineEndText = "~ sold"
+    VAR _thirdLineMiddleText = "of"
+    VAR _thirdLineEndText = "months were successful" 
+    
+    /* COLORS DECLARTIONS */
+    VAR _grey = "#E6E6E6" // Will be used for all other columns
+    VAR _activePartsColor = "#658E95" // Will be used for all highly colored parts of card
+    VAR _darkGrey = "#808080" // Will be used for all text
+    VAR _targetLineColor = "#A8A8A8" // Will be used for target line
+    
+    /* SVG DECLARTIONS */
+    VAR _svgDeclaration = "data:image/svg+xml;utf8,"
+    VAR _svgHeader = "<svg xmlns='http://www.w3.org/2000/svg' width='" & _width & "' height='" & _height & "'>"
+    VAR _svgEnd = "</svg>" 
+    
+    /* CSS DECLARATIONS */
+    VAR _style = "<style>
+        text{
+            font-family:Segoe UI;
+        }
+        .columns{
+             opacity: 1;
+             outline: none;
+        }
+        .lineDeclaration{
+            stroke:" & _targetLineColor & "; 
+            stroke-width:1.25;
+            stroke-dasharray:5 5;
+        }
+        .txtGroup{
+            dominant-baseline: middle;
+            text-anchor:start;
+        }
+        .bolder{
+            font-weight: bold;
+        }
+    </style>" 
+    
+    /* CALCULATION */
+    VAR _preparedTbl =
+        ADDCOLUMNS (
+            _initialTbl,
+            "@rowNum", ROWNUMBER ( _initialTbl, ORDERBY ( [@xAxisPeriod], ASC ) )
+        )
+    VAR _maxResultedValue =
+        MAXX ( _preparedTbl, [@val] )
+    VAR _rowCounter =
+        COUNTROWS ( _preparedTbl )
+    VAR _modifiedValue = _rowCounter * _target
+    VAR _resultSizeOfColumns =
+        VAR _cal =
+            ROUND (
+                DIVIDE ( 100 - ( ( _rowCounter + 1 ) * _spaceBetweenColumns ), _rowCounter ),
+                1
+            )
+        RETURN
+            IF ( _cal > _maxSizeOfColumn, _maxSizeOfColumn, _cal )
+    VAR _columns =
+        CONCATENATEX (
+            _preparedTbl,
+            VAR _colorOfColumn =
+                IF ( _target < [@val], _activePartsColor, _grey ) // Rules for coloring columns
+            VAR _startOfColumn =
+                ROUND ( DIVIDE ( [@val], _maxResultedValue ) * 40, 1 )
+            VAR _positionCounter = ( ( [@rowNum] - 1 ) * _resultSizeOfColumns ) + ( _spaceBetweenColumns * [@rowNum] )
+            RETURN
+                "<rect class='columns' x='" & _positionCounter & "%' y='" & 85 - _startOfColumn & "%' width='" & _resultSizeOfColumns & "%' height='" & _startOfColumn & "%' fill='" & _colorOfColumn & "' rx='" & _columnRounding & "' />"
+        )
+    VAR _targetLine =
+        VAR _y =
+            85
+                - ROUND ( DIVIDE ( _target, _maxResultedValue ) * 40, 1 )
+        RETURN
+            "<line class='lineDeclaration' x1='" & _spaceBetweenColumns & "%' x2='" & 100 - _spaceBetweenColumns & "%' y1='" & _y & "%' y2='" & _y & "%' />"
+    VAR _initialText =
+        "<g class='txtGroup'>" & "<text y='4%' x='2.5%' font-size='107.5%' fill='" & _darkGrey & "'><tspan class='bolder'> " & _firstLineInitialText & " <tspan fill='" & _activePartsColor & "'>"
+            & FORMAT (
+                ROUND ( DIVIDE ( SUMX ( _preparedTbl, [@val] ), _modifiedValue ), 2 ),
+                "0%"
+            ) & "</tspan></tspan><tspan font-size='80%'> " & _firstLineEndText & " "
+            & _modifiedValue - SUMX ( _preparedTbl, [@val] ) & " </tspan>
+        </text>" & "<text y='16.5%' x='2.5%' fill='" & _darkGrey & "'>
+            " & _secondLineInitialText & " <tspan fill='" & _activePartsColor & "' class='bolder'>"
+            & FORMAT (
+                ROUND ( DIVIDE ( SUMX ( _preparedTbl, [@val] ), _modifiedValue ), 2 ),
+                "0%"
+            ) & "</tspan> <tspan font-size='80%'> " & _secondLineEndText & " "
+            & SUMX ( _preparedTbl, [@val] ) & " </tspan>
+        </text>" & "<text y='29%' x='2.5%' fill='" & _darkGrey & "'>
+            <tspan fill='" & _activePartsColor & "' class='bolder'>"
+            & COUNTROWS ( FILTER ( _preparedTbl, [@val] >= _target ) ) & "</tspan> " & _thirdLineMiddleText & "
+            <tspan class='bolder'>" & _rowCounter & "</tspan> " & _thirdLineEndText & "
+        </text>
+    </g>"
+    VAR SVGImageURL = _svgDeclaration & _svgHeader & _style & _initialText & _targetLine & _columns & _svgEnd
+    RETURN
+        SVGImageURL
+    DisplayFolder = "SVG Measures"
+    Visible = FALSE

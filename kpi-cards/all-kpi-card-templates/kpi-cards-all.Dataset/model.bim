@@ -455,7 +455,7 @@
               "    )",
               "RETURN",
               "    _Color & \" Actuals:\"",
-              "        & FORMAT( _Actuals, \" #,##0\" )"
+              "        & FORMAT( _Actuals, \" #,##0,K\" )"
             ],
             "isHidden": true,
             "lineageTag": "65c9248a-39c8-491d-87ce-125866b90de7"
@@ -572,12 +572,6 @@
           },
           {
             "name": "Dynamic Subtitle (Context)",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
             "displayFolder": "Dynamic Titles",
             "expression": [
               "",
@@ -595,7 +589,7 @@
               "VAR _Target = [Sum (PY YTD)]",
               "RETURN",
               "    \"1 Year Prior: \"",
-              "        & FORMAT( _Target, \"#,##0\" )",
+              "        & FORMAT( _Target, \"#,##0,K\" )",
               "        & _Color",
               "        & FORMAT(",
               "            _Perc,",
@@ -728,12 +722,6 @@
           },
           {
             "name": "KPI Trend Line Title",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
             "displayFolder": "Dynamic Titles",
             "expression": [
               "",
@@ -743,7 +731,7 @@
               "FORMAT(",
               "    [Sum (Latest Data Point)],",
               "    \"#,##0,.0K\"",
-              ")"
+              ") & \" Claims\""
             ],
             "isHidden": true,
             "lineageTag": "5a737d28-fd3a-4785-bdcd-52e8904a178a"

@@ -1,6 +1,8 @@
 # powerbi-macguyver-toolbox
 Power BI report .pbip templates and patterns to create special visuals, address specific problems, and have data adventures.
 
+**SVG measure templates contributed by Štěpán Rešl. Thanks Štěpán!**
+
 ## ⚠️ Notice
 These templates are provided as-is without warranties or guarantees. They are not maintained nor are they all necessarily suitable for use in production solutions.
 Feel free to use them, but do so at your own risk.
@@ -32,7 +34,7 @@ _Note: Any chart with a MacGuyver Rating of 3 or above_ (🟩🟩🟩⬜⬜+) _i
 
 | Image (Click for Template) | Name | Description |
 |:-----:|:----:|:------------|
-| <a href="bar-charts/bar-chart/"><img src="bar-charts/bar-chart/bar-chart.png"/></a> | __Bar chart (Horizontal bar)__ | The standard horizontal bar chart. Tried and true, best used to compare categories. Consider turning off axes and gridlines and using data labels with conditional formatting for a more elegant design. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩🟩 __Popularity Rating__ - How frequently I see it requested by users for reports <br> 🟩🟩🟩🟩⬜ __Utility Rating__ - The breadth of different use-cases that it covers <br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ - Effort to make it and # report-specific objects required |
+| <a href="bar-charts/bar-chart/"><img src="bar-charts/bar-chart/bar-chart.png"/></a> | __Bar chart (Horizontal bar)__ | The standard horizontal bar chart. Tried and true, best used to compare categories. Consider turning off axes and gridlines and using data labels with conditional formatting for a more elegant design. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩🟩 __Popularity Rating__ - Frequency I see it requested by users<br> 🟩🟩🟩🟩⬜ __Utility Rating__ - Typical amount of different use-cases<br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ - Effort to build, test, and maintain the visual |
 | <a href="bar-charts/column-chart/"><img src="bar-charts/column-chart/column-chart.png"/></a> | __Column chart (Vertical bar)__ | The standard vertical bar chart. Harder to read compared to the horizontal version, often because the labels are truncated or angled. Consider using the Bar chart (Horizontal bar), instead. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩🟩 __Popularity Rating__ <br> 🟩🟩⬜⬜⬜ __Utility Rating__ <br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ |
 | <a href="bar-charts/rounded-bar-chart/"><img src="bar-charts/rounded-bar-chart/rounded-bar-chart.png"/></a> | __Rounded bar chart__ | A standard horizontal bar chart, except the ends are rounded. Honestly, I personally don't see the appeal, but there's a lot of people who do. There's a risk that the curves make it harder to compare lengths. It's mainly used for infographics for the shape. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩⬜⬜ __Popularity Rating__ <br> ⬜⬜⬜⬜⬜ __Utility Rating__ <br> 🟩🟩🟩⬜⬜ __MacGuyver Rating__ |
 | <a href="bar-charts/stacked-bar-chart/"><img src="bar-charts/stacked-bar-chart/stacked-bar-chart.png"/></a> | __Stacked bar chart__ | The standard horizontal stacked bar chart. Can be useful because it can display both the part-of-whole and total labels, but like many part-of-whole visuals, can be difficult to read and interpret with too many categories.<br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩⬜ __Popularity Rating__ <br> 🟩🟩🟩⬜⬜ __Utility Rating__ <br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ |
@@ -54,8 +56,6 @@ _Note: Any chart with a MacGuyver Rating of 3 or above_ (🟩🟩🟩⬜⬜+) _i
 ## Line chart templates
 The following line chart templates are available:
 
-_Note: Any chart with a MacGuyver Rating of 3 or above_ (🟩🟩🟩⬜⬜+) _is not recommended for production deployment. That's because they require too many report-specific objects and have too high a risk to break or effort to maintain. For these charts, you should use Deneb._
-
 | Image | Name | Description |
 |:-----:|:----:|:------------|
 | <a href="line-charts/line-chart/"><img src="line-charts/line-chart/line-chart.png"/></a> |__Line chart__ | The standard line chart of Power BI. Useful for plotting trends, but needs specific handling of the axes and labels to be most usable and efficient. *Beware that the Y-axis won't start at 0 by default in Power BI. Additionally, be aware that Power BI will interpolate values such that it will connect data points over blanks, which can create false trends.  <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩🟩 __Popularity Rating__ - Frequency I see it requested <br> 🟩🟩🟩⬜⬜ __Utility Rating__ - # Different use-cases that it covers <br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ - Effort to make it with core visuals |
@@ -73,6 +73,23 @@ _Note: Any chart with a MacGuyver Rating of 3 or above_ (🟩🟩🟩⬜⬜+) _i
 | <a href="line-charts/hills-and-valleys/"><img src="line-charts/hills-and-valleys/hills-and-valleys.png"/></a> |__Hills and valleys__ | Comparing multiple series and highlighting the difference between them by using conditional formatting. Requires some MacGuyvering, but is quite stable. Note that the area fill cannot interpolate the area between data points, unlike the lines in the line chart. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩⬜⬜⬜ __Popularity Rating__ <br> 🟩🟩🟩🟩⬜ __Utility Rating__ <br> 🟩🟩⬜⬜⬜ __MacGuyver Rating__ |
 | <a href="line-charts/multiple-area/"><img src="line-charts/multiple-area/multiple-area.png"/></a> |__Multiple area__ | Comparing multiple series where there are overlapping area fills between the lines. Can be useful circumstantially but can also pollute the canvas with additional ink that doesn't need to be there. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩⬜ __Popularity Rating__ <br> 🟩🟩🟩⬜⬜ __Utility Rating__ <br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ |
 | <a href="line-charts/stacked-area/"><img src="line-charts/stacked-area/stacked-area.png"/></a> |__Stacked area__ | Parts-of-whole for trend analysis. Useful when you want to break up a trend to see how different parts contribute to a total. Need to be careful that it isn't mis-interpreted by users. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩⬜⬜ __Popularity Rating__ <br> 🟩🟩🟩⬜⬜ __Utility Rating__ <br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ |
+
+## KPI and card templates
+The following KPI and card templates are available:
+
+*Note: TOC table to be added later, when I get time.*
+
+### Core visuals - no SVG measures
+These use the formatting options of the core visuals like cards, tables, etc. to achieve a KPI or callout-like effect.
+
+![Visual of KPI card templates in Power BI without using SVG measures](<kpi-cards/all-kpi-card-templates/KPIs and Cards in Power BI (No SVGs).png>)
+
+### Core visuals - SVG measures
+These use a combination of formatting options as well as SVG custom microvisualizations rendered as image URLs in the core visuals. 
+
+**These SVG measure templates were created by Štěpán Rešl.**
+
+![Visual of KPI card templates in Power BI with SVG measures](<kpi-cards/all-kpi-card-templates/KPIs and Cards in Power BI (SVGs).png>)
 
 ## Remark
 I don't consider myself a "dataviz person"; these comments are my subjective opinions and experience. I'm just sharing these templates because they might be helpful to others.

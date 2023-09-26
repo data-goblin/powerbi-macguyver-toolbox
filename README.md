@@ -1,7 +1,7 @@
 # powerbi-macguyver-toolbox
 Power BI report visual templates and patterns. These templates are intended to help you solve specific visual requirements in your projects, or inspire you for your report design.
 
-You can use them for free, but I'd appreciate that you please cite [data-goblins.com](https://www.data-goblins.com) where it's appropriate.
+You can use them for free, but I'd appreciate that you please cite [data-goblins.com](https://www.data-goblins.com) if you do.
 
 **SVG measure templates contributed by Štěpán Rešl. Thanks Štěpán!**
 
@@ -11,17 +11,35 @@ These templates are provided as-is without warranties or guarantees. They are no
 Feel free to use them, but do so at your own risk.
 	
 ## 💡 To use these templates
-Templates are provided either as Power BI Desktop (.pbix) or [Power BI projects (.pbip)](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview) files. 
+Templates are provided either as Power BI Desktop (.pbix) or [Power BI projects (.pbip)](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview) files. I recommend that you use the .pbip format. 
 
-I recommend that you use the .pbip format. You must first enable Power BI Project files from Power BI Desktop to open and use .pbip files. Follow these steps to enable and use .pbip files:
+### How to clone a repository by using Git
+To use these templates, I recommend that you _clone_ (or copy) this Git repo to your local machine. If you're unfamiliar with Git, cloning allows you to ensure you have a syncronized local copy of the repository. You use a tool like VS Code to open the folder, check for changes, and sync to get the latest updates. To clone the Git repo:
+
+1. __Install [Git](https://git-scm.com/download/win).__ Typically, you want to use the 64-bit Git for Windows Setup.
+2. __Download a graphical user interface (GUI) to manage Git, like [GitHub Desktop](https://desktop.github.com/) or [VS Code](https://code.visualstudio.com/).__ You can also manage it from the command line, but if you're new to Git, this isn't recommended. I recommend that you [download and install VS Code](https://code.visualstudio.com/), since it's used for other code authoring experiences in Power BI.
+3. __Create a [GitHub account](https://github.com/signup).__ Follow the steps to validate your account and set up multi-factor authentication.
+4. __Link your GitHub account to the GUI you downloaded.__ This differs depending on the tool you used. Generally, you should just follow the user interface's instructions; in [VS Code](https://code.visualstudio.com/docs/sourcecontrol/github) you sign in via the Source Control tab or GitHub extension.
+5. __Clone the repository.__ In the GUI, you should select an option "clone repository". From here, you can enter the HTTPS URL. You can also initiate this from GitHub, itself, via the _code_ button.
+
+> <br>
+> Use this URL when cloning the repo: https://github.com/data-goblin/powerbi-macguyver-toolbox.git
+> <br><br>
+
+<br>
+
+![An image depicting how to clone a repository in VS code](clone-repo-vscode.png)
+
+![Alt text](clone-repo-github.png)
+
+### How to enable and use .pbip files
 
 1. Open Power BI Desktop (~May 2023 version or later)
 2. Open the 'File' menu
 3. Navigate to _Options and settings_ and then _Options_
 4. Enable the preview feature _Power BI Project (.pbip) save option
 5. Restart Power BI Desktop
-6. Clone the Repo to your local machine using VS Code or a similar SCM tool
-7. Open the .pbip files in Power BI Desktop
+6. Open the .pbip files in Power BI Desktop
 
 ![An image depicting how to enable .pbip format in Power BI Desktop](how-to-enable-pbip-format.png)
 
@@ -121,6 +139,8 @@ The following templates are available:
 | <a href="kpi-cards/repeated-text/"><img src="kpi-cards/repeated-text/repeated-text.png"/></a> |__Repeated text__ | Using DAX methods to dynamically repeat text, showing the value as the count of characters. This can be an effective alternative to show numbers that are typically low and you want to visually draw attention to in a unique way. An example could be "issues" or "bugs" when doing testing, or "critical incidents in the last 24h" in a service desk report. This isn't so popular, but it's worth considering. <br><br> _Subjective Goblin graph scores_<br> 🟩⬜⬜⬜⬜ __Popularity Rating__ <br> 🟩🟩🟩⬜⬜ __Utility Rating__ <br> 🟩⬜⬜⬜⬜ __MacGuyver Rating__ |
 | <a href="kpi-cards/star-rating-text/"><img src="kpi-cards/star-rating-text/star-rating-text.png"/></a> |__Star rating text__ | Using DAX approaches to create a star rating with unicode characters. This is best done when you have literal ratings, like from customers for products or stores. The DAX can be complex, but it's a pattern that's easy to re-use. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩⬜⬜⬜ __Popularity Rating__ <br> 🟩🟩⬜⬜⬜ __Utility Rating__ <br> 🟩⬜⬜⬜⬜ __MacGuyver Rating__ |
 | <a href="kpi-cards/waffle-text/"><img src="kpi-cards/waffle-text/waffle-text.png"/></a> |__Waffle text__ | Using line breaks and unicode characters to dynamically display a waffle chart out of text characters. This goes a bit beyond what is tolerable in a production solution, but can be a creative alternative to other waffle chart approaches. Consider using a waffle chart like this when you want to visualize progress or achievement, but not where overachievement is possible. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩⬜⬜⬜ __Popularity Rating__ <br> 🟩🟩⬜⬜⬜ __Utility Rating__ <br> 🟩🟩🟩⬜⬜ __MacGuyver Rating__ |
+
+<br><br>
 
 ### Core visuals - SVG measures
 These use a combination of formatting options as well as SVG custom microvisualizations rendered as image URLs in the core visuals. 

@@ -1,0 +1,968 @@
+{
+  "compatibilityLevel": 1601,
+  "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.121.782.0 (23.09)"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"Table\"]"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      },
+      {
+        "name": "__TEdtr",
+        "value": "1"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "DynamicImprovement": "HighConfidence",
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "discourageImplicitMeasures": true,
+    "extendedProperties": [
+      {
+        "name": "TabularEditor_DeploymentMetadata",
+        "type": "json",
+        "value": {
+          "ClientMachine": "DESKTOP-NV69I5J",
+          "DeploymentMode": "SaveUI",
+          "TabularEditorBuild": "3.9.0.2972",
+          "Time": "2023-07-26T01:35:00.5333614+02:00",
+          "User": "DESKTOP-NV69I5J\\Klonk-Temp"
+        }
+      }
+    ],
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "Table",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Dimension",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b6428db5-956a-46cf-8e0d-f78eb01375b5",
+            "sourceColumn": "Dimension",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Quantitative",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "ea479855-4c8e-45af-927c-60b87abbeb86",
+            "sourceColumn": "Quantitative",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Sub-Dimension",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9f44d7b1-03be-4dc8-ad1c-32b4503fb996",
+            "sourceColumn": "Sub-Dimension",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f94a7412-424a-4c12-9e19-6a928be50131",
+            "sourceColumn": "Year",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "74c7dcbc-f534-4da1-9c59-174298c17e81",
+        "partitions": [
+          {
+            "name": "Table",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i45Wcs9PysnMK1bSUQrKTy9NBTEUFIwMjIyADCOlWB1kFeGZVYlFKXAlxkCGKZoSt8z0jJLUIhRjzNHU+ObnZaMYYgxW4F+UjN0ZFsjSWNxgaIisAJsLDFFswLAf4kDXnLJU7A4wNEVRgM0JRigqsLrBEkUJhiOglngk5qQBwykdu0uMMdRgcYwJhiKs7sFQheEkoKdiAQ==\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Dimension = _t, #\"Sub-Dimension\" = _t, Year = _t, Quantitative = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Quantitative\", Int64.Type}, {\"Year\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "2. Report-Specific Objects",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "21661cfde1db4d40be113778b97a84f2"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Value",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "05cd4f72-d741-444a-8849-796154a583d9",
+            "sourceColumn": "[Value]",
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "bc077534-c5b0-40dd-9fb4-4bad6abc2bd2",
+        "measures": [
+          {
+            "name": "1 - Percentage",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "For Stacked Percentages",
+            "expression": "1 - [Percentage] ",
+            "isHidden": true,
+            "lineageTag": "a797f413-2545-4e12-a017-c9decafc3fa4"
+          },
+          {
+            "name": "Zero",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isCustom\":true}"
+              }
+            ],
+            "displayFolder": "Misc",
+            "expression": "0",
+            "formatString": "\" \"",
+            "isHidden": true,
+            "lineageTag": "9c5e001d-acf5-4a94-8c79-b36b22eddff2"
+          },
+          {
+            "name": "90% of Sum",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Control Axis Ranges",
+            "expression": "0.9 * [Sum]",
+            "isHidden": true,
+            "lineageTag": "3dfd2c42-1784-48db-b00d-f2279171b90d"
+          },
+          {
+            "name": "Transparent",
+            "displayFolder": "Control Colours",
+            "expression": "\"#00000000\"",
+            "isHidden": true,
+            "lineageTag": "7af08448-2e99-4e55-a505-8e431865c8dd"
+          },
+          {
+            "name": "One",
+            "displayFolder": "Misc",
+            "expression": "1",
+            "formatString": "0.0%;-0.0%;0.0%",
+            "isHidden": true,
+            "lineageTag": "ac584242-db7d-4988-837c-5bd76985c46d"
+          },
+          {
+            "name": "5% of Sum",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Control Axis Ranges",
+            "expression": "0.05 * [Sum]",
+            "isHidden": true,
+            "lineageTag": "7bf36b78-b7d5-408b-860f-e141b73f3749"
+          },
+          {
+            "name": "110% of Highest Sum",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Control Axis Ranges",
+            "expression": [
+              "",
+              "1.1 ",
+              "* ",
+              "CALCULATE(",
+              "    [Sum],",
+              "    TOPN(",
+              "        1,",
+              "        VALUES( 'Table'[Dimension] ),",
+              "        [Sum]",
+              "    )",
+              ")"
+            ],
+            "isHidden": true,
+            "lineageTag": "5b18d1b8-9148-45f3-8893-a6f86d294363"
+          },
+          {
+            "name": "Min One",
+            "displayFolder": "Misc",
+            "expression": "-1",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "ebff2474-2af1-4c1e-b138-c5f3c295c261"
+          },
+          {
+            "name": "120% of Highest Sum",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Control Axis Ranges",
+            "expression": [
+              "",
+              "1.2 ",
+              "* ",
+              "CALCULATE(",
+              "    [Sum],",
+              "    TOPN(",
+              "        1,",
+              "        VALUES( 'Table'[Dimension] ),",
+              "        [Sum]",
+              "    )",
+              ")"
+            ],
+            "isHidden": true,
+            "lineageTag": "372933e1-0e0e-457e-8349-6aaaaa5cb5d9"
+          },
+          {
+            "name": "Sum (2022; Inverse)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isCustom\":true}"
+              }
+            ],
+            "displayFolder": "For Format Strings",
+            "expression": "- [Sum (PY)]",
+            "formatString": "#,##0; #,##0; #,##0",
+            "isHidden": true,
+            "lineageTag": "2ad4db16-6991-4157-8219-d80f6deb39ed"
+          },
+          {
+            "name": "2022",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isCustom\":true}"
+              }
+            ],
+            "displayFolder": "For Legends",
+            "expression": "[Sum (2022; Inverse)]",
+            "formatString": "#,##0; #,##0; #,##0",
+            "isHidden": true,
+            "lineageTag": "bec9c999-6fec-47de-8f1f-6e2ae0cd4437"
+          },
+          {
+            "name": "2023",
+            "displayFolder": "For Legends",
+            "expression": "[Sum (CY)]",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "8bcf8528-5a56-46a4-8577-7c5cfa488766"
+          },
+          {
+            "name": "Year Colour",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Control Colours",
+            "expression": "IF ( SELECTEDVALUE ( 'Table'[Year] ) = \"  2022\", \"#ece6da\", \"#737068\" )",
+            "isHidden": true,
+            "lineageTag": "7a633807-acfb-4667-bf5f-0f51cfe82c98"
+          },
+          {
+            "name": "Bar Chart & Candlestick - Change (Lower)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "For Bar Chart & Candlestick",
+            "expression": [
+              "",
+              "IF ( ",
+              "    SELECTEDVALUE ( '3. Report-Specific Disconnected Table'[Attribute] ) = \"CHANGE\",",
+              "    MIN ( [Sum (PY)], [Sum (CY)] )",
+              ")"
+            ],
+            "isHidden": true,
+            "lineageTag": "42be94b5-2cf7-403f-b817-e793d939313a"
+          },
+          {
+            "name": "Bar Chart & Candlestick - Change (Higher)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "For Bar Chart & Candlestick",
+            "expression": [
+              "",
+              "IF ( ",
+              "    SELECTEDVALUE ( '3. Report-Specific Disconnected Table'[Attribute] ) = \"CHANGE\",",
+              "    MAX ( [Sum (PY)], [Sum (CY)] )",
+              ")"
+            ],
+            "isHidden": true,
+            "lineageTag": "06a8e96e-b86e-4795-ae87-d11205f3f7ee"
+          },
+          {
+            "name": "Bar Chart & Candlestick - Bar Color",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "For Bar Chart & Candlestick",
+            "expression": [
+              "",
+              "VAR _Attribute = SELECTEDVALUE ( '3. Report-Specific Disconnected Table'[Attribute] )",
+              "RETURN",
+              "IF ( ",
+              "    _Attribute = \"CHANGE\",",
+              "    \"#00000000\",",
+              "    IF (",
+              "        _Attribute = \"2023\", \"#737068\",",
+              "        \"#ece6da\"",
+              "    )",
+              ")"
+            ],
+            "isHidden": true,
+            "lineageTag": "2ac1fede-d563-4021-b19f-cb3ad7697b75"
+          },
+          {
+            "name": "120% of Highest Sum by Year",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Control Axis Ranges",
+            "expression": [
+              "",
+              "1.2 ",
+              "* ",
+              "CALCULATE(",
+              "    [Sum],",
+              "    TOPN(",
+              "        1,",
+              "        VALUES( 'Table'[Year] ),",
+              "        [Sum]",
+              "    )",
+              ")"
+            ],
+            "isHidden": true,
+            "lineageTag": "72ea17f8-178e-48f7-a73d-2a0479fdd182"
+          },
+          {
+            "name": "Bar Chart & Candlestick - Label Color",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "For Bar Chart & Candlestick",
+            "expression": [
+              "",
+              "VAR _Attribute = SELECTEDVALUE ( '3. Report-Specific Disconnected Table'[Attribute] )",
+              "RETURN",
+              "IF ( ",
+              "    _Attribute = \"CHANGE\",",
+              "    IF ( [Sum (Δ% PY - CY)] > 0, \"#1f84bb\", \"#ec8b69\" ), \"#00000000\" )"
+            ],
+            "isHidden": true,
+            "lineageTag": "0442ff64-b4ae-4dd0-bab9-992d9e1ec8f5"
+          },
+          {
+            "name": "120% of Highest Delta",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Control Axis Ranges",
+            "expression": [
+              "",
+              "1.2 ",
+              "* ",
+              "CALCULATE(",
+              "    MAX( [Sum (PY)], [Sum (CY)] ),",
+              "    TOPN(",
+              "        1,",
+              "        VALUES( 'Table'[Dimension] ),",
+              "        MAX( [Sum (PY)], [Sum (CY)] )",
+              "    )",
+              ")"
+            ],
+            "isHidden": true,
+            "lineageTag": "e64df63d-9b51-4dea-b0c7-7cfd61781d41"
+          },
+          {
+            "name": "Min 2",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Duplicated Measures for Formatting",
+            "expression": "-2",
+            "isHidden": true,
+            "lineageTag": "8a4b18d3-f2cd-440b-a115-9c6339b8ae7a"
+          },
+          {
+            "name": "Zero #3",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "displayFolder": "Duplicated Measures for Formatting",
+            "expression": "0",
+            "isHidden": true,
+            "lineageTag": "a4149ffb-966e-4875-a3a3-d540e6ece0e0"
+          },
+          {
+            "name": "Goblins",
+            "displayFolder": "For Progress Bar III",
+            "expression": "IF ( SELECTEDVALUE( 'Table'[Dimension] ) = \"Goblins\", 0.75 )",
+            "formatString": "0%;-0%;0%",
+            "lineageTag": "159adc75-7072-42b0-93ca-599cd80e5992"
+          },
+          {
+            "name": "Y-Axis (Progress III)",
+            "displayFolder": "For Progress Bar III",
+            "expression": [
+              "",
+              "VAR _Dimension = SELECTEDVALUE ( 'Table'[Dimension] ) ",
+              "RETURN",
+              "SWITCH(",
+              "    _Dimension,",
+              "    \"Halflings\", 0.95, ",
+              "    \"Goblins\", 0.70,",
+              "    \"Orcs\", 0.45,",
+              "    \"Elves\", 0.20",
+              "    ,0",
+              ")"
+            ],
+            "formatString": "0%;-0%;0%",
+            "lineageTag": "3ae4415e-2da2-4c0a-9850-4dc0e09a9821"
+          },
+          {
+            "name": "Yellow",
+            "displayFolder": "For Progress Bar III",
+            "expression": "0.25",
+            "formatString": "0%;-0%;0%",
+            "lineageTag": "7b2ecbaf-aa8b-439d-aeb4-dd5a256af54d"
+          },
+          {
+            "name": "Orcs",
+            "displayFolder": "For Progress Bar III",
+            "expression": "IF ( SELECTEDVALUE( 'Table'[Dimension] ) = \"Goblins\", 0.5 )",
+            "formatString": "0%;-0%;0%",
+            "lineageTag": "c3bfd392-d6d1-4ed7-ba57-e90ec17dc9e8"
+          },
+          {
+            "name": "Halflings",
+            "displayFolder": "For Progress Bar III",
+            "expression": "IF ( SELECTEDVALUE( 'Table'[Dimension] ) = \"Halflings\", 1 )",
+            "formatString": "0%;-0%;0%",
+            "lineageTag": "69d09b41-5a01-404b-b885-00bcb54f8111"
+          },
+          {
+            "name": "Sum CY (Bar)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "[Sum (CY)]",
+            "lineageTag": "afbf49c9-e1ef-403d-b6de-ab8706de94a2"
+          },
+          {
+            "name": "Sum PY (Bar)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "[Sum (PY)]",
+            "lineageTag": "3a2ec604-108a-4706-abc9-8dd5db5b98b3"
+          },
+          {
+            "name": "Sum Delta (Bar)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "[Sum (ΔPY - CY)]",
+            "lineageTag": "de23fae5-03fa-430c-b188-b18aca5161a7"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "2. Report-Specific Objects",
+            "mode": "import",
+            "source": {
+              "expression": "{1}",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "1. Measures",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "724d8a875a79418db6f9113a2cf5d8eb"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Value",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "18e219e8-e8e5-4a4e-8c86-825ff8a663c7",
+            "sourceColumn": "[Value]",
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "4bd4c7d3-ed8c-4fc9-802b-4eb3b0893f5d",
+        "measures": [
+          {
+            "name": "Percentage",
+            "expression": [
+              "",
+              "VAR _Total = CALCULATE( SUM ( 'Table'[Quantitative] ), REMOVEFILTERS ( ) )",
+              "RETURN",
+              "DIVIDE ( ",
+              "    SUM ( 'Table'[Quantitative] ), ",
+              "    _Total",
+              ") + 0.15"
+            ],
+            "formatString": "0.0%;-0.0%;0.0%",
+            "lineageTag": "ccbbf42b-88e3-4b49-8192-f592b6d02dc4"
+          },
+          {
+            "name": "Sum",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isCustom\":true}"
+              }
+            ],
+            "expression": "SUM ( 'Table'[Quantitative] )",
+            "formatString": "  #,##0",
+            "lineageTag": "71445de7-2cd6-43b8-81cb-8b9dd1159740"
+          },
+          {
+            "name": "Sum (CY)",
+            "expression": [
+              "",
+              "// This would normally be just the sum; where Sum (2022) would be using time intelligence or a similar method to calculate PY",
+              "CALCULATE(",
+              "    [Sum],",
+              "    'Table'[Year] = \"  2023\"",
+              ")"
+            ],
+            "formatString": "0",
+            "lineageTag": "202a6bc8-71c3-41cc-9349-cde551b031a0"
+          },
+          {
+            "name": "Sum (PY)",
+            "expression": [
+              "",
+              "// This would normally be calculated using time intelligence or a similar method to calculate PY",
+              "CALCULATE(",
+              "    [Sum],",
+              "    'Table'[Year] = \"  2022\"",
+              ")"
+            ],
+            "formatString": "0",
+            "lineageTag": "6fe52e9a-2944-457b-97e7-ee4aadcdc2cc"
+          },
+          {
+            "name": "Sum (ΔPY - CY)",
+            "expression": [
+              "",
+              "VAR _CY = [Sum (CY)]",
+              "VAR _PY = [Sum (PY)]",
+              "VAR _Delta = _CY - _PY",
+              "RETURN",
+              "_Delta"
+            ],
+            "formatString": "0",
+            "lineageTag": "4cb18752-6c6d-444e-b2dd-dff2e86ce817"
+          },
+          {
+            "name": "Sum (Δ% PY - CY)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isCustom\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "DIVIDE (",
+              "    [Sum (ΔPY - CY)],",
+              "    [Sum (PY)]",
+              ")"
+            ],
+            "formatString": "+#,##0.0%;-#,##0.0%;#,##0.0%",
+            "lineageTag": "546753a4-f8e4-45be-92c8-3a0ccdc60f66"
+          },
+          {
+            "name": "Dumbbell Candle Upper (Green)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR _CY = [Sum (CY)]",
+              "VAR _PY = [Sum (PY)]",
+              "RETURN",
+              "IF ( _CY > _PY, _CY )"
+            ],
+            "lineageTag": "ddabfcbe-403f-4e32-bb5c-9c775387f4fe"
+          },
+          {
+            "name": "Dumbbell Candle Lower (Green)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR _CY = [Sum (CY)]",
+              "VAR _PY = [Sum (PY)]",
+              "RETURN",
+              "IF ( _CY > _PY, _PY )"
+            ],
+            "lineageTag": "efacd5f7-169e-4e7d-b4fd-746f35c92480"
+          },
+          {
+            "name": "Dumbbell Candle Upper (Red)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR _CY = [Sum (CY)]",
+              "VAR _PY = [Sum (PY)]",
+              "RETURN",
+              "IF ( _CY < _PY, _PY )"
+            ],
+            "lineageTag": "d636fe70-992e-4e3b-a007-3613a2b538a8"
+          },
+          {
+            "name": "Dumbbell Candle Lower (Red)",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR _CY = [Sum (CY)]",
+              "VAR _PY = [Sum (PY)]",
+              "RETURN",
+              "IF ( _CY < _PY, _CY )"
+            ],
+            "lineageTag": "38f51b3a-e517-4ced-8582-2c1941fc8caf"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "1. Measures",
+            "mode": "import",
+            "source": {
+              "expression": "{1}",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "3. Report-Specific Calculation Group",
+        "calculationGroup": {
+          "calculationItems": [
+            {
+              "name": "2023",
+              "expression": "[Sum (CY)]",
+              "formatStringDefinition": {
+                "expression": "SELECTEDMEASUREFORMATSTRING ()"
+              },
+              "ordinal": 1
+            },
+            {
+              "name": "2022",
+              "expression": "[Sum (PY)]",
+              "formatStringDefinition": {
+                "expression": "SELECTEDMEASUREFORMATSTRING ()"
+              },
+              "ordinal": 0
+            },
+            {
+              "name": "CHANGE",
+              "expression": [
+                "",
+                "MAX ( [Sum (PY)], [Sum (CY)] )",
+                ""
+              ],
+              "formatStringDefinition": {
+                "expression": "[Sum (Δ% PY - CY)]"
+              },
+              "ordinal": 2
+            }
+          ]
+        },
+        "columns": [
+          {
+            "name": "Attribute",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isHidden": true,
+            "lineageTag": "46153ef3-7f1e-4409-9fd9-da8badcc1c16",
+            "sortByColumn": "Ordinal",
+            "sourceColumn": "Name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Ordinal",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "isHidden": true,
+            "lineageTag": "eb4d2363-14da-44a2-b9e8-6a6b70069eea",
+            "sourceColumn": "Ordinal",
+            "summarizeBy": "sum"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "e8e227b7-fd27-4a64-87a2-95da79648028",
+        "partitions": [
+          {
+            "name": "Partition",
+            "mode": "import",
+            "source": {
+              "type": "calculationGroup"
+            }
+          }
+        ]
+      },
+      {
+        "name": "3. Report-Specific Disconnected Table",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "803854adc3014b728952e70307c7162a"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Attribute",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "b683d841-5ca8-40dc-a3aa-b94c9aa78716",
+            "sortByColumn": "Order",
+            "sourceColumn": "[Attribute]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Order",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "781445e6-72e9-47cf-ae90-7148209c7c40",
+            "sourceColumn": "[Order]",
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "fe2cdcff-7270-464b-bddc-7b06cdc7fdc3",
+        "measures": [
+          {
+            "name": "Bar Chart & Candlestick",
+            "expression": [
+              "",
+              "// sqlbi measure replacement method",
+              "CALCULATE( ",
+              "    [Zero],",
+              "    TREATAS(",
+              "        DISTINCT( '3. Report-Specific Disconnected Table'[Attribute] ),",
+              "        '3. Report-Specific Calculation Group'[Attribute]",
+              "    )",
+              ")"
+            ],
+            "formatStringDefinition": {
+              "expression": [
+                "IF ( ",
+                "    SELECTEDVALUE ( '3. Report-Specific Disconnected Table'[Attribute] ) = \"CHANGE\",",
+                "    FORMAT( [Sum (Δ% PY - CY)], \"+0\\.0%;-0\\.0%;0\\.0%\"),",
+                "    \"#,##0\"",
+                ")"
+              ]
+            },
+            "isHidden": true,
+            "lineageTag": "0e596993-63a5-42a9-9dc0-aa320666263d"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "3. Report-Specific Disconnected Table",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "",
+                "SELECTCOLUMNS( ",
+                "    '3. Report-Specific Calculation Group',",
+                "    \"Attribute\", '3. Report-Specific Calculation Group'[Attribute],",
+                "    \"Order\", '3. Report-Specific Calculation Group'[Ordinal] ",
+                ")"
+              ],
+              "type": "calculated"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

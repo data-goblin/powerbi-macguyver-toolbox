@@ -1,14 +1,19 @@
 # powerbi-macguyver-toolbox
-Power BI report .pbip templates and patterns to create special visuals, address specific problems, and have data adventures.
+Power BI report visual templates and patterns. These templates are intended to help you solve specific visual requirements in your projects, or inspire you for your report design.
+
+You can use them for free, but I'd appreciate that you please cite [data-goblins.com](https://www.data-goblins.com) where it's appropriate.
 
 **SVG measure templates contributed by Štěpán Rešl. Thanks Štěpán!**
 
 ## ⚠️ Notice
 These templates are provided as-is without warranties or guarantees. They are not maintained nor are they all necessarily suitable for use in production solutions.
+
 Feel free to use them, but do so at your own risk.
 	
 ## 💡 To use these templates
-You must first enable Power BI Project files from Power BI Desktop to open and use these templates. Note that the .pbip format is in Preview.
+Templates are provided either as Power BI Desktop (.pbix) or [Power BI projects (.pbip)](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview) files. 
+
+I recommend that you use the .pbip format. You must first enable Power BI Project files from Power BI Desktop to open and use .pbip files. Follow these steps to enable and use .pbip files:
 
 1. Open Power BI Desktop (~May 2023 version or later)
 2. Open the 'File' menu
@@ -18,23 +23,27 @@ You must first enable Power BI Project files from Power BI Desktop to open and u
 6. Clone the Repo to your local machine using VS Code or a similar SCM tool
 7. Open the .pbip files in Power BI Desktop
 
-- I will make a tutorial about how to do this in a video in the coming week.
-
 ![An image depicting how to enable .pbip format in Power BI Desktop](how-to-enable-pbip-format.png)
 
-__I use the .pbip format for the following reasons:__
+__I recommend the .pbip format for templates for the following reasons:__
 - Lightweight sharing of report + model metadata.
 - Report metadata allows you to programmatically modify the templates before opening them.
 - Track changes of the individual objects and formatting in the GitHub repo.
 
+<br><br>
+
 ## Bar chart templates
-The following bar chart templates are available:
+You can download these templates either as standalone or combined files. Click the below image for the combined file:
+
+<a href="bar-charts/all-bar-chart-templates/"><img src="bar-charts/all-bar-chart-templates/Bar Charts in Power BI.png"/></a>
 
 _Note: Any chart with a MacGuyver Rating of 3 or above_ (🟩🟩🟩⬜⬜+) _is not recommended for production deployment. That's because they require too many report-specific objects and have too high a risk to break or effort to maintain. For these charts, you should use Deneb._
 
+The following templates are available:
+
 | Image (Click for Template) | Name | Description |
 |:-----:|:----:|:------------|
-| <a href="bar-charts/bar-chart/"><img src="bar-charts/bar-chart/bar-chart.png"/></a> | __Bar chart (Horizontal bar)__ | The standard horizontal bar chart. Tried and true, best used to compare categories. Consider turning off axes and gridlines and using data labels with conditional formatting for a more elegant design. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩🟩 __Popularity Rating__ - Frequency I see it requested by users<br> 🟩🟩🟩🟩⬜ __Utility Rating__ - Typical amount of different use-cases<br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ - Effort to build, test, and maintain the visual |
+| <a href="bar-charts/bar-chart/"><img src="bar-charts/bar-chart/bar-chart.png"/></a> | __Bar chart (Horizontal bar)__ | The standard horizontal bar chart. Tried and true, best used to compare categories. Consider turning off axes and gridlines and using data labels with conditional formatting for a more elegant design. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩🟩 __Popularity Rating__ - Frequency I see it requested<br> 🟩🟩🟩🟩⬜ __Utility Rating__ - # Different use-cases it covers<br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ - Effort to build, test, maintain |
 | <a href="bar-charts/column-chart/"><img src="bar-charts/column-chart/column-chart.png"/></a> | __Column chart (Vertical bar)__ | The standard vertical bar chart. Harder to read compared to the horizontal version, often because the labels are truncated or angled. Consider using the Bar chart (Horizontal bar), instead. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩🟩 __Popularity Rating__ <br> 🟩🟩⬜⬜⬜ __Utility Rating__ <br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ |
 | <a href="bar-charts/rounded-bar-chart/"><img src="bar-charts/rounded-bar-chart/rounded-bar-chart.png"/></a> | __Rounded bar chart__ | A standard horizontal bar chart, except the ends are rounded. Honestly, I personally don't see the appeal, but there's a lot of people who do. There's a risk that the curves make it harder to compare lengths. It's mainly used for infographics for the shape. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩⬜⬜ __Popularity Rating__ <br> ⬜⬜⬜⬜⬜ __Utility Rating__ <br> 🟩🟩🟩⬜⬜ __MacGuyver Rating__ |
 | <a href="bar-charts/stacked-bar-chart/"><img src="bar-charts/stacked-bar-chart/stacked-bar-chart.png"/></a> | __Stacked bar chart__ | The standard horizontal stacked bar chart. Can be useful because it can display both the part-of-whole and total labels, but like many part-of-whole visuals, can be difficult to read and interpret with too many categories.<br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩⬜ __Popularity Rating__ <br> 🟩🟩🟩⬜⬜ __Utility Rating__ <br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ |
@@ -53,7 +62,13 @@ _Note: Any chart with a MacGuyver Rating of 3 or above_ (🟩🟩🟩⬜⬜+) _i
 | <a href="bar-charts/side-by-side-bars-ii/"><img src="bar-charts/side-by-side-bars-ii/side-by-side-bars-ii.png"/></a> | __Side-by-side bars II__ | Side-by-side bars to compare two or more series. A nice, simple core visual to compare absolute values. Ensure that the minimum width is set that you can have the data labels showing. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩🟩 __Popularity Rating__ <br> 🟩🟩🟩⬜⬜ __Utility Rating__ <br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ |
 | <a href="bar-charts/bar-chart-candlestick/"><img src="bar-charts/bar-chart-candlestick/bar-chart-candlestick.png"/></a> | __Bar chart and candlestick__ | Side-by-side bars where a candlestick shows the percentage difference. Honestly, this is a great chart type that's an alternative to connected dot plot or dumbbell charts, but in Power BI it's simply too much effort to MacGuyver with the core visuals. Just make a dumbbell / connected dot plot in Deneb or use a bullet chart; don't waste time with this. <br><br> _Subjective Goblin graph scores_<br> ⬜⬜⬜⬜⬜ __Popularity Rating__ <br> 🟩🟩🟩🟩⬜ __Utility Rating__ <br> 🟩🟩🟩🟩🟩 __MacGuyver Rating__ |
 
+<br><br>
+
 ## Line chart templates
+You can download these templates either as standalone or combined files. Click the below image for the combined file:
+
+<a href="line-charts/all-line-chart-templates/"><img src="line-charts/all-line-chart-templates/Line Charts in Power BI.png"/></a>
+
 The following line chart templates are available:
 
 | Image | Name | Description |
@@ -74,15 +89,38 @@ The following line chart templates are available:
 | <a href="line-charts/multiple-area/"><img src="line-charts/multiple-area/multiple-area.png"/></a> |__Multiple area__ | Comparing multiple series where there are overlapping area fills between the lines. Can be useful circumstantially but can also pollute the canvas with additional ink that doesn't need to be there. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩⬜ __Popularity Rating__ <br> 🟩🟩🟩⬜⬜ __Utility Rating__ <br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ |
 | <a href="line-charts/stacked-area/"><img src="line-charts/stacked-area/stacked-area.png"/></a> |__Stacked area__ | Parts-of-whole for trend analysis. Useful when you want to break up a trend to see how different parts contribute to a total. Need to be careful that it isn't mis-interpreted by users. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩⬜⬜ __Popularity Rating__ <br> 🟩🟩🟩⬜⬜ __Utility Rating__ <br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ |
 
-## KPI and card templates
-The following KPI and card templates are available:
+<br><br>
 
-*Note: TOC table to be added later, when I get time.*
+## KPI and card templates
+You can download these templates either as standalone or combined files. Click the below images for the combined file:
 
 ### Core visuals - no SVG measures
 These use the formatting options of the core visuals like cards, tables, etc. to achieve a KPI or callout-like effect.
 
 ![Visual of KPI card templates in Power BI without using SVG measures](<kpi-cards/all-kpi-card-templates/KPIs and Cards in Power BI (No SVGs).png>)
+
+The following templates are available:
+
+| Image | Name | Description |
+|:-----:|:----:|:------------|
+| <a href="kpi-cards/basic-card/"><img src="kpi-cards/basic-card/basic-card.png"/></a> |__Basic Card__ | The standard card visual of Power BI. Typically, you should try to use conditional formatting and format strings to better give context to the number callout. However, there are cases where this context might not be required (particularly if calling out text). <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩🟩 __Popularity Rating__ - Frequency I see it requested <br> 🟩🟩⬜⬜⬜ __Utility Rating__ - # Different use-cases that it covers <br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ - Effort to make it with core visuals |
+| <a href="kpi-cards/basic-card-ii/"><img src="kpi-cards/basic-card-ii/basic-card-ii.png"/></a> |__Basic card II__ | The standard card visual, but using conditional formatting and format strings to better provide context. Implicit information from colours and symbols helps the user understand how they should interpret the number. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩🟩 __Popularity Rating__ <br> 🟩🟩🟩🟩⬜ __Utility Rating__ <br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ |
+| <a href="kpi-cards/basic-card-iii/"><img src="kpi-cards/basic-card-iii/basic-card-iii.png"/></a> |__Basic card III__ | The standard card visual, but using dynamic format strings, typically also together with conditional formatting. This is similar to _Basic card II_. Note that dynamic format strings for measures don't work in all client tools, like Analyze in Excel's MDX queries. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩🟩 __Popularity Rating__ <br> 🟩🟩🟩🟩⬜ __Utility Rating__ <br> 🟩⬜⬜⬜⬜ __MacGuyver Rating__ |
+| <a href="kpi-cards/basic-kpi-card/"><img src="kpi-cards/basic-kpi-card/basic-kpi-card.png"/></a> |__Basic KPI__ | The standard KPI visual from Power BI that lets you compare to one or more targets. This visual is best used when the 'trend' is ignored, replaced with a disconnected dimension like "All", for example. That's because the 'trend' is regularly misunderstood, leading to misleading trends and difficulties of report creators to implement this visual, properly. Some effort is required to set the (conditional) formatting properly. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩🟩 __Popularity Rating__ <br> 🟩🟩🟩🟩⬜ __Utility Rating__ <br> 🟩⬜⬜⬜⬜ __MacGuyver Rating__ |
+| <a href="kpi-cards/boolean-conditional-text/"><img src="kpi-cards/boolean-conditional-text/boolean-conditional-text.png"/></a> |__Boolean conditional text__ | The standard card, where it displays a single boolean value (Yes/No; True/False; ✔️/✖️). This can be a nice way to call out answers to simple, highly aggregate questions. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩⬜⬜⬜ __Popularity Rating__ <br> 🟩🟩⬜⬜⬜ __Utility Rating__ <br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ |
+| <a href="kpi-cards/dynamic-titles/"><img src="kpi-cards/dynamic-titles/dynamic-titles.png"/></a> |__Dynamic titles__ | Making use of conditional DAX logic and conditional formatting of visual titles can provide a lot of flexibility to provide context. In many cases, the dynamic titles _are_ in fact the KPIs, allowing any visual to become a _de facto_ KPI card with a bit of MacGuyvering. However, this does result in a lot of DAX objects, as you typically need one or more measures for each dynamic (sub)title. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩🟩 __Popularity Rating__ <br> 🟩🟩🟩🟩🟩 __Utility Rating__ <br> 🟩🟩⬜⬜⬜ __MacGuyver Rating__ |
+| <a href="kpi-cards/dynamic-subtitles/"><img src="kpi-cards/dynamic-subtitles/dynamic-subtitles.png"/></a> |__Dynamic subtitles__ | Similar to dynamic titles, dynamic subtitles simply allow you to provide an extra line of text. You should be wary that you don't over-use these, making your visuals busy and increasing the time it takes for a user to read and interpret the card. The example in the image is too busy to be an effective KPI card, for example. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩🟩 __Popularity Rating__ <br> 🟩🟩🟩🟩🟩 __Utility Rating__ <br> 🟩🟩⬜⬜⬜ __MacGuyver Rating__ |
+| <a href="kpi-cards/kpi-bar/"><img src="kpi-cards/kpi-bar/kpi-bar.png"/></a> |__KPI bar__ | The standard bar chart, using dynamic (sub)titles to turn it into a KPI card. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩⬜⬜ __Popularity Rating__ <br> 🟩🟩🟩⬜⬜ __Utility Rating__ <br> 🟩⬜⬜⬜⬜ __MacGuyver Rating__ |
+| <a href="kpi-cards/kpi-bullet/"><img src="kpi-cards/kpi-bullet/kpi-bullet.png"/></a> |__KPI bullet__ | Horizontal bar chart turned into a simple bullet chart by using error bars. Bullet charts are typically more effective than adjacent bar charts for target comparisons. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩⬜⬜ __Popularity Rating__ <br> 🟩🟩🟩⬜⬜ __Utility Rating__ <br> 🟩🟩⬜⬜⬜ __MacGuyver Rating__ |
+| <a href="kpi-cards/kpi-doughnut/"><img src="kpi-cards/kpi-doughnut/kpi-doughnut.png"/></a> |__KPI doughnut__ | The standard doughnut chart, using dynamic (sub)titles to turn it into a KPI card. Doughnuts and pies are often dismissed without consideration, but can still be effective with 3 or fewer categories, depending on your use-case. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩⬜⬜⬜ __Popularity Rating__ <br> 🟩🟩🟩⬜⬜ __Utility Rating__ <br> 🟩⬜⬜⬜⬜ __MacGuyver Rating__ |
+| <a href="kpi-cards/KPI-gauge/"><img src="kpi-cards/KPI-gauge/KPI-gauge.png"/></a> |__KPI gauge__ | The standard gauge chart, using dynamic (sub)titles to turn it into a KPI card. Gauges are often dismissed as bad practice, but can still be an effective alternative to a bullet chart, depending on your use-case. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩⬜⬜⬜ __Popularity Rating__ <br> 🟩🟩🟩⬜⬜ __Utility Rating__ <br> 🟩⬜⬜⬜⬜ __MacGuyver Rating__ |
+| <a href="kpi-cards/kpi-sparkline-trend/"><img src="kpi-cards/kpi-sparkline-trend/kpi-sparkline-trend.png"/></a> |__KPI sparkline trend__ | The table visual, using the 'Insert' tab to add a Sparkline. Note that sparklines can create heavier visual DAX queries in some reports, having a high performance cost. Furthermore, they can be misleading, as they don't share a Y-axis range, and can't have labels. A good alternative can be creating your own custom SVG sparkline microvisualization; however, this requires additional effort and complexity. Sparklines can be very valuable. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩⬜⬜⬜ __Popularity Rating__ <br> 🟩🟩🟩⬜⬜ __Utility Rating__ <br> ⬜⬜⬜⬜⬜ __MacGuyver Rating__ |
+| <a href="kpi-cards/kpi-trend-bar/"><img src="kpi-cards/kpi-trend-bar/kpi-trend-bar.png"/></a> |__KPI trend bar__ | A bar chart for a (typically) non-continuous trend. Typically, this should also highlight a specific data point, like the latest month, or an anomolous value (highest/lowest). Consider using dynamic subtitles to provide effective context about the trend, but ensure that this isn't misleading. Define clearly what "trending down" or "up" means for users. You can also use this approach to show the magnitude difference between select TopN categories. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩⬜⬜ __Popularity Rating__ <br> 🟩🟩🟩⬜⬜ __Utility Rating__ <br> 🟩🟩⬜⬜⬜ __MacGuyver Rating__ |
+| <a href="kpi-cards/kpi-trend-comparison/"><img src="kpi-cards/kpi-trend-comparison/kpi-trend-comparison.png"/></a> |__KPI trend comparison__ | Standard line chart comparing 2-3 series. Ensure that you take means to make the comparison easy to read and interpret, so that it doesn't become less effective than a full line-chart with axis labeling. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩⬜⬜ __Popularity Rating__ <br> 🟩🟩🟩⬜⬜ __Utility Rating__ <br> 🟩🟩⬜⬜⬜ __MacGuyver Rating__ |
+| <a href="kpi-cards/kpi-trend-line/"><img src="kpi-cards/kpi-trend-line/kpi-trend-line.png"/></a> |__KPI trend line__ | The standard line or area chart, but using dynamic (sub)titles to turn it into a KPI. This can be a very effective way to call out a number, but still show the trend, beneath it. This is a very popular and effective approach. Consider using methods to label the latest data point, or whichever data point is being called out in the (sub)title. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩🟩🟩🟩 __Popularity Rating__ <br> 🟩🟩🟩🟩⬜ __Utility Rating__ <br> 🟩⬜⬜⬜⬜ __MacGuyver Rating__ |
+| <a href="kpi-cards/repeated-text/"><img src="kpi-cards/repeated-text/repeated-text.png"/></a> |__Repeated text__ | Using DAX methods to dynamically repeat text, showing the value as the count of characters. This can be an effective alternative to show numbers that are typically low and you want to visually draw attention to in a unique way. An example could be "issues" or "bugs" when doing testing, or "critical incidents in the last 24h" in a service desk report. This isn't so popular, but it's worth considering. <br><br> _Subjective Goblin graph scores_<br> 🟩⬜⬜⬜⬜ __Popularity Rating__ <br> 🟩🟩🟩⬜⬜ __Utility Rating__ <br> 🟩⬜⬜⬜⬜ __MacGuyver Rating__ |
+| <a href="kpi-cards/star-rating-text/"><img src="kpi-cards/star-rating-text/star-rating-text.png"/></a> |__Star rating text__ | Using DAX approaches to create a star rating with unicode characters. This is best done when you have literal ratings, like from customers for products or stores. The DAX can be complex, but it's a pattern that's easy to re-use. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩⬜⬜⬜ __Popularity Rating__ <br> 🟩🟩⬜⬜⬜ __Utility Rating__ <br> 🟩⬜⬜⬜⬜ __MacGuyver Rating__ |
+| <a href="kpi-cards/waffle-text/"><img src="kpi-cards/waffle-text/waffle-text.png"/></a> |__Waffle text__ | Using line breaks and unicode characters to dynamically display a waffle chart out of text characters. This goes a bit beyond what is tolerable in a production solution, but can be a creative alternative to other waffle chart approaches. Consider using a waffle chart like this when you want to visualize progress or achievement, but not where overachievement is possible. <br><br> _Subjective Goblin graph scores_<br> 🟩🟩⬜⬜⬜ __Popularity Rating__ <br> 🟩🟩⬜⬜⬜ __Utility Rating__ <br> 🟩🟩🟩⬜⬜ __MacGuyver Rating__ |
 
 ### Core visuals - SVG measures
 These use a combination of formatting options as well as SVG custom microvisualizations rendered as image URLs in the core visuals. 
@@ -90,6 +128,8 @@ These use a combination of formatting options as well as SVG custom microvisuali
 **These SVG measure templates were created by Štěpán Rešl.**
 
 ![Visual of KPI card templates in Power BI with SVG measures](<kpi-cards/all-kpi-card-templates/KPIs and Cards in Power BI (SVGs).png>)
+
+<br><br>
 
 ## Remark
 I don't consider myself a "dataviz person"; these comments are my subjective opinions and experience. I'm just sharing these templates because they might be helpful to others.

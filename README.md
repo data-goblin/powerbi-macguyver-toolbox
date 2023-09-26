@@ -1,4 +1,5 @@
-# powerbi-macguyver-toolbox
+![Image header "Power BI macguyver toolbox templates and examples for your Power BI reports"](powerbi-macguyver-toolbox.png)
+
 Power BI report visual templates and patterns. These templates are intended to help you solve specific visual requirements in your projects, or inspire you for your report design.
 
 You can use them for free, but I'd appreciate that you please cite [data-goblins.com](https://www.data-goblins.com) if you do.
@@ -12,6 +13,8 @@ Feel free to use them, but do so at your own risk.
 	
 ## 💡 To use these templates
 Templates are provided either as Power BI Desktop (.pbix) or [Power BI projects (.pbip)](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview) files. I recommend that you use the .pbip format. 
+
+![A header image "how to clone a Git repo if you're new to git or unfamiliar with it"](clone-repo-github-header.png)
 
 ### How to clone a repository by using Git
 To use these templates, I recommend that you _clone_ (or copy) this Git repo to your local machine. If you're unfamiliar with Git, cloning allows you to ensure you have a syncronized local copy of the repository. You use a tool like VS Code to open the folder, check for changes, and sync to get the latest updates. To clone the Git repo:
@@ -30,7 +33,9 @@ To use these templates, I recommend that you _clone_ (or copy) this Git repo to 
 
 ![An image depicting how to clone a repository in VS code](clone-repo-vscode.png)
 
-![Alt text](clone-repo-github.png)
+![An image depicting how to clone a repository in GitHub](clone-repo-github.png)
+
+![A header image "how to enable and use PBIP files"](how-to-enable-pbip-format-header.png)
 
 ### How to enable and use .pbip files
 
@@ -49,6 +54,8 @@ __I recommend the .pbip format for templates for the following reasons:__
 - Track changes of the individual objects and formatting in the GitHub repo.
 
 <br><br>
+
+![Image header "bar chart templates"](bar-chart-templates.png)
 
 ## Bar chart templates
 You can download these templates either as standalone or combined files. Click the below image for the combined file:
@@ -82,6 +89,8 @@ The following templates are available:
 
 <br><br>
 
+![Image header "Line chart templates"](line-chart-templates.png)
+
 ## Line chart templates
 You can download these templates either as standalone or combined files. Click the below image for the combined file:
 
@@ -109,7 +118,9 @@ The following line chart templates are available:
 
 <br><br>
 
-## KPI and card templates
+![Image header "KPI & card templates"](kpi-cards-templates.png)
+
+## KPI & card templates
 You can download these templates either as standalone or combined files. Click the below images for the combined file:
 
 ### Core visuals - no SVG measures

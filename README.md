@@ -126,7 +126,8 @@ You can download these templates either as standalone or combined files. Click t
 ### Core visuals - no SVG measures
 These use the formatting options of the core visuals like cards, tables, etc. to achieve a KPI or callout-like effect.
 
-![Visual of KPI card templates in Power BI without using SVG measures](<kpi-cards/all-kpi-card-templates/KPIs and Cards in Power BI (No SVGs).png>)
+
+<a href="kpi-cards/all-kpi-card-templates/"><img src="kpi-cards/all-kpi-card-templates/KPIs and Cards in Power BI (No SVGs).png"/></a>
 
 The following templates are available:
 
@@ -158,7 +159,7 @@ These use a combination of formatting options as well as SVG custom microvisuali
 
 **These SVG measure templates were created by Štěpán Rešl.**
 
-![Visual of KPI card templates in Power BI with SVG measures](<kpi-cards/all-kpi-card-templates/KPIs and Cards in Power BI (SVGs).png>)
+<a href="kpi-cards/all-kpi-card-templates/"><img src="kpi-cards/all-kpi-card-templates/KPIs and Cards in Power BI (SVGs).png"/></a>
 
 <br><br>
 

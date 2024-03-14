@@ -1,0 +1,1 @@
+Model.SetAnnotation( "__PBI_ServiceStoredInTmdl", "1" );

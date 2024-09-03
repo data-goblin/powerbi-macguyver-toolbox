@@ -1,4 +1,8 @@
-// Script instructions:
+// Script author: Kurt Buhler; Data Goblins
+// Script created: Sept 3, 2024
+// Script supports: Tabular Editor 2.X, Tabular Editor 3.X.
+//
+// Script instructions: Use this script when connected with any Power BI semantic model. Doesn't support AAS models.
 //
 // 1. In Figma, add or create the image you want in your report.
 // 2. In Figma, select the image and right-click, then select "Copy/Paste as > Copy as SVG".
@@ -20,7 +24,7 @@ if ( Clipboard.ContainsText() )
     if ( Clipboard.GetText().Contains("<svg") )
     {
 
-        string _Comments   = $"-- SVG measure added on {System.DateTime.Today.ToShortDateString()} via a Tabular Editor script.\n-- Use in a visual that supports ImageUrl measures, like Table, Matrix, New Card or New Slicer visuals.\n\n";
+        string _Comments   = "-- SVG measure added on " + System.DateTime.Today.ToShortDateString() +" via a Tabular Editor script.\n-- Use in a visual that supports ImageUrl measures, like Table, Matrix, New Card or New Slicer visuals.\n\n";
         string _SvgPrefix  = "data:image/svg+xml;utf8, \n\n";
         string _SvgViewbox = @"viewBox='\d+\s+\d+\s+\d+\s+\d+' ";
         string _SvgFill    = @"fill='.+' ";
@@ -43,7 +47,7 @@ if ( Clipboard.ContainsText() )
         _SvgMeasure.IsHidden = true;
         
         // Notification InfoBox.
-        Info($"Added new SVG measure to the table {_SelectedTable.Name}.\n\nValidate the SVG definition before using it.\nDon't forget to rename the new measure.");
+        Info("Added new SVG measure to the table " + _SelectedTable.Name + ".\n\nValidate the SVG definition before using it.\nDon't forget to rename the new measure.");
 
     }
     else

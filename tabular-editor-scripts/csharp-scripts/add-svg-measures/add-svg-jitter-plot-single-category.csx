@@ -14,7 +14,7 @@
 // 2. Run the script and validate the resulting DAX. Troubleshoot any possible errors, if necessary.
 // 3. Add the measure to a table or matrix visual.
 // 4. Set the "Image size" property of the visual to Height: 102 and Width: 20. If you use another size, ensure that you adjust the measure DAX.
-// 5. 
+// 5. Validate the SVG visual in different filter contexts to ensure that it is accurate.
 
 
 // DAX template
@@ -26,8 +26,9 @@ string _SvgString = @"
 VAR _Values = VALUES( __DETAIL_COLUMN ) -- NOTE: This column has a limited number of values that you can use.
 VAR _ValuesByMeasure = ADDCOLUMNS( _Values, ""@Measure"", __MEASURE )
 
-VAR _AxisMax = CALCULATE(MAXX( _ValuesByMeasure, ''[@Measure] ), REMOVEFILTERS( )) * 1.1
-// VAR _AxisMin = CALCULATE(MINX( _ValuesByMeasure, ''[@Measure] ), REMOVEFILTERS( ))
+-- NOTE: If the detail column uses a "Sort By" or "Group By" property, you need to add it to the REMOVEFILTERS as well.
+VAR _AxisMax = CALCULATE(MAXX( _ValuesByMeasure, ''[@Measure] ), REMOVEFILTERS( __DETAIL_COLUMN )) * 1.1
+// VAR _AxisMin = CALCULATE(MINX( _ValuesByMeasure, ''[@Measure] ), REMOVEFILTERS( __DETAIL_COLUMN ))
 
 VAR _SvgWidth = 102     -- NOTE: Match this value in the Image size property of the table or matrix
 VAR _SvgHeight = 20     -- NOTE: Match this value in the Image size property of the table or matrix

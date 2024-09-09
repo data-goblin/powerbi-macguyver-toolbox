@@ -23,27 +23,35 @@ string _SvgString = @"
 -- Use this inside of a Table or a Matrix visual.
 -- The 'Image size' property of the Table or Matrix must match the values in the config below
 
+-- Fields config
 VAR _Values = VALUES( __DETAIL_COLUMN ) -- NOTE: This column has a limited number of values that you can use.
 VAR _ValuesByMeasure = ADDCOLUMNS( _Values, ""@Measure"", __MEASURE )
 
--- NOTE: If the detail column uses a "Sort By" or "Group By" property, you need to add it to the REMOVEFILTERS as well.
-VAR _AxisMax = CALCULATE(MAXX( _ValuesByMeasure, ''[@Measure] ), REMOVEFILTERS( __DETAIL_COLUMN )) * 1.1
-// VAR _AxisMin = CALCULATE(MINX( _ValuesByMeasure, ''[@Measure] ), REMOVEFILTERS( __DETAIL_COLUMN ))
 
+-- Chart config
 VAR _SvgWidth = 102     -- NOTE: Match this value in the Image size property of the table or matrix
 VAR _SvgHeight = 20     -- NOTE: Match this value in the Image size property of the table or matrix
-
 VAR _JitterAmount = 10  -- NOTE: Adjust this value to control the amount of jitter
+VAR _AxisMax = CALCULATE(MAXX( _ValuesByMeasure, ''[@Measure] ), REMOVEFILTERS( __DETAIL_COLUMN )) * 1.1 -- NOTE: If the detail column uses a 'Sort By' or 'Group By' property, you need to add it to the REMOVEFILTERS as well.
+// VAR _AxisMin = CALCULATE(MINX( _ValuesByMeasure, ''[@Measure] ), REMOVEFILTERS( __DETAIL_COLUMN ))
 
+
+-- Average line config
 VAR _Avg = DIVIDE( AVERAGEX( _ValuesByMeasure, ''[@Measure] ), _AxisMax ) * _SvgWidth
 VAR _AvgLine = ""<rect x='"" & _Avg & ""' y='2' width='1.25' height='80%' fill='red'/>""
+
+
+-- Vectors and SVG code
+VAR _SvgPrefix = ""data:image/svg+xml;utf8, <svg width='"" & _SvgWidth & ""' height='"" & _SvgHeight & ""' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' overflow='visible'>""
+VAR _Sort = ""<desc>"" & FORMAT ( _Avg, ""000000000000"" ) & ""</desc>""
 
 RETURN
 IF(
     HASONEVALUE( __GROUP_BY_COLUMN ),
-    ""data:image/svg+xml;utf8, "" &
-    ""<svg width='"" & _SvgWidth & ""' height='"" & _SvgHeight & ""' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' overflow='visible'>"" & 
-    CONCATENATEX(
+    _SvgPrefix &
+    _Sort &
+
+    CONCATENATEX( -- Repeats the <circle> tag for each one of the values in the group by column
         _Values, 
         VAR _JitterValue = RAND() * _JitterAmount - (_JitterAmount / 2)
         RETURN 
@@ -52,15 +60,18 @@ IF(
         ""' cy='"" & ( _SvgHeight / 2 + _JitterValue) & ""' stroke='#333333' stroke-width='1' stroke-opacity='0.5' r='1.5' fill='gainsboro' fill-opacity='0.5' />"",
         """"
     ) &
+
     _AvgLine &
     ""</svg>""
 )";
 
 
 // Selected values you want to use in the plot.
-var _Measure = SelectMeasure(Model.AllMeasures, null,"Select the measure that you want to plot:");
-var _Detail = SelectColumn(Model.AllColumns, null, "Select the column for which you want to plot each value as a dot\nin the plot (WARNING: LIMITED UNIQUE VALUES):");
-var _GroupBy = SelectColumn(Model.AllColumns, null, "Select the column for which you will group the data in\nthe table or matrix visual:");
+var _AllMeasures = Model.AllMeasures.OrderBy(m => m.Name);
+var _AllColumns = Model.AllColumns.OrderBy(m => m.DaxObjectFullName);
+var _Measure = SelectMeasure(_AllMeasures, null,"Select the measure that you want to plot:");
+var _Detail = SelectColumn(_AllColumns, null, "Select the column for which you want to plot each value as a dot\nin the plot (WARNING: LIMITED UNIQUE VALUES):");
+var _GroupBy = SelectColumn(_AllColumns, null, "Select the column for which you will group the data in\nthe table or matrix visual:");
 
 _SvgString = _SvgString.Replace( "__DETAIL_COLUMN", _Detail.DaxObjectFullName ).Replace( "__GROUP_BY_COLUMN", _GroupBy.DaxObjectFullName ).Replace( "__MEASURE", _Measure.DaxObjectFullName );
 

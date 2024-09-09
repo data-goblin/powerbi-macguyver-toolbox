@@ -1,0 +1,155 @@
+// Script author: Kurt Buhler; Data Goblins
+// Script created: Sept 3, 2024
+// Script supports: Tabular Editor 2.X, Tabular Editor 3.X.
+//
+// Original template author: Kurt Buhler
+//
+// Script instructions: Use this script when connected with any Power BI semantic model. Doesn't support AAS models.
+//
+// 1. Select your measure table - or the table where you want to place the measure - in the TOM Explorer.
+// 2. Run the script and validate the resulting DAX. Troubleshoot any possible errors, if necessary.
+// 3. Add the measure to a table or matrix visual.
+// 4. Set the "Image size" property of the visual to Height: 25 and Width: 100. If you use another size, you might need to adjust the measure DAX.
+// 5. Validate the SVG visual in different filter contexts to ensure that it is accurate and performant.
+
+
+// DAX template
+string _SvgString = @"
+-- SVG measure
+-- Use this inside of a Table or a Matrix visual.
+-- The 'Image size' property of the Table or Matrix must match the values in the config below
+
+
+----------------------------------------------------------------------------------------
+-------------------- START CONFIG - SAFELY CHANGE STUFF IN THIS AREA -------------------
+----------------------------------------------------------------------------------------
+
+
+-- Input field config
+VAR _Actual = __ACTUAL_MEASURE
+VAR _Target = __TARGET_MEASURE
+VAR _Performance = DIVIDE ( _Actual - _Target, _Target )
+
+
+-- Font config
+VAR _Font = ""Segoe UI""
+VAR _FontSize = 10
+VAR _FontWeight = 600
+
+
+-- Chart Config
+VAR _BarMax = 100
+VAR _BarMin = 30
+VAR _Scope = ALLSELECTED ( __GROUPBY_COLUMN )
+
+
+-- Color config.
+VAR _ActualColor        = ""#686868"" -- Charcoal
+VAR _TargetColor        = ""#e1dfdd"" -- Grey 
+VAR _VarianceColor     = 
+    IF ( 
+        _Performance < 0, 
+        ""#fab005"",  -- Yellow
+        ""#2094ff""   -- Blue
+    )
+
+
+----------------------------------------------------------------------------------------
+----------------------- END CONFIG - BEYOND HERE THERE BE DRAGONS ----------------------
+----------------------------------------------------------------------------------------
+
+
+VAR _MaxActualsInScope = 
+    CALCULATE(
+        MAXX(
+            _Scope,
+            __ACTUAL_MEASURE
+        ),
+        REMOVEFILTERS( __GROUPBY_COLUMN )
+    )
+
+VAR _MaxTargetInScope = 
+    CALCULATE(
+        MAXX(
+            _Scope,
+            __TARGET_MEASURE
+        ),
+        REMOVEFILTERS( __GROUPBY_COLUMN )
+    )
+
+VAR _AxisMax = 
+    IF (
+        HASONEVALUE ( __GROUPBY_COLUMN ),
+        MAX( _MaxActualsInScope, _MaxTargetInScope ),
+        CALCULATE( MAX( __ACTUAL_MEASURE, __TARGET_MEASURE ), REMOVEFILTERS( __GROUPBY_COLUMN ) )
+    ) * 1.1
+
+
+-- Normalize values (to get position along X-axis)
+    VAR _AxisRange = 
+        _BarMax - _BarMin
+    
+    VAR _ActualNormalized = 
+        DIVIDE ( _Actual, _AxisMax ) * _AxisRange
+
+    VAR _TargetNormalized = 
+        DIVIDE ( _Target, _AxisMax ) * _AxisRange
+
+
+-- Vectors and SVG code
+VAR _SvgPrefix = ""data:image/svg+xml;utf8, <svg xmlns='http://www.w3.org/2000/svg'>""
+
+VAR _Sort = ""<desc>"" & FORMAT ( _Actual, ""000000000000"" ) & ""</desc>""
+
+VAR _Icon  = ""<text x='"" & _BarMin - 3 & ""' y='13.5' font-family='Segoe UI' font-size='6' font-weight='700' text-anchor='end' fill='"" & _VarianceColor & ""'>"" & FORMAT ( _Performance, ""▲;▼;"" ) & ""</text>""
+VAR _Label = ""<text x='"" & _BarMin - 10 & ""' y='15' font-family='"" & _Font & ""' font-size='"" & _FontSize & ""' font-weight='"" & _FontWeight & ""' text-anchor='end' fill='"" & _VarianceColor & ""'>"" & FORMAT ( _Performance, ""#,##0%;#,##0%;#,##0%"" ) & ""</text>""
+
+VAR _ActualBar     = ""<rect x='"" & _BarMin & ""' y='3' width='"" & _ActualNormalized & ""' height='12' stroke ='"" & _ActualColor & ""' fill='"" & _ActualColor & ""'/>""
+VAR _TargetBar     = ""<rect x='"" & _BarMin & ""' y='10' width='"" & _TargetNormalized & ""' height='12' stroke='"" & _ActualColor & ""' fill='"" & _TargetColor & ""'/>""
+VAR _VarianceBar   = ""<rect x='"" & _BarMin + MIN( _ActualNormalized, _TargetNormalized ) & ""' y='"" & IF ( _Target > _Actual, 2.9, 9 ) & ""' width='"" & ABS( _ActualNormalized - _TargetNormalized ) & ""' height='6' stroke='"" & _VarianceColor & ""' fill='"" & _VarianceColor & ""'/>""
+
+VAR _SvgSuffix = ""</svg>""
+
+
+-- Final result
+VAR _SVG = 
+    _SvgPrefix 
+    
+    & _Sort
+
+    & _Icon 
+    & _Label 
+
+    & _TargetBar
+    & _ActualBar 
+    & _VarianceBar
+
+    & _SvgSuffix
+
+RETURN
+    _SVG
+";
+
+
+// Selected values you want to use in the plot.
+var _AllMeasures = Model.AllMeasures.OrderBy(m => m.Name);
+var _AllColumns = Model.AllColumns.OrderBy(m => m.DaxObjectFullName);
+var _Actual = SelectMeasure(_AllMeasures, null,"Select the measure that you want to measure:");
+var _Target = SelectMeasure(_AllMeasures, null,"Select the measure that you want to compare to:");
+var _GroupBy = SelectColumn(_AllColumns, null, "Select the column for which you will group the data in\nthe table or matrix visual:");
+
+_SvgString = _SvgString.Replace( "__ACTUAL_MEASURE", _Actual.DaxObjectFullName ).Replace( "__TARGET_MEASURE", _Target.DaxObjectFullName ).Replace( "__GROUPBY_COLUMN", _GroupBy.DaxObjectFullName );
+
+// Adding the measure.
+var _SelectedTable = Selected.Table;
+string _Name = "SVG Bar Chart (with Target and Variance)";
+string _Desc = _Name + " of " + _Actual.Name + " vs. " + _Target.Name + ", grouped by " + _GroupBy.Name;
+var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs");
+
+// Setting measure properties.
+_SvgMeasure.DataCategory = "ImageUrl";
+_SvgMeasure.IsHidden = true;
+_SvgMeasure.Description = _Desc;
+
+// Notification InfoBox.
+Info("Added new SVG measure to the table " + _SelectedTable.Name + ".\n\nValidate the SVG specification and test the measure carefully in many different filter contexts before using it in reports.\nDon't forget to rename the new measure.");

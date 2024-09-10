@@ -4,7 +4,6 @@
 //
 // Original template author: Kurt Buhler
 //
-// Template limitations: This template supports a limited number of datapoints (dots) to display at once, due to limitations of the DAX measure string length.
 //
 // Script instructions: Use this script when connected with any Power BI semantic model. Doesn't support AAS models.
 //
@@ -17,9 +16,8 @@
 
 // DAX template
 string _SvgString = @"
--- SVG measure
 -- Use this inside of a Table or a Matrix visual.
--- The 'Image size' property of the Table or Matrix must match the values in the config below
+-- The 'Image size' property of the Table or Matrix should be set to a 'Height' of 25px and a 'Width' of 100px for best results
 
 
 ----------------------------------------------------------------------------------------
@@ -34,7 +32,7 @@ VAR _Performance = DIVIDE ( _Actual - _Target, _Target )
 
 
 -- Chart Config
-VAR _BarMax = 75
+VAR _BarMax = 100
 VAR _BarMin = 30
 VAR _Scope = ALLSELECTED ( __GROUPBY_COLUMN )
 
@@ -101,7 +99,7 @@ VAR _SvgPrefix = ""data:image/svg+xml;utf8, <svg xmlns='http://www.w3.org/2000/s
 VAR _Sort = ""<desc>"" & FORMAT ( _Actual, ""000000000000"" ) & ""</desc>""
 
 VAR _Icon  = ""<text x='0' y='13.5' font-family='Segoe UI' font-size='6' font-weight='700' fill='"" & _SentimentColor & ""'>"" & FORMAT ( _Performance, ""▲;▼;"" ) & ""</text>""
-VAR _Label = ""<text x='"" & _BarMin & ""' y='15' font-family='Segoe UI' font-size='10' font-weight='700' text-anchor='end' fill='"" & _SentimentColor & ""'>"" & FORMAT ( _Performance, ""#,##0%;#,##0%;#,##0%"" ) & ""</text>""
+VAR _Label = ""<text x='6.5' y='15' font-family='Segoe UI' font-size='10' font-weight='700' fill='"" & _SentimentColor & ""'>"" & FORMAT ( _Performance, ""#,##0%;#,##0%;#,##0%"" ) & ""</text>""
 
 VAR _BarBaseline = ""<rect x='"" & _BarMin - 1 & ""' y='0' width='1' height='100%' fill='"" & _BaselineColor & ""'/>""
 VAR _BarBackground = ""<rect x='"" & _BarMin & ""' y='2' width='"" & _BarMax & ""' height='80%' fill='"" & _BackgroundColor & ""'/>""
@@ -116,7 +114,10 @@ VAR _SvgSuffix = ""</svg>""
 VAR _SVG = 
     _SvgPrefix 
     
-    & _Sort 
+    & _Sort
+
+    & _BarBackground
+
     & _Icon 
     & _Label 
 
@@ -133,8 +134,9 @@ RETURN
 
 
 // Selected values you want to use in the plot.
-var _AllMeasures = Model.AllMeasures.OrderBy(m => m.Name);
-var _AllColumns = Model.AllColumns.OrderBy(m => m.DaxObjectFullName);
+var _AllMeasures = Model.AllMeasures.Where(m => m.IsHidden != true).OrderBy(m => m.Name);
+var _AllColumns = Model.AllColumns.Where(c => c.IsHidden != true).OrderBy(c => c.DaxObjectFullName);
+
 var _Actual = SelectMeasure(_AllMeasures, null,"Select the measure that you want to measure:");
 var _Target = SelectMeasure(_AllMeasures, null,"Select the measure that you want to compare to:");
 var _GroupBy = SelectColumn(_AllColumns, null, "Select the column for which you will group the data in\nthe table or matrix visual:");
@@ -145,7 +147,7 @@ _SvgString = _SvgString.Replace( "__ACTUAL_MEASURE", _Actual.DaxObjectFullName )
 var _SelectedTable = Selected.Table;
 string _Name = "SVG Bullet Chart (with Label)";
 string _Desc = _Name + " of " + _Actual.Name + " vs. " + _Target.Name + ", grouped by " + _GroupBy.Name;
-var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs");
+var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs\\Bullet Chart");
 
 // Setting measure properties.
 _SvgMeasure.DataCategory = "ImageUrl";

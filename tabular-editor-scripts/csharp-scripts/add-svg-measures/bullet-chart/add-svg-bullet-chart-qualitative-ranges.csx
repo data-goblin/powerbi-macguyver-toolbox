@@ -4,7 +4,6 @@
 //
 // Original template author: Kurt Buhler
 //
-// Template limitations: This template supports a limited number of datapoints (dots) to display at once, due to limitations of the DAX measure string length.
 //
 // Script instructions: Use this script when connected with any Power BI semantic model. Doesn't support AAS models.
 //
@@ -17,9 +16,8 @@
 
 // DAX template
 string _SvgString = @"
--- SVG measure
 -- Use this inside of a Table or a Matrix visual.
--- The 'Image size' property of the Table or Matrix must match the values in the config below
+-- The 'Image size' property of the Table or Matrix should be set to 'Height' of 25 and 'Width' of 100 for best results.
 
 
 ----------------------------------------------------------------------------------------
@@ -33,17 +31,17 @@ VAR _Target = __TARGET_MEASURE
 
 
 -- Chart Config
-VAR _BarMax = 75
+VAR _BarMax = 100
+VAR _BarMin = 0
 VAR _Scope = ALLSELECTED ( __GROUPBY_COLUMN )
 
-
--- Sentiment config (percent)
-VAR _Bad                = 0.75 * _TargetNormalized
-VAR _Acceptable         = 0.90 * _TargetNormalized
-
+-- Sentiment config
+VAR _BadThreshold       = 0.75
+VAR _AcceptableThreshold= 0.90
 VAR _BadColor           = ""#f8f9fa""
 VAR _AcceptableColor    = ""#e9ecef""
 VAR _SatisfactoryColor  = ""#ced4da""
+
 
 -- Color config.
 VAR _BarFillColor       = ""#ffd43b"" -- Yellow
@@ -94,33 +92,52 @@ VAR _AxisMax =
         DIVIDE ( _Target, _AxisMax ) * _AxisRange + _BarMin - 1
 
 
+-- Sentiment normalized (percent)
+VAR _Bad                = _BadThreshold * _TargetNormalized
+VAR _Acceptable         = _AcceptableThreshold * _TargetNormalized
+
+
 -- Vectors and SVG code
 VAR _SvgPrefix = ""data:image/svg+xml;utf8, <svg xmlns='http://www.w3.org/2000/svg'>""
 
 VAR _Sort = ""<desc>"" & FORMAT ( _Actual, ""000000000000"" ) & ""</desc>""
 
-VAR _BarBaseline = ""<rect x='0' y='0' width='1' height='100%' fill='"" & _BaselineColor & ""'/>""
+VAR _BarBaseline = ""<rect x='"" & _BarMin - 1 & ""' y='0' width='1' height='100%' fill='"" & _BaselineColor & ""'/>""
 
-VAR _BarSatisfactory = ""<rect x='0' y='2' width='"" & _Bad & ""' height='75%' fill='"" & _SatisfactoryColor & ""'/>""
-VAR _BarAcceptable = ""<rect x='0' y='2' width='"" & _Acceptable & ""' height='75%' fill='"" & _AcceptableColor & ""'/>""
-VAR _BarBad = ""<rect x='0' y='2' width='"" & _BarMax & ""' height='75%' fill='"" & _BadColor & ""'/>""
+VAR _BarSatisfactory = ""<rect x='"" & _BarMin & ""' y='2' width='"" & _Bad & ""' height='75%' fill='"" & _SatisfactoryColor & ""'/>""
+VAR _BarAcceptable = ""<rect x='"" & _BarMin & ""' y='2' width='"" & _Acceptable & ""' height='75%' fill='"" & _AcceptableColor & ""'/>""
+VAR _BarBad = ""<rect x='"" & _BarMin & ""' y='2' width='"" & _BarMax & ""' height='75%' fill='"" & _BadColor & ""'/>""
 
-VAR _ActualBar  = ""<rect x='0' y='7' width='"" & _ActualNormalized & ""' height='33%' fill='"" & _BarFillColor & ""' stroke='"" & _BarStrokeColor & ""' stroke-width='1'/>""
+VAR _ActualBar  = ""<rect x='"" & _BarMin & ""' y='7' width='"" & _ActualNormalized & ""' height='33%' fill='"" & _BarFillColor & ""' stroke='"" & _BarStrokeColor & ""' stroke-width='1'/>""
 VAR _TargetLine = ""<rect x='"" & _TargetNormalized & ""' y='2' width='1.5' height='80%' fill='"" & _TargetColor & ""'/>""
 
 VAR _SvgSuffix = ""</svg>""
 
 
 -- Final result
-VAR _SVG = _SvgPrefix & _Sort & _BarBad & _BarAcceptable & _BarSatisfactory & _ActualBar & _BarBaseline & _TargetLine & _SvgSuffix
+VAR _SVG = 
+    _SvgPrefix 
+
+    & _Sort 
+
+    & _BarBad
+    & _BarAcceptable
+    & _BarSatisfactory
+
+    & _ActualBar
+    & _TargetLine
+    & _BarBaseline
+
+    & _SvgSuffix
 RETURN
     _SVG
 ";
 
 
 // Selected values you want to use in the plot.
-var _AllMeasures = Model.AllMeasures.OrderBy(m => m.Name);
-var _AllColumns = Model.AllColumns.OrderBy(m => m.DaxObjectFullName);
+var _AllMeasures = Model.AllMeasures.Where(m => m.IsHidden != true).OrderBy(m => m.Name);
+var _AllColumns = Model.AllColumns.Where(c => c.IsHidden != true).OrderBy(c => c.DaxObjectFullName);
+
 var _Actual = SelectMeasure(_AllMeasures, null,"Select the measure that you want to measure:");
 var _Target = SelectMeasure(_AllMeasures, null,"Select the measure that you want to compare to:");
 var _GroupBy = SelectColumn(_AllColumns, null, "Select the column for which you will group the data in\nthe table or matrix visual:");
@@ -132,7 +149,7 @@ _SvgString = _SvgString.Replace( "__ACTUAL_MEASURE", _Actual.DaxObjectFullName )
 var _SelectedTable = Selected.Table;
 string _Name = "SVG Bullet Chart (with Qualitative Ranges)";
 string _Desc = _Name + " of " + _Actual.Name + " vs. " + _Target.Name + ", grouped by " + _GroupBy.Name;
-var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs");
+var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs\\Bullet Chart");
 
 // Setting measure properties.
 _SvgMeasure.DataCategory = "ImageUrl";

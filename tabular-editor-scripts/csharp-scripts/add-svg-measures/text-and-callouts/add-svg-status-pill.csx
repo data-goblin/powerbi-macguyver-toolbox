@@ -123,7 +123,7 @@ RETURN
 
 
 // Selected values you want to use in the plot.
-var _AllColumns = Model.AllColumns.OrderBy(m => m.DaxObjectFullName);
+var _AllColumns = Model.AllColumns.Where(m => m.IsHidden != true).OrderBy(m => m.DaxObjectFullName);
 var _GroupBy = SelectColumn(_AllColumns, null, "Select the column that has the text you want to label:");
 
 _SvgString = _SvgString.Replace( "__GROUPBY_COLUMN", _GroupBy.DaxObjectFullName );
@@ -133,7 +133,7 @@ _SvgString = _SvgString.Replace( "__GROUPBY_COLUMN", _GroupBy.DaxObjectFullName 
 var _SelectedTable = Selected.Table;
 string _Name = "SVG Status Pill";
 string _Desc = _Name + " of " + _GroupBy.Name;
-var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs");
+var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs\\Text or Callouts");
 
 
 // Setting measure properties.

@@ -106,7 +106,7 @@ VAR _Label = ""<text x='"" & _BarMin - 10 & ""' y='15' font-family='"" & _Font &
 
 VAR _ActualBar     = ""<rect x='"" & _BarMin & ""' y='3' width='"" & _ActualNormalized & ""' height='12' stroke ='"" & _ActualColor & ""' fill='"" & _ActualColor & ""'/>""
 VAR _TargetBar     = ""<rect x='"" & _BarMin & ""' y='10' width='"" & _TargetNormalized & ""' height='12' stroke='"" & _ActualColor & ""' fill='"" & _TargetColor & ""'/>""
-VAR _VarianceBar   = ""<rect x='"" & _BarMin + MIN( _ActualNormalized, _TargetNormalized ) & ""' y='"" & IF ( _Target > _Actual, 2.9, 9 ) & ""' width='"" & ABS( _ActualNormalized - _TargetNormalized ) & ""' height='6' stroke='"" & _VarianceColor & ""' fill='"" & _VarianceColor & ""'/>""
+VAR _VarianceBar   = ""<rect x='"" & _BarMin + MIN( _ActualNormalized, _TargetNormalized ) + 1 & ""' y='"" & IF ( _Target > _Actual, 2.9, 9 ) & ""' width='"" & ABS( _ActualNormalized - _TargetNormalized ) - 1 & ""' height='6' stroke='"" & _VarianceColor & ""' fill='"" & _VarianceColor & ""'/>""
 
 VAR _SvgSuffix = ""</svg>""
 
@@ -132,8 +132,9 @@ RETURN
 
 
 // Selected values you want to use in the plot.
-var _AllMeasures = Model.AllMeasures.OrderBy(m => m.Name);
-var _AllColumns = Model.AllColumns.OrderBy(m => m.DaxObjectFullName);
+var _AllMeasures = Model.AllMeasures.Where(m => m.IsHidden != true).OrderBy(m => m.Name);
+var _AllColumns = Model.AllColumns.Where(c => c.IsHidden != true).OrderBy(c => c.DaxObjectFullName);
+
 var _Actual = SelectMeasure(_AllMeasures, null,"Select the measure that you want to measure:");
 var _Target = SelectMeasure(_AllMeasures, null,"Select the measure that you want to compare to:");
 var _GroupBy = SelectColumn(_AllColumns, null, "Select the column for which you will group the data in\nthe table or matrix visual:");
@@ -142,9 +143,9 @@ _SvgString = _SvgString.Replace( "__ACTUAL_MEASURE", _Actual.DaxObjectFullName )
 
 // Adding the measure.
 var _SelectedTable = Selected.Table;
-string _Name = "SVG Bar Chart (with Target and Variance)";
+string _Name = "SVG Overlapping Bar Chart (with Variance)";
 string _Desc = _Name + " of " + _Actual.Name + " vs. " + _Target.Name + ", grouped by " + _GroupBy.Name;
-var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs");
+var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs\\Bar Chart");
 
 // Setting measure properties.
 _SvgMeasure.DataCategory = "ImageUrl";

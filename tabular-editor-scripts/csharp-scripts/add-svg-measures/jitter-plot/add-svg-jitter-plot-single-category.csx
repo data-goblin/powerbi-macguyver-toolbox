@@ -19,9 +19,14 @@
 
 // DAX template
 string _SvgString = @"
--- SVG measure
 -- Use this inside of a Table or a Matrix visual.
--- The 'Image size' property of the Table or Matrix must match the values in the config below
+-- The 'Image size' property of the Table or Matrix should be set to ""Height"" of 25 px and ""Width"" of 100 px for the best results.
+
+
+----------------------------------------------------------------------------------------
+-------------------- START CONFIG - SAFELY CHANGE STUFF IN THIS AREA -------------------
+----------------------------------------------------------------------------------------
+
 
 -- Fields config
 VAR _Values = VALUES( __DETAIL_COLUMN ) -- NOTE: This column has a limited number of values that you can use.
@@ -29,23 +34,33 @@ VAR _ValuesByMeasure = ADDCOLUMNS( _Values, ""@Measure"", __MEASURE )
 
 
 -- Chart config
-VAR _SvgWidth = 102     -- NOTE: Match this value in the Image size property of the table or matrix
-VAR _SvgHeight = 20     -- NOTE: Match this value in the Image size property of the table or matrix
+VAR _SvgWidth = 100     -- NOTE: Match this value in the Image size property of the table or matrix
+VAR _SvgHeight = 25     -- NOTE: Match this value in the Image size property of the table or matrix
 VAR _JitterAmount = 10  -- NOTE: Adjust this value to control the amount of jitter
-VAR _AxisMax = CALCULATE(MAXX( _ValuesByMeasure, ''[@Measure] ), REMOVEFILTERS( __DETAIL_COLUMN )) * 1.1 -- NOTE: If the detail column uses a 'Sort By' or 'Group By' property, you need to add it to the REMOVEFILTERS as well.
-// VAR _AxisMin = CALCULATE(MINX( _ValuesByMeasure, ''[@Measure] ), REMOVEFILTERS( __DETAIL_COLUMN ))
+
+
+----------------------------------------------------------------------------------------
+----------------------- END CONFIG - BEYOND HERE THERE BE DRAGONS ----------------------
+----------------------------------------------------------------------------------------
+
+
+VAR _AxisMax = CALCULATE(MAXX( _ValuesByMeasure, ''[@Measure] ), REMOVEFILTERS( __DETAIL_COLUMN )) * 1.1
+    -- NOTE: If the detail column uses a 'Sort By' or 'Group By' property, you need to add it to the REMOVEFILTERS as well.
 
 
 -- Average line config
 VAR _Avg = DIVIDE( AVERAGEX( _ValuesByMeasure, ''[@Measure] ), _AxisMax ) * _SvgWidth
-VAR _AvgLine = ""<rect x='"" & _Avg & ""' y='2' width='1.25' height='80%' fill='red'/>""
 
 
 -- Vectors and SVG code
 VAR _SvgPrefix = ""data:image/svg+xml;utf8, <svg width='"" & _SvgWidth & ""' height='"" & _SvgHeight & ""' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' overflow='visible'>""
 VAR _Sort = ""<desc>"" & FORMAT ( _Avg, ""000000000000"" ) & ""</desc>""
+VAR _AvgLine = ""<rect x='"" & _Avg & ""' y='2' width='1.25' height='80%' fill='red'/>""
+VAR _SvgSuffix = ""</svg>""
 
-RETURN
+
+-- Final result
+VAR _SVG =
 IF(
     HASONEVALUE( __GROUP_BY_COLUMN ),
     _SvgPrefix &
@@ -62,13 +77,18 @@ IF(
     ) &
 
     _AvgLine &
-    ""</svg>""
-)";
+    _SvgSuffix
+)
+
+RETURN
+    _SVG
+";
 
 
 // Selected values you want to use in the plot.
-var _AllMeasures = Model.AllMeasures.OrderBy(m => m.Name);
-var _AllColumns = Model.AllColumns.OrderBy(m => m.DaxObjectFullName);
+var _AllMeasures = Model.AllMeasures.Where(m => m.IsHidden != true).OrderBy(m => m.Name);
+var _AllColumns = Model.AllColumns.Where(c => c.IsHidden != true).OrderBy(c => c.DaxObjectFullName);
+
 var _Measure = SelectMeasure(_AllMeasures, null,"Select the measure that you want to plot:");
 var _Detail = SelectColumn(_AllColumns, null, "Select the column for which you want to plot each value as a dot\nin the plot (WARNING: LIMITED UNIQUE VALUES):");
 var _GroupBy = SelectColumn(_AllColumns, null, "Select the column for which you will group the data in\nthe table or matrix visual:");
@@ -76,14 +96,10 @@ var _GroupBy = SelectColumn(_AllColumns, null, "Select the column for which you 
 _SvgString = _SvgString.Replace( "__DETAIL_COLUMN", _Detail.DaxObjectFullName ).Replace( "__GROUP_BY_COLUMN", _GroupBy.DaxObjectFullName ).Replace( "__MEASURE", _Measure.DaxObjectFullName );
 
 
-// Optional: If you don't want the table context-sensitivity in the TOM Explorer, use the below.
-// var _SelectedTable = SelectTable();
-// var _SvgMeasure = _SelectedTable.AddMeasure( "New SVG Jitter Plot (Single Category)", _SvgString, "SVGs");
-
 // Adding the measure.
 var _SelectedTable = Selected.Table;
 string _Desc = "SVG Jitter Plot of " + _Measure.Name + " for each " + _Detail.Name + ", grouped by " + _GroupBy.Name;
-var _SvgMeasure = _SelectedTable.AddMeasure( "New SVG Jitter Plot (Single Category)", _SvgString, "SVGs");
+var _SvgMeasure = _SelectedTable.AddMeasure( "New SVG Jitter Plot (Single Category)", _SvgString, "SVGs\\Jitter Plot");
 
 // Setting measure properties.
 _SvgMeasure.DataCategory = "ImageUrl";

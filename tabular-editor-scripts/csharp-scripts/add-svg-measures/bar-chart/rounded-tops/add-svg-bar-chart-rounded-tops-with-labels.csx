@@ -4,7 +4,6 @@
 //
 // Original template author: Kurt Buhler
 //
-// Template limitations: This template supports a limited number of datapoints (dots) to display at once, due to limitations of the DAX measure string length.
 //
 // Script instructions: Use this script when connected with any Power BI semantic model. Doesn't support AAS models.
 //
@@ -28,35 +27,15 @@ string _SvgString = @"
 
 -- Color config.
 ---- Bar fill
+VAR _BarFillColor = ""#CFCFCF""     -- Greyish
+VAR _LabelColor = ""#666666""       -- Darkish greyish
 VAR _LabelFont = ""Segoe UI""
 VAR _LabelWeight = ""600""          -- Semibold-ish
-VAR _LabelSize = ""11""          -- Semibold-ish
+VAR _LabelSize = ""11""
 
 
 -- Input field config
 VAR _Actual = __ACTUAL_MEASURE
-
-VAR _Target = __TARGET_MEASURE
-VAR _Performance = DIVIDE ( _Actual - _Target, _Target )
-
-
--- Color config.
----- Conditional bar fill
-VAR _BarColor = 
-    SWITCH (
-        TRUE(),
-        _Performance < 0, ""#ffd43b"", -- Light yellow
-        _Performance > 0, ""#a5d8ff"", -- Light blue
-        ""#CACACA""                    -- Grey
-        )
-
-VAR _LabelColor = 
-    SWITCH (
-        TRUE(),
-        _Performance < 0, ""#c68c03"", -- Dark yellow
-        _Performance > 0, ""#1971c2"", -- Dark blue
-        ""#CACACA""                    -- Grey
-        )
 
     -- How to format actuals
     VAR _NumberFormat =
@@ -118,8 +97,8 @@ VAR _SvgPrefix = ""data:image/svg+xml;utf8, <svg xmlns='http://www.w3.org/2000/s
 ---- To sort the SVG in a table or matrix by the bar length
 VAR _Sort = ""<desc>"" & FORMAT ( _Actual, ""000000000000"" ) & ""</desc>""
 
-VAR _ActualBar  = ""<rect x='"" & _BarMin & ""' y='6' width='"" & DIVIDE ( _ActualNormalized, 2 ) & ""' height='50%' fill='"" & _BarColor & ""'/>""
-VAR _ActualBarRounded  = ""<rect x='"" & _BarMin & ""' y='6' rx='6' width='"" & _ActualNormalized & ""' height='50%' fill='"" & _BarColor & ""'/>""
+VAR _ActualBar  = ""<rect x='"" & _BarMin & ""' y='6' width='"" & DIVIDE ( _ActualNormalized, 2 ) & ""' height='50%' fill='"" & _BarFillColor & ""'/>""
+VAR _ActualBarRounded  = ""<rect x='"" & _BarMin & ""' y='6' rx='6' width='"" & _ActualNormalized & ""' height='50%' fill='"" & _BarFillColor & ""'/>""
 VAR _ActualLabel = ""<text x='40' y='16' font-family='"" & _LabelFont & ""' font-size='"" & _LabelSize & ""' font-weight='"" & _LabelWeight & ""'  text-anchor=""""end"""" fill='"" & _LabelColor & ""'>"" & _NumberFormat & ""</text>""
 
 VAR _SvgSuffix = ""</svg>""
@@ -143,20 +122,20 @@ RETURN
 
 
 // Selected values you want to use in the plot.
-var _AllMeasures = Model.AllMeasures.OrderBy(m => m.Name);
-var _AllColumns = Model.AllColumns.OrderBy(m => m.DaxObjectFullName);
+var _AllMeasures = Model.AllMeasures.Where(m => m.IsHidden != true).OrderBy(m => m.Name);
+var _AllColumns = Model.AllColumns.Where(c => c.IsHidden != true).OrderBy(c => c.DaxObjectFullName);
+
 var _Actual = SelectMeasure(_AllMeasures, null,"Select the measure that you want to measure:");
-var _Target = SelectMeasure(_AllMeasures, null,"Select the measure that you want to compare to\n(For conditional formatting):");
 var _GroupBy = SelectColumn(_AllColumns, null, "Select the column for which you will group the data in\nthe table or matrix visual:");
 
-_SvgString = _SvgString.Replace( "__ACTUAL_MEASURE", _Actual.DaxObjectFullName ).Replace( "__TARGET_MEASURE", _Target.DaxObjectFullName ).Replace( "__GROUPBY_COLUMN", _GroupBy.DaxObjectFullName );
+_SvgString = _SvgString.Replace( "__ACTUAL_MEASURE", _Actual.DaxObjectFullName ).Replace( "__GROUPBY_COLUMN", _GroupBy.DaxObjectFullName );
 
 
 // Adding the measure.
 var _SelectedTable = Selected.Table;
-string _Name = "SVG Bar Chart (Conditional Formatting with Rounded Tops and Label)";
-string _Desc = _Name + " of " + _Actual.Name + " vs. " + _Target.Name + ", grouped by " + _GroupBy.Name;
-var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs");
+string _Name = "SVG Bar Chart (Rounded Tops with Label)";
+string _Desc = _Name + " of " + _Actual.Name + ", grouped by " + _GroupBy.Name;
+var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs\\Bar Chart (Rounded Tops)");
 
 // Setting measure properties.
 _SvgMeasure.DataCategory = "ImageUrl";

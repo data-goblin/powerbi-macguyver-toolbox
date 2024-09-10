@@ -4,8 +4,6 @@
 //
 // Original template author: Kurt Buhler
 //
-// Template limitations: This template supports a limited number of datapoints (dots) to display at once, due to limitations of the DAX measure string length.
-//
 // Script instructions: Use this script when connected with any Power BI semantic model. Doesn't support AAS models.
 //
 // 1. Select your measure table - or the table where you want to place the measure - in the TOM Explorer.
@@ -28,9 +26,10 @@ VAR _Target = __TARGET_MEASURE
 
 -- SVG configuration
 VAR _SvgWidth = 100
+VAR _SvgMin = 0
 VAR _SvgHeight = 25
 
-VAR _Scope = ALL ( __GROUPBY_COLUMN )
+VAR _Scope = ALLSELECTED ( __GROUPBY_COLUMN )
 VAR _MaxActualsInScope = 
     CALCULATE(
         MAXX(
@@ -56,54 +55,68 @@ VAR _AxisMax =
         CALCULATE( MAX( __ACTUAL_MEASURE, __TARGET_MEASURE ), REMOVEFILTERS( __GROUPBY_COLUMN ) )
     ) * 1.1
 
-VAR _ActualNormalized = ( DIVIDE ( _Actual, _AxisMax ) * _SvgWidth )
-VAR _TargetNormalized = ( DIVIDE ( _Target, _AxisMax ) * _SvgWidth )
+VAR _AxisRange = _SvgWidth - _SvgMin
+
+VAR _ActualNormalized = DIVIDE ( _Actual, _AxisMax ) * _AxisRange
+VAR _TargetNormalized = DIVIDE ( _Target, _AxisMax ) * _AxisRange
 
 
 -- Color config
 VAR _TargetCircleColor = ""#F5F5F5""
 VAR _TargetStrokeColor = ""#C7C7C7""
-VAR _AxisColor = ""#C7C7C7""
+VAR _AxisColor =         ""#C7C7C7""
 
 -- Blue
-VAR _OnTargetFill = ""#448FD6""
-VAR _OnTargetStroke = ""#2F6698""
+VAR _OnTargetFill      = ""#448FD6""
+VAR _OnTargetStroke    = ""#2F6698""
 
 -- Red
-VAR _OffTargetFill = ""#D64444""
-VAR _OffTargetStroke = ""#982F2F""
+VAR _OffTargetFill     = ""#D64444""
+VAR _OffTargetStroke   = ""#982F2F""
 
 VAR _Fill = IF ( _Actual > _Target, _OnTargetFill, _OffTargetFill )
 VAR _Stroke = IF ( _Actual > _Target, _OnTargetStroke, _OffTargetStroke )
 
 
 -- Vectors and SVG specification
-VAR _SvgPrefix = ""data:image/svg+xml;utf8, ""
+VAR _SvgPrefix = ""data:image/svg+xml;utf8, <svg width='"" & _SvgWidth & ""' height='"" & _SvgHeight & ""' xmlns='http://www.w3.org/2000/svg'>""
 
 VAR _Sort = ""<desc>"" & FORMAT ( _Actual, ""000000000000"" ) & ""</desc>""
-
-VAR _Background = ""<svg width='"" & _SvgWidth & ""' height='"" & _SvgHeight & ""' xmlns='http://www.w3.org/2000/svg'>""
 
 VAR _Axis = ""<line x1='0' y1='"" & _SvgHeight / 2 & ""' x2='"" & _SvgWidth & ""' y2='"" & _SvgHeight / 2 & ""' stroke='"" & _AxisColor & ""'/>""
 VAR _Origin = ""<circle cx='2' cy='"" & _SvgHeight / 2 & ""' r='2' fill='"" & _AxisColor & ""'/>""
 
-VAR _ActualCircle = ""<circle cx='"" & _ActualNormalized & ""' cy='"" & _SvgHeight / 2 & ""' r='5' fill='"" & _Fill & ""' stroke='"" & _Stroke & ""' stroke-width='1.5'/>""
-VAR _TargetCircle = ""<circle cx='"" & _TargetNormalized & ""' cy='"" & _SvgHeight / 2 & ""' r='5' fill='"" & _TargetCircleColor & ""' stroke='"" & _TargetStrokeColor & ""' stroke-width='1.5'/>""
+VAR _ActualCircle = ""<circle cx='"" & _ActualNormalized & ""' cy='"" & _SvgHeight / 2 & ""' r='4' fill='"" & _Fill & ""' stroke='"" & _Stroke & ""' stroke-width='1.5'/>""
+VAR _TargetCircle = ""<circle cx='"" & _TargetNormalized & ""' cy='"" & _SvgHeight / 2 & ""' r='4' fill='"" & _TargetCircleColor & ""' stroke='"" & _TargetStrokeColor & ""' stroke-width='1.5'/>""
 VAR _DumbbellLine = ""<line x1='"" & _ActualNormalized & ""' y1='"" & _SvgHeight / 2 & ""' x2='"" & _TargetNormalized & ""' y2='"" & _SvgHeight / 2 & ""' stroke='"" & _Fill & ""' stroke-width='3'/>""
 
 VAR _SvgSuffix = ""</svg>""
 
 
 -- Final result
-VAR _Svg = _SvgPrefix & _Background & _Sort & _Axis & _Origin & _DumbbellLine & _TargetCircle & _ActualCircle & _SvgSuffix
+VAR _Svg = 
+    _SvgPrefix 
+
+    & _Sort
+
+    & _Axis
+    & _Origin
+    
+    & _DumbbellLine
+    & _TargetCircle
+    & _ActualCircle
+
+    & _SvgSuffix
+
 RETURN
 	 _Svg
 ";
 
 
 // Selected values you want to use in the plot.
-var _AllMeasures = Model.AllMeasures.OrderBy(m => m.Name);
-var _AllColumns = Model.AllColumns.OrderBy(m => m.DaxObjectFullName);
+var _AllMeasures = Model.AllMeasures.Where(m => m.IsHidden != true).OrderBy(m => m.Name);
+var _AllColumns = Model.AllColumns.Where(c => c.IsHidden != true).OrderBy(c => c.DaxObjectFullName);
+
 var _Actual = SelectMeasure(_AllMeasures, null,"Select the measure that you want to measure:");
 var _Target = SelectMeasure(_AllMeasures, null,"Select the measure that you want to compare to:");
 var _GroupBy = SelectColumn(_AllColumns, null, "Select the column for which you will group the data in\nthe table or matrix visual:");
@@ -114,7 +127,7 @@ _SvgString = _SvgString.Replace( "__ACTUAL_MEASURE", _Actual.DaxObjectFullName )
 // Adding the measure.
 var _SelectedTable = Selected.Table;
 string _Desc = "SVG Dumbbell Chart of " + _Actual.Name + " vs. " + _Target.Name + ", grouped by " + _GroupBy.Name;
-var _SvgMeasure = _SelectedTable.AddMeasure( "New SVG Dumbbell Chart", _SvgString, "SVGs");
+var _SvgMeasure = _SelectedTable.AddMeasure( "New SVG Dumbbell Chart", _SvgString, "SVGs\\Dumbbell Plot");
 
 
 // Setting measure properties.

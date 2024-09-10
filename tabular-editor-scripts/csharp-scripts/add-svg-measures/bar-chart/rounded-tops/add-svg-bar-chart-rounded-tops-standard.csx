@@ -4,7 +4,6 @@
 //
 // Original template author: Kurt Buhler
 //
-// Template limitations: This template supports a limited number of datapoints (dots) to display at once, due to limitations of the DAX measure string length.
 //
 // Script instructions: Use this script when connected with any Power BI semantic model. Doesn't support AAS models.
 //
@@ -61,7 +60,7 @@ VAR _BarFillColor = ""#CFCFCF""     -- Greyish
     
     VAR _AxisMax = 
         IF (
-            HASONEVALUE ( 'Customers'[Key Account] ),
+            HASONEVALUE ( __GROUPBY_COLUMN ),
             _MaxActualsInScope
         ) * 1.1
     
@@ -93,6 +92,7 @@ VAR _SVG =
     & _Sort
     
     & _ActualBar
+    & _ActualBarRounded
     
     & _SvgSuffix
     
@@ -102,8 +102,9 @@ RETURN
 
 
 // Selected values you want to use in the plot.
-var _AllMeasures = Model.AllMeasures.OrderBy(m => m.Name);
-var _AllColumns = Model.AllColumns.OrderBy(m => m.DaxObjectFullName);
+var _AllMeasures = Model.AllMeasures.Where(m => m.IsHidden != true).OrderBy(m => m.Name);
+var _AllColumns = Model.AllColumns.Where(c => c.IsHidden != true).OrderBy(c => c.DaxObjectFullName);
+
 var _Actual = SelectMeasure(_AllMeasures, null,"Select the measure that you want to measure:");
 var _GroupBy = SelectColumn(_AllColumns, null, "Select the column for which you will group the data in\nthe table or matrix visual:");
 
@@ -112,9 +113,9 @@ _SvgString = _SvgString.Replace( "__ACTUAL_MEASURE", _Actual.DaxObjectFullName )
 
 // Adding the measure.
 var _SelectedTable = Selected.Table;
-string _Name = "SVG Bar Chart";
+string _Name = "SVG Bar Chart (Rounded Tops)";
 string _Desc = _Name + " of " + _Actual.Name + ", grouped by " + _GroupBy.Name;
-var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs");
+var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs\\Bar Chart (Rounded Tops)");
 
 // Setting measure properties.
 _SvgMeasure.DataCategory = "ImageUrl";

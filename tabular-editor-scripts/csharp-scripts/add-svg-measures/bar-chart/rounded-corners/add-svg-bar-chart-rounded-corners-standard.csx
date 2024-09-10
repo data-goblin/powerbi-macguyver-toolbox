@@ -4,7 +4,6 @@
 //
 // Original template author: Kurt Buhler
 //
-// Template limitations: This template supports a limited number of datapoints (dots) to display at once, due to limitations of the DAX measure string length.
 //
 // Script instructions: Use this script when connected with any Power BI semantic model. Doesn't support AAS models.
 //
@@ -26,38 +25,19 @@ string _SvgString = @"
 ----------------------------------------------------------------------------------------
 
 
--- Color config.
----- Bar fill
-VAR _BarFillColor = ""#CFCFCF"" -- Greyish
-VAR _LabelColor = ""#666666""   -- Darkish greyish
-VAR _LabelFont = ""Segoe UI""
-VAR _LabelWeight = ""600""      -- Semibold-ish
-VAR _LabelSize = ""11""         -- Semibold-ish
-
-
 -- Input field config
 VAR _Actual = __ACTUAL_MEASURE
 
-    -- How to format actuals
-    VAR _NumberFormat =
-        SWITCH (
-            TRUE (),
-            _Actual <= 1E3,  FORMAT ( _Actual, ""#,0."" ),
-            _Actual <= 1E4,  FORMAT ( _Actual, ""#,0,.00 K"" ),
-            _Actual <= 1E5,  FORMAT ( _Actual, ""#,0,.0 K"" ),
-            _Actual <= 1E6,  FORMAT ( _Actual, ""#,0,. K"" ),
-            _Actual <= 1E7,  FORMAT ( _Actual, ""#,0,,.00 M"" ),
-            _Actual <= 1E8,  FORMAT ( _Actual, ""#,0,,.0 M"" ),
-            _Actual <= 1E9,  FORMAT ( _Actual, ""#,0,,. M"" ),
-            _Actual <= 1E10, FORMAT ( _Actual, ""#,0,,,.00 bn"" ),
-            _Actual <= 1E11, FORMAT ( _Actual, ""#,0,,,.0 bn"" ),
-            _Actual <= 1E12, FORMAT ( _Actual, ""#,0,,,. bn"" )
-        )
 
 -- Chart Config
 VAR _BarMax = 100
-VAR _BarMin = 44
+VAR _BarMin = 0
 VAR _Scope = ALLSELECTED ( __GROUPBY_COLUMN ) -- Table comprising all values that group the actuals and targets
+
+
+-- Color config.
+---- Bar fill
+VAR _BarFillColor = ""#CFCFCF""     -- Greyish
 
 
 ----------------------------------------------------------------------------------------
@@ -66,6 +46,7 @@ VAR _Scope = ALLSELECTED ( __GROUPBY_COLUMN ) -- Table comprising all values tha
 
 
 -- Only change the parts of this code if you want to adjust how the SVG visual works or add / remove stuff.
+
 
     -- Get axis maximum
     VAR _MaxActualsInScope = 
@@ -98,8 +79,8 @@ VAR _SvgPrefix = ""data:image/svg+xml;utf8, <svg xmlns='http://www.w3.org/2000/s
 ---- To sort the SVG in a table or matrix by the bar length
 VAR _Sort = ""<desc>"" & FORMAT ( _Actual, ""000000000000"" ) & ""</desc>""
 
-VAR _ActualBar  = ""<rect x='"" & _BarMin & ""' y='6' width='"" & _ActualNormalized & ""' height='50%' fill='"" & _BarFillColor & ""'/>""
-VAR _ActualLabel = ""<text x='40' y='16' font-family='"" & _LabelFont & ""' font-size='"" & _LabelSize & ""' font-weight='"" & _LabelWeight & ""'  text-anchor=""""end"""" fill='"" & _LabelColor & ""'>"" & _NumberFormat & ""</text>""
+VAR _ActualBar  = ""<rect x='"" & _BarMin & ""' y='6' width='"" & DIVIDE ( _ActualNormalized, 2 ) & ""' height='50%' fill='"" & _BarFillColor & ""'/>""
+VAR _ActualBarRounded  = ""<rect x='"" & _BarMin & ""' y='6' rx='3' width='"" & _ActualNormalized & ""' height='50%' fill='"" & _BarFillColor & ""'/>""
 
 VAR _SvgSuffix = ""</svg>""
 
@@ -111,7 +92,7 @@ VAR _SVG =
     & _Sort
     
     & _ActualBar
-    & _ActualLabel
+    & _ActualBarRounded
     
     & _SvgSuffix
     
@@ -121,8 +102,9 @@ RETURN
 
 
 // Selected values you want to use in the plot.
-var _AllMeasures = Model.AllMeasures.OrderBy(m => m.Name);
-var _AllColumns = Model.AllColumns.OrderBy(m => m.DaxObjectFullName);
+var _AllMeasures = Model.AllMeasures.Where(m => m.IsHidden != true).OrderBy(m => m.Name);
+var _AllColumns = Model.AllColumns.Where(c => c.IsHidden != true).OrderBy(c => c.DaxObjectFullName);
+
 var _Actual = SelectMeasure(_AllMeasures, null,"Select the measure that you want to measure:");
 var _GroupBy = SelectColumn(_AllColumns, null, "Select the column for which you will group the data in\nthe table or matrix visual:");
 
@@ -131,9 +113,9 @@ _SvgString = _SvgString.Replace( "__ACTUAL_MEASURE", _Actual.DaxObjectFullName )
 
 // Adding the measure.
 var _SelectedTable = Selected.Table;
-string _Name = "SVG Bar Chart (Label)";
+string _Name = "SVG Bar Chart (Rounded Corners)";
 string _Desc = _Name + " of " + _Actual.Name + ", grouped by " + _GroupBy.Name;
-var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs");
+var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs\\Bar Chart (Rounded Corners)");
 
 // Setting measure properties.
 _SvgMeasure.DataCategory = "ImageUrl";

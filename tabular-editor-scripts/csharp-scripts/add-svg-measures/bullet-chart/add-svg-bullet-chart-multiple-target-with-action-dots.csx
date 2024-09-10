@@ -4,7 +4,6 @@
 //
 // Original template author: Kurt Buhler
 //
-// Template limitations: This template supports a limited number of datapoints (dots) to display at once, due to limitations of the DAX measure string length.
 //
 // Script instructions: Use this script when connected with any Power BI semantic model. Doesn't support AAS models.
 //
@@ -123,7 +122,7 @@ VAR _ActionDotTwoFill =
         IF (
             HASONEVALUE ( __GROUPBY_COLUMN ),
             MAX( _MaxActualsInScope, MAX( _MaxTargetOneInScope, _MaxTargetTwoInScope ) ),
-            CALCULATE( MAX( [Turnover (Selected Unit)], MAX( __TARGET_ONE_MEASURE, __TARGET_TWO_MEASURE ) ), REMOVEFILTERS( __GROUPBY_COLUMN ) )
+            CALCULATE( MAX( __ACTUAL_MEASURE, MAX( __TARGET_ONE_MEASURE, __TARGET_TWO_MEASURE ) ), REMOVEFILTERS( __GROUPBY_COLUMN ) )
         ) * 1.1
     
     
@@ -190,8 +189,9 @@ RETURN
 
 
 // Selected values you want to use in the plot.
-var _AllMeasures = Model.AllMeasures.OrderBy(m => m.Name);
-var _AllColumns = Model.AllColumns.OrderBy(m => m.DaxObjectFullName);
+var _AllMeasures = Model.AllMeasures.Where(m => m.IsHidden != true).OrderBy(m => m.Name);
+var _AllColumns = Model.AllColumns.Where(c => c.IsHidden != true).OrderBy(c => c.DaxObjectFullName);
+
 var _Actual = SelectMeasure(_AllMeasures, null,"Select the measure that you want to measure:");
 var _TargetOne = SelectMeasure(_AllMeasures, null,"Select the first measure that you want to compare to:");
 var _TargetTwo = SelectMeasure(_AllMeasures, null,"Select the second measure that you want to compare to:");
@@ -204,7 +204,7 @@ _SvgString = _SvgString.Replace( "__ACTUAL_MEASURE", _Actual.DaxObjectFullName )
 var _SelectedTable = Selected.Table;
 string _Name = "SVG Bullet Chart (Multiple Targets with Action Dots)";
 string _Desc = _Name + " of " + _Actual.Name + " vs. " + _TargetOne.Name + " and " + _TargetTwo.Name + ", grouped by " + _GroupBy.Name;
-var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs");
+var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs\\Bullet Chart");
 
 // Setting measure properties.
 _SvgMeasure.DataCategory = "ImageUrl";

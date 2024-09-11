@@ -4,7 +4,7 @@ Power BI report visual templates and patterns. These templates are intended to h
 
 You can use them for free, but I'd appreciate that you please cite [data-goblins.com](https://www.data-goblins.com) if you do.
 
-**SVG measure templates contributed by Štěpán Rešl. Thanks Štěpán!**
+**SVG measure templates in the .pbix and .pbip files are contributed by Štěpán Rešl. Thanks Štěpán!**
 
 ## ⚠️ Notice
 These templates are provided as-is without warranties or guarantees. They are not maintained nor are they all necessarily suitable for use in production solutions.

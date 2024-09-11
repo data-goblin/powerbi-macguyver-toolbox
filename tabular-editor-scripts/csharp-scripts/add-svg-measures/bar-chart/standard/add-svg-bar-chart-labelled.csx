@@ -41,16 +41,16 @@ VAR _Actual = __ACTUAL_MEASURE
     VAR _NumberFormat =
         SWITCH (
             TRUE (),
-            _Actual <= 1E3,  FORMAT ( _Actual, ""#,0."" ),
+            _Actual <= 1E3,  FORMAT ( _Actual, ""#,0"" ),
             _Actual <= 1E4,  FORMAT ( _Actual, ""#,0,.00 K"" ),
             _Actual <= 1E5,  FORMAT ( _Actual, ""#,0,.0 K"" ),
-            _Actual <= 1E6,  FORMAT ( _Actual, ""#,0,. K"" ),
+            _Actual <= 1E6,  FORMAT ( _Actual, ""#,0, K"" ),
             _Actual <= 1E7,  FORMAT ( _Actual, ""#,0,,.00 M"" ),
             _Actual <= 1E8,  FORMAT ( _Actual, ""#,0,,.0 M"" ),
-            _Actual <= 1E9,  FORMAT ( _Actual, ""#,0,,. M"" ),
+            _Actual <= 1E9,  FORMAT ( _Actual, ""#,0,, M"" ),
             _Actual <= 1E10, FORMAT ( _Actual, ""#,0,,,.00 bn"" ),
             _Actual <= 1E11, FORMAT ( _Actual, ""#,0,,,.0 bn"" ),
-            _Actual <= 1E12, FORMAT ( _Actual, ""#,0,,,. bn"" )
+            _Actual <= 1E12, FORMAT ( _Actual, ""#,0,,, bn"" )
         )
 
 -- Chart Config
@@ -123,17 +123,17 @@ RETURN
 var _AllMeasures = Model.AllMeasures.Where(m => m.IsHidden != true).OrderBy(m => m.Name);
 var _AllColumns = Model.AllColumns.Where(c => c.IsHidden != true).OrderBy(c => c.DaxObjectFullName);
 
-var _Actual = SelectMeasure(_AllMeasures, null,"Select the measure that you want to measure:");
+var _Actual = SelectMeasure(_AllMeasures, null, "Select the measure that you want to measure:");
 var _GroupBy = SelectColumn(_AllColumns, null, "Select the column for which you will group the data in\nthe table or matrix visual:");
 
-_SvgString = _SvgString.Replace( "__ACTUAL_MEASURE", _Actual.DaxObjectFullName ).Replace( "__GROUPBY_COLUMN", _GroupBy.DaxObjectFullName );
+_SvgString = _SvgString.Replace("__ACTUAL_MEASURE", _Actual.DaxObjectFullName).Replace("__GROUPBY_COLUMN", _GroupBy.DaxObjectFullName);
 
 
 // Adding the measure.
 var _SelectedTable = Selected.Table;
 string _Name = "SVG Bar Chart (Label)";
 string _Desc = _Name + " of " + _Actual.Name + ", grouped by " + _GroupBy.Name;
-var _SvgMeasure = _SelectedTable.AddMeasure( "New " + _Name, _SvgString, "SVGs\\Bar Chart");
+var _SvgMeasure = _SelectedTable.AddMeasure("New " + _Name, _SvgString, "SVGs\\Bar Chart");
 
 // Setting measure properties.
 _SvgMeasure.DataCategory = "ImageUrl";

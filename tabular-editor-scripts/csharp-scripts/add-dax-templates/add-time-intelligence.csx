@@ -2,7 +2,7 @@
 //
 // Script author: Kurt Buhler; Data Goblins
 // Script created: Sept 16, 2024
-// Script supports: Tabular Editor 2.X (Tabular Editor 2.X untested)
+// Script supports: Tabular Editor 3.X (Tabular Editor 2.X untested)
 //
 //
 // Script instructions: Use this script when connected with any Power BI or AAS/SSAS semantic model.

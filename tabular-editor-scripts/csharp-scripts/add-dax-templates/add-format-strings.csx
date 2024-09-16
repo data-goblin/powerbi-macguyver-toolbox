@@ -2,14 +2,14 @@
 //
 // Script author: Kurt Buhler; Data Goblins
 // Script created: Sept 16, 2024
-// Script supports: Tabular Editor 2.X (Tabular Editor 2.X untested)
+// Script supports: Tabular Editor 3.X (Tabular Editor 2.X untested)
 //
 //// Script instructions: Use this script when connected with any Power BI or AAS/SSAS semantic model.
 //
-// 1. Select the measures and columns
+// 1. Select the measures you want to format
 // 2. Run the script
-// 3. Validate the DAX and set properties
-// 4. Test the measure in different filter contexts and conditions before using
+// 3. Select the format that you want to apply in the dialog
+// 4. Validate the format string and test the measure in reports
 
 // Namespaces
 using System.Windows.Forms;

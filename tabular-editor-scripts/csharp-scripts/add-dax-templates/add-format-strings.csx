@@ -3,6 +3,8 @@
 // Script author: Kurt Buhler; Data Goblins
 // Script created: Sept 16, 2024
 // Script supports: Tabular Editor 3.X (Tabular Editor 2.X untested)
+// Disclaimer: Script created with help from Chat-GPT 1o (productivity enhancement and some C# patterns)
+//
 //
 //// Script instructions: Use this script when connected with any Power BI or AAS/SSAS semantic model.
 //
@@ -51,6 +53,7 @@ var _FormatOptionsPanel = new TableLayoutPanel()
 // Add column styles
 _FormatOptionsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
 _FormatOptionsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+
 
 // Symbol select
 var _SymbolLabel = new Label()
@@ -108,7 +111,7 @@ _SymbolOptionsPanel.Controls.Add(_SymbolOption2);
 _SymbolOptionsPanel.Controls.Add(_SymbolOption3);
 _SymbolOptionsPanel.Controls.Add(_SymbolOption4);
 
-// Option for symbol position (now using radio buttons)
+// Option for symbol position
 var _SymbolPositionLabel = new Label()
 {
     Text = "Symbol Position:",
@@ -183,6 +186,7 @@ _SpacingOptionsPanel.Controls.Add(_SpacingOption1);
 _SpacingOptionsPanel.Controls.Add(_SpacingOption2);
 _SpacingOptionsPanel.Controls.Add(_SpacingOption3);
 
+
 // Nr decimal places
 var _DecimalPlacesLabel = new Label()
 {
@@ -198,7 +202,8 @@ var _DecimalPlacesComboBox = new ComboBox()
 _DecimalPlacesComboBox.Items.AddRange(new string[] { "0", "1", "2", "3", "4", "Over 9000" });
 _DecimalPlacesComboBox.SelectedIndex = 0;
 
-// Option C) Percentage
+
+// Percentage checkbox
 var _PercentageLabel = new Label()
 {
     Text = "Percentage:",
@@ -210,7 +215,7 @@ var _PercentageCheckBox = new CheckBox()
     AutoSize = true
 };
 
-// Option D) Suffix
+// Adding a suffix
 var _SuffixLabel = new Label()
 {
     Text = "Suffix:",
@@ -222,7 +227,7 @@ var _SuffixTextBox = new TextBox()
     Width = 100
 };
 
-// Option E) Prefix
+// Adding a prefix
 var _PrefixLabel = new Label()
 {
     Text = "Prefix:",
@@ -233,6 +238,7 @@ var _PrefixTextBox = new TextBox()
 {
     Width = 100
 };
+
 
 // Sample formatted number label
 var _SampleLabel = new Label()
@@ -246,6 +252,7 @@ var _SampleValueLabel = new Label()
     Text = "",
     AutoSize = true
 };
+
 
 // Add controls to the format options panel
 int rowIndex = 0;

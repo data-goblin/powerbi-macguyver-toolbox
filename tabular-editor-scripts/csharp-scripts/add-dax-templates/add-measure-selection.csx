@@ -3,6 +3,7 @@
 // Script author: Kurt Buhler; Data Goblins
 // Script created: Sept 16, 2024
 // Script supports: Tabular Editor 3.X (Tabular Editor 2.X untested)
+// Disclaimer: Script created with help from Chat-GPT 1o (productivity enhancement and some C# patterns)
 //
 //
 // Script instructions: Use this script when connected with any Power BI or AAS/SSAS semantic model.

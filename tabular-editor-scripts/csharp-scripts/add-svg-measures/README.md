@@ -62,8 +62,8 @@ An overview of all the templates are listed below. Click the image to navigate t
 
 | Image (Click for Template) | Name | Description |
 |:--------------------------:|:----:|:------------|
-| <a href="lollipop-chart/add-svg-lollipop-chart-with-label.csx"><img src="lollipop-with-label.png"/></a> | __Dumbbell plot__ | Plots the value as a line and ends with a conditionally sized dot. |
-| <a href="lollipop-chart/add-svg-lollipop-chart-conditional-formatting.csx"><img src="lollipop-conditional-formatting.png"/></a> | __Dumbbell plot__ | Plots the value as a line and ends with a conditionally sized dot. Supports CF vs target. |
+| <a href="lollipop-chart/add-svg-lollipop-chart-with-label.csx"><img src="lollipop-with-label.png"/></a> | __Lollipop Chart (with label)__ | Plots the value as a line and ends with a conditionally sized dot. |
+| <a href="lollipop-chart/add-svg-lollipop-chart-conditional-formatting.csx"><img src="lollipop-conditional-formatting.png"/></a> | __Lollipop chart (Conditional formatting)__ | Plots the value as a line and ends with a conditionally sized dot. Supports CF vs target. |
 
 ### Dumbbell plots
 
@@ -75,7 +75,7 @@ An overview of all the templates are listed below. Click the image to navigate t
 
 | Image (Click for Template) | Name | Description |
 |:--------------------------:|:----:|:------------|
-| <a href="waterfall-chart/add-svg-waterfall-chart.csx"><img src="waterfall.png"/></a> | __Dumbbell plot__ | Simple horizontal waterfall for a single category. Doesn't support breakdowns within category. |
+| <a href="waterfall-chart/add-svg-waterfall-chart.csx"><img src="waterfall.png"/></a> | __Waterfall chart (simple)__ | Simple horizontal waterfall for a single category. Doesn't support breakdowns within category. |
 
 ### Distribution charts
 

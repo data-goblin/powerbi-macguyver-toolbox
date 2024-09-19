@@ -6,6 +6,10 @@ You can use them for free, but I'd appreciate that you please cite [data-goblins
 
 **SVG measure templates in the .pbix and .pbip files are contributed by Štěpán Rešl. Thanks Štěpán!**
 
+## Were these templates and patterns helpful to you? 
+I don't accept donations, have a patreon, or sell anything, but if you want to donate time helping me to prepare my tabletop roleplaying game campaign, that'd be great. So if you like worldbuilding or want to just have a 1 hour call with me to ideate about one of my tRPG sessions, that's payment enough for me 🎲.
+
+
 ## ⚠️ Notice
 These templates are provided as-is without warranties or guarantees. They are not maintained nor are they all necessarily suitable for use in production solutions.
 

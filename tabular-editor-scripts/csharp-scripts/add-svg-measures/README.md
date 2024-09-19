@@ -7,6 +7,9 @@ These C# scripts add SVG visuals to your semantic model with Tabular Editor.
 You can use these scripts and templates for free for non-commercial use. I'd appreciate that you please cite [data-goblins.com](https://www.data-goblins.com) if you do. For any future templates originally authored by someone else, please cite the original author.
 
 
+## Were these scripts helpful to you? 
+I don't accept donations, have a patreon, or sell anything, but if you want to donate time helping me to prepare my tabletop roleplaying game campaign, that'd be great. So if you like worldbuilding or want to just have a 1 hour call with me to ideate about one of my tRPG sessions, that's payment enough for me 🎲.
+
 ## ⚠️ Notice
 These templates are provided as-is without warranties or guarantees. They are not maintained nor are they all necessarily suitable for use in production solutions.
 

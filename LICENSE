@@ -1,21 +1,33 @@
-MIT License
+# Custom Non-Commercial License
 
-Copyright (c) 2023 Data Goblins (Kurt Buhler)
+Copyright (c) Data Goblins (Kurt Buhler)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## Permitted Uses
+- Personal use and study
+- Non-commercial educational use (with permission)
+- Non-commercial research
+- Open source projects (non-commercial)
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## Commercial Use
+Commercial use is **prohibited without explicit written permission** from the copyright holder. Commercial use includes but is not limited to:
+- Paid work, consulting, or services
+- Commercial training programs or workshops
+- Paid courses or educational content
+- Commercial presentations or speaking engagements
+- Videos, content, or media with monetization
+- Integration into commercial products or services
+- Use by for-profit organizations in their operations
+- **Commercial use of derivative works** based on this content
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Contact the author for commercial licensing permissions.
+
+## Permission Required
+All non-commercial uses beyond personal study require written permission from the copyright holder. Contact the author for permission requests.
+
+## Conditions
+- This copyright notice and license must be included in all copies or substantial portions of the work
+- Any derivative works must use the same license terms
+- Attribution to the original author is required
+
+## Disclaimer
+THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER DEALINGS IN THE WORK.

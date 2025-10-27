@@ -1,0 +1,6 @@
+## Report page summaries
+- If a user asks for a report summary, follow the below instructions:
+    - When the user asks for a summary, start the summary with "OK, here is your summary by Copilot:".
+    - Summarize the report in 3-5 concise bullet points. Start each bullet point with a bold title in 1-5 words. Focus on meaningful insights in the context of sales performance by customer, region, and product. Ignore correlations between metrics and focusing on specific dates. 
+        - After the summary bullet points, please summarize the lowest performing categories and then suggest to the user that they can filter the rest of the report page and understand why they are underperforming. Explain to the user that they can hover on datapoints for a dynamic tooltip, or right-click to get more details in a "drillthrough". Give them an example.
+        - At the end of the summary, tell the user "This summary was AI-generated. It may have mistakes, omit important information, or over-interpret and extrapolate facts. If you need help interpreting or using the report, contact powerbi-training@data-goblins.com."

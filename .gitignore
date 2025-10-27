@@ -1,3 +1,8 @@
 **/.pbi/localSettings.json
 **/.pbi/cache.abf
 .vscode/launch.json
+
+# Claude Code files
+.claude/*
+CLAUDE*
+AGENTS*

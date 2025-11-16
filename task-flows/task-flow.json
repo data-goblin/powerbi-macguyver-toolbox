@@ -1,0 +1,104 @@
+{
+    "tasks": [
+        {
+            "type": "get data",
+            "id": "task-d38cdde6-7535-4e3d-b024-2f5d10b773a0",
+            "name": "Extract",
+            "description": "Items that extract data from APIs and other data sources."
+        },
+        {
+            "type": "get data",
+            "id": "task-b3dce050-a787-4c7d-a21b-bd2da8d7d6d1",
+            "name": "Initial Load",
+            "description": "Ingest batch and real-time data into a single location within your Fabric workspace."
+        },
+        {
+            "type": "store data",
+            "id": "task-2b86cf48-5ca8-4844-90fd-60b58537c70a",
+            "name": "Store"
+        },
+        {
+            "type": "get data",
+            "id": "task-65b316d0-edc7-4aff-86c0-811245ebb720",
+            "name": "Transform",
+            "description": "Transforming and cleaning data"
+        },
+        {
+            "type": "prepare data",
+            "id": "task-85fbefa6-3a63-4e25-a775-eedfc57ae818",
+            "name": "Model",
+            "description": "Create semantic models"
+        },
+        {
+            "type": "visualize",
+            "id": "task-0326cfbf-e3e4-4927-8602-de7e998749ad",
+            "name": "Visualize"
+        },
+        {
+            "type": "track data",
+            "id": "task-c1ac723a-6e73-430a-a3f1-61bad1fa93eb",
+            "name": "Track"
+        },
+        {
+            "type": "distribute data",
+            "id": "task-c83428f2-b043-4a96-8e4a-f98da7f693cd",
+            "name": "Distribute"
+        },
+        {
+            "type": "get data",
+            "id": "task-2fc7b829-3337-4dbe-a5bc-2d8b4360bbe9",
+            "name": "Orchestrate",
+            "description": "Orchestrate notebooks and data items to ensure data freshness."
+        }
+    ],
+    "edges": [
+        {
+            "source": "task-b3dce050-a787-4c7d-a21b-bd2da8d7d6d1",
+            "target": "task-2b86cf48-5ca8-4844-90fd-60b58537c70a"
+        },
+        {
+            "source": "task-d38cdde6-7535-4e3d-b024-2f5d10b773a0",
+            "target": "task-2b86cf48-5ca8-4844-90fd-60b58537c70a"
+        },
+        {
+            "source": "task-2b86cf48-5ca8-4844-90fd-60b58537c70a",
+            "target": "task-65b316d0-edc7-4aff-86c0-811245ebb720"
+        },
+        {
+            "source": "task-65b316d0-edc7-4aff-86c0-811245ebb720",
+            "target": "task-2b86cf48-5ca8-4844-90fd-60b58537c70a"
+        },
+        {
+            "source": "task-2b86cf48-5ca8-4844-90fd-60b58537c70a",
+            "target": "task-85fbefa6-3a63-4e25-a775-eedfc57ae818"
+        },
+        {
+            "source": "task-85fbefa6-3a63-4e25-a775-eedfc57ae818",
+            "target": "task-0326cfbf-e3e4-4927-8602-de7e998749ad"
+        },
+        {
+            "source": "task-85fbefa6-3a63-4e25-a775-eedfc57ae818",
+            "target": "task-c1ac723a-6e73-430a-a3f1-61bad1fa93eb"
+        },
+        {
+            "source": "task-85fbefa6-3a63-4e25-a775-eedfc57ae818",
+            "target": "task-c83428f2-b043-4a96-8e4a-f98da7f693cd"
+        },
+        {
+            "source": "task-0326cfbf-e3e4-4927-8602-de7e998749ad",
+            "target": "task-c83428f2-b043-4a96-8e4a-f98da7f693cd"
+        },
+        {
+            "source": "task-2fc7b829-3337-4dbe-a5bc-2d8b4360bbe9",
+            "target": "task-65b316d0-edc7-4aff-86c0-811245ebb720"
+        },
+        {
+            "source": "task-2fc7b829-3337-4dbe-a5bc-2d8b4360bbe9",
+            "target": "task-d38cdde6-7535-4e3d-b024-2f5d10b773a0"
+        },
+        {
+            "source": "task-2fc7b829-3337-4dbe-a5bc-2d8b4360bbe9",
+            "target": "task-85fbefa6-3a63-4e25-a775-eedfc57ae818"
+        }
+    ]
+}
